@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		45C66E545B9040F592AD50AC /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CBFB221824DF4DA888384C44 /* libPods.a */; };
 		7C6465C017A9DE3C00A4E2A3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C6465BF17A9DE3C00A4E2A3 /* UIKit.framework */; };
 		7C6465C217A9DE3C00A4E2A3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C6465C117A9DE3C00A4E2A3 /* Foundation.framework */; };
 		7C6465C417A9DE3C00A4E2A3 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C6465C317A9DE3C00A4E2A3 /* CoreGraphics.framework */; };
@@ -18,9 +19,28 @@
 		7C6465D617A9DE3C00A4E2A3 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C6465D517A9DE3C00A4E2A3 /* Default-568h@2x.png */; };
 		7C6465D917A9DE3C00A4E2A3 /* JHViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C6465D817A9DE3C00A4E2A3 /* JHViewController.m */; };
 		7C6465DC17A9DE3C00A4E2A3 /* JHViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C6465DA17A9DE3C00A4E2A3 /* JHViewController.xib */; };
+		7C6465E517A9DE5C00A4E2A3 /* JHClientViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C6465E317A9DE5C00A4E2A3 /* JHClientViewController.m */; };
+		7C6465E617A9DE5C00A4E2A3 /* JHClientViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C6465E417A9DE5C00A4E2A3 /* JHClientViewController.xib */; };
+		7C6465EB17A9DEEB00A4E2A3 /* GeneralUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C6465EA17A9DEEB00A4E2A3 /* GeneralUI.m */; };
+		7C6465EE17A9DF3000A4E2A3 /* JHYoutubeSongCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C6465ED17A9DF3000A4E2A3 /* JHYoutubeSongCell.m */; };
+		7C6465F417A9DFA000A4E2A3 /* JHYouTubeSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C6465F217A9DFA000A4E2A3 /* JHYouTubeSearchViewController.m */; };
+		7C6465F517A9DFA000A4E2A3 /* JHYouTubeSearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C6465F317A9DFA000A4E2A3 /* JHYouTubeSearchViewController.xib */; };
+		7C6465F917A9DFAC00A4E2A3 /* JHPlaylistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C6465F717A9DFAC00A4E2A3 /* JHPlaylistViewController.m */; };
+		7C6465FA17A9DFAC00A4E2A3 /* JHPlaylistViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C6465F817A9DFAC00A4E2A3 /* JHPlaylistViewController.xib */; };
+		7CBE53D517AA749000647D68 /* UIColor+AppColours.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CBE53D417AA749000647D68 /* UIColor+AppColours.m */; };
+		7CBE53D817AA75E500647D68 /* NSString+UIColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CBE53D717AA75E500647D68 /* NSString+UIColor.m */; };
+		7CBE53DC17AA7B8E00647D68 /* navbar-background.png in Resources */ = {isa = PBXBuildFile; fileRef = 7CBE53DA17AA7B8E00647D68 /* navbar-background.png */; };
+		7CBE53DD17AA7B8E00647D68 /* navbar-background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7CBE53DB17AA7B8E00647D68 /* navbar-background@2x.png */; };
+		7CBE53E017AA81A800647D68 /* JHYoutubeSongCellBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CBE53DF17AA81A700647D68 /* JHYoutubeSongCellBackgroundView.m */; };
+		7CBE53E217AA81B000647D68 /* JHYoutubeSongCellBackgroundView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CBE53E117AA81B000647D68 /* JHYoutubeSongCellBackgroundView.xib */; };
+		7CBE53E917AA8C9B00647D68 /* JHYoutubeSongCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CBE53E817AA8C9B00647D68 /* JHYoutubeSongCell.xib */; };
+		7CBE53EE17AA933000647D68 /* JHFontAwesome.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CBE53EB17AA933000647D68 /* JHFontAwesome.m */; };
+		7CBE53EF17AA933000647D68 /* UIFont+AppFonts.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CBE53ED17AA933000647D68 /* UIFont+AppFonts.m */; };
+		7CBE53F117AA936D00647D68 /* FontAwesome.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7CBE53F017AA936D00647D68 /* FontAwesome.otf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		079349673FEE4912A476FA9F /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 		7C6465BC17A9DE3C00A4E2A3 /* tubedj.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tubedj.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C6465BF17A9DE3C00A4E2A3 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		7C6465C117A9DE3C00A4E2A3 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -37,6 +57,35 @@
 		7C6465D717A9DE3C00A4E2A3 /* JHViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JHViewController.h; sourceTree = "<group>"; };
 		7C6465D817A9DE3C00A4E2A3 /* JHViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JHViewController.m; sourceTree = "<group>"; };
 		7C6465DB17A9DE3C00A4E2A3 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/JHViewController.xib; sourceTree = "<group>"; };
+		7C6465E217A9DE5C00A4E2A3 /* JHClientViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHClientViewController.h; sourceTree = "<group>"; };
+		7C6465E317A9DE5C00A4E2A3 /* JHClientViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JHClientViewController.m; sourceTree = "<group>"; };
+		7C6465E417A9DE5C00A4E2A3 /* JHClientViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JHClientViewController.xib; sourceTree = "<group>"; };
+		7C6465E917A9DEEB00A4E2A3 /* GeneralUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeneralUI.h; sourceTree = "<group>"; };
+		7C6465EA17A9DEEB00A4E2A3 /* GeneralUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeneralUI.m; sourceTree = "<group>"; };
+		7C6465EC17A9DF3000A4E2A3 /* JHYoutubeSongCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHYoutubeSongCell.h; sourceTree = "<group>"; };
+		7C6465ED17A9DF3000A4E2A3 /* JHYoutubeSongCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JHYoutubeSongCell.m; sourceTree = "<group>"; };
+		7C6465F117A9DFA000A4E2A3 /* JHYouTubeSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHYouTubeSearchViewController.h; sourceTree = "<group>"; };
+		7C6465F217A9DFA000A4E2A3 /* JHYouTubeSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JHYouTubeSearchViewController.m; sourceTree = "<group>"; };
+		7C6465F317A9DFA000A4E2A3 /* JHYouTubeSearchViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JHYouTubeSearchViewController.xib; sourceTree = "<group>"; };
+		7C6465F617A9DFAC00A4E2A3 /* JHPlaylistViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHPlaylistViewController.h; sourceTree = "<group>"; };
+		7C6465F717A9DFAC00A4E2A3 /* JHPlaylistViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JHPlaylistViewController.m; sourceTree = "<group>"; };
+		7C6465F817A9DFAC00A4E2A3 /* JHPlaylistViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JHPlaylistViewController.xib; sourceTree = "<group>"; };
+		7CBE53D317AA749000647D68 /* UIColor+AppColours.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+AppColours.h"; sourceTree = "<group>"; };
+		7CBE53D417AA749000647D68 /* UIColor+AppColours.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+AppColours.m"; sourceTree = "<group>"; };
+		7CBE53D617AA75E500647D68 /* NSString+UIColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+UIColor.h"; sourceTree = "<group>"; };
+		7CBE53D717AA75E500647D68 /* NSString+UIColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+UIColor.m"; sourceTree = "<group>"; };
+		7CBE53DA17AA7B8E00647D68 /* navbar-background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "navbar-background.png"; path = "Resources/navbar-background.png"; sourceTree = "<group>"; };
+		7CBE53DB17AA7B8E00647D68 /* navbar-background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "navbar-background@2x.png"; path = "Resources/navbar-background@2x.png"; sourceTree = "<group>"; };
+		7CBE53DE17AA81A700647D68 /* JHYoutubeSongCellBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHYoutubeSongCellBackgroundView.h; sourceTree = "<group>"; };
+		7CBE53DF17AA81A700647D68 /* JHYoutubeSongCellBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JHYoutubeSongCellBackgroundView.m; sourceTree = "<group>"; };
+		7CBE53E117AA81B000647D68 /* JHYoutubeSongCellBackgroundView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JHYoutubeSongCellBackgroundView.xib; sourceTree = "<group>"; };
+		7CBE53E817AA8C9B00647D68 /* JHYoutubeSongCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JHYoutubeSongCell.xib; sourceTree = "<group>"; };
+		7CBE53EA17AA933000647D68 /* JHFontAwesome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JHFontAwesome.h; path = "../../Why Dont We (ios6)/Why Dont We (ios6)/JHFontAwesome.h"; sourceTree = "<group>"; };
+		7CBE53EB17AA933000647D68 /* JHFontAwesome.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JHFontAwesome.m; path = "../../Why Dont We (ios6)/Why Dont We (ios6)/JHFontAwesome.m"; sourceTree = "<group>"; };
+		7CBE53EC17AA933000647D68 /* UIFont+AppFonts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIFont+AppFonts.h"; path = "../../Why Dont We (ios6)/Why Dont We (ios6)/UIFont+AppFonts.h"; sourceTree = "<group>"; };
+		7CBE53ED17AA933000647D68 /* UIFont+AppFonts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIFont+AppFonts.m"; path = "../../Why Dont We (ios6)/Why Dont We (ios6)/UIFont+AppFonts.m"; sourceTree = "<group>"; };
+		7CBE53F017AA936D00647D68 /* FontAwesome.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome.otf; sourceTree = "<group>"; };
+		CBFB221824DF4DA888384C44 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +96,7 @@
 				7C6465C017A9DE3C00A4E2A3 /* UIKit.framework in Frameworks */,
 				7C6465C217A9DE3C00A4E2A3 /* Foundation.framework in Frameworks */,
 				7C6465C417A9DE3C00A4E2A3 /* CoreGraphics.framework in Frameworks */,
+				45C66E545B9040F592AD50AC /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -59,6 +109,7 @@
 				7C6465C517A9DE3C00A4E2A3 /* tubedj */,
 				7C6465BE17A9DE3C00A4E2A3 /* Frameworks */,
 				7C6465BD17A9DE3C00A4E2A3 /* Products */,
+				079349673FEE4912A476FA9F /* Pods.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -76,6 +127,7 @@
 				7C6465BF17A9DE3C00A4E2A3 /* UIKit.framework */,
 				7C6465C117A9DE3C00A4E2A3 /* Foundation.framework */,
 				7C6465C317A9DE3C00A4E2A3 /* CoreGraphics.framework */,
+				CBFB221824DF4DA888384C44 /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -83,12 +135,18 @@
 		7C6465C517A9DE3C00A4E2A3 /* tubedj */ = {
 			isa = PBXGroup;
 			children = (
+				7CBE53D217AA746900647D68 /* Navigation Bar */,
+				7C6465E817A9DED200A4E2A3 /* Utils */,
+				7C6465E717A9DEC300A4E2A3 /* Shared */,
 				7C6465CE17A9DE3C00A4E2A3 /* JHAppDelegate.h */,
 				7C6465CF17A9DE3C00A4E2A3 /* JHAppDelegate.m */,
 				7C6465D717A9DE3C00A4E2A3 /* JHViewController.h */,
 				7C6465D817A9DE3C00A4E2A3 /* JHViewController.m */,
 				7C6465DA17A9DE3C00A4E2A3 /* JHViewController.xib */,
 				7C6465C617A9DE3C00A4E2A3 /* Supporting Files */,
+				7C6465E217A9DE5C00A4E2A3 /* JHClientViewController.h */,
+				7C6465E317A9DE5C00A4E2A3 /* JHClientViewController.m */,
+				7C6465E417A9DE5C00A4E2A3 /* JHClientViewController.xib */,
 			);
 			path = tubedj;
 			sourceTree = "<group>";
@@ -96,6 +154,7 @@
 		7C6465C617A9DE3C00A4E2A3 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				7CBE53D917AA7A8800647D68 /* Resources */,
 				7C6465C717A9DE3C00A4E2A3 /* tubedj-Info.plist */,
 				7C6465C817A9DE3C00A4E2A3 /* InfoPlist.strings */,
 				7C6465CB17A9DE3C00A4E2A3 /* main.m */,
@@ -107,6 +166,59 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		7C6465E717A9DEC300A4E2A3 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				7CBE53E817AA8C9B00647D68 /* JHYoutubeSongCell.xib */,
+				7C6465EC17A9DF3000A4E2A3 /* JHYoutubeSongCell.h */,
+				7C6465ED17A9DF3000A4E2A3 /* JHYoutubeSongCell.m */,
+				7C6465F117A9DFA000A4E2A3 /* JHYouTubeSearchViewController.h */,
+				7C6465F217A9DFA000A4E2A3 /* JHYouTubeSearchViewController.m */,
+				7C6465F317A9DFA000A4E2A3 /* JHYouTubeSearchViewController.xib */,
+				7C6465F617A9DFAC00A4E2A3 /* JHPlaylistViewController.h */,
+				7C6465F717A9DFAC00A4E2A3 /* JHPlaylistViewController.m */,
+				7C6465F817A9DFAC00A4E2A3 /* JHPlaylistViewController.xib */,
+				7CBE53DE17AA81A700647D68 /* JHYoutubeSongCellBackgroundView.h */,
+				7CBE53DF17AA81A700647D68 /* JHYoutubeSongCellBackgroundView.m */,
+				7CBE53E117AA81B000647D68 /* JHYoutubeSongCellBackgroundView.xib */,
+			);
+			name = Shared;
+			sourceTree = "<group>";
+		};
+		7C6465E817A9DED200A4E2A3 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				7CBE53EA17AA933000647D68 /* JHFontAwesome.h */,
+				7CBE53EB17AA933000647D68 /* JHFontAwesome.m */,
+				7CBE53EC17AA933000647D68 /* UIFont+AppFonts.h */,
+				7CBE53ED17AA933000647D68 /* UIFont+AppFonts.m */,
+				7C6465E917A9DEEB00A4E2A3 /* GeneralUI.h */,
+				7C6465EA17A9DEEB00A4E2A3 /* GeneralUI.m */,
+				7CBE53D317AA749000647D68 /* UIColor+AppColours.h */,
+				7CBE53D417AA749000647D68 /* UIColor+AppColours.m */,
+				7CBE53D617AA75E500647D68 /* NSString+UIColor.h */,
+				7CBE53D717AA75E500647D68 /* NSString+UIColor.m */,
+			);
+			name = Utils;
+			sourceTree = "<group>";
+		};
+		7CBE53D217AA746900647D68 /* Navigation Bar */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "Navigation Bar";
+			sourceTree = "<group>";
+		};
+		7CBE53D917AA7A8800647D68 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				7CBE53F017AA936D00647D68 /* FontAwesome.otf */,
+				7CBE53DA17AA7B8E00647D68 /* navbar-background.png */,
+				7CBE53DB17AA7B8E00647D68 /* navbar-background@2x.png */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -114,9 +226,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7C6465DF17A9DE3C00A4E2A3 /* Build configuration list for PBXNativeTarget "tubedj" */;
 			buildPhases = (
+				B0C2C55BAF2840E89F00AF41 /* Check Pods Manifest.lock */,
 				7C6465B817A9DE3C00A4E2A3 /* Sources */,
 				7C6465B917A9DE3C00A4E2A3 /* Frameworks */,
 				7C6465BA17A9DE3C00A4E2A3 /* Resources */,
+				385E026681A043978DCA63F7 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -164,10 +278,49 @@
 				7C6465D417A9DE3C00A4E2A3 /* Default@2x.png in Resources */,
 				7C6465D617A9DE3C00A4E2A3 /* Default-568h@2x.png in Resources */,
 				7C6465DC17A9DE3C00A4E2A3 /* JHViewController.xib in Resources */,
+				7C6465E617A9DE5C00A4E2A3 /* JHClientViewController.xib in Resources */,
+				7C6465F517A9DFA000A4E2A3 /* JHYouTubeSearchViewController.xib in Resources */,
+				7C6465FA17A9DFAC00A4E2A3 /* JHPlaylistViewController.xib in Resources */,
+				7CBE53DC17AA7B8E00647D68 /* navbar-background.png in Resources */,
+				7CBE53DD17AA7B8E00647D68 /* navbar-background@2x.png in Resources */,
+				7CBE53E217AA81B000647D68 /* JHYoutubeSongCellBackgroundView.xib in Resources */,
+				7CBE53E917AA8C9B00647D68 /* JHYoutubeSongCell.xib in Resources */,
+				7CBE53F117AA936D00647D68 /* FontAwesome.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		385E026681A043978DCA63F7 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+		};
+		B0C2C55BAF2840E89F00AF41 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		7C6465B817A9DE3C00A4E2A3 /* Sources */ = {
@@ -177,6 +330,16 @@
 				7C6465CC17A9DE3C00A4E2A3 /* main.m in Sources */,
 				7C6465D017A9DE3C00A4E2A3 /* JHAppDelegate.m in Sources */,
 				7C6465D917A9DE3C00A4E2A3 /* JHViewController.m in Sources */,
+				7C6465E517A9DE5C00A4E2A3 /* JHClientViewController.m in Sources */,
+				7C6465EB17A9DEEB00A4E2A3 /* GeneralUI.m in Sources */,
+				7C6465EE17A9DF3000A4E2A3 /* JHYoutubeSongCell.m in Sources */,
+				7C6465F417A9DFA000A4E2A3 /* JHYouTubeSearchViewController.m in Sources */,
+				7C6465F917A9DFAC00A4E2A3 /* JHPlaylistViewController.m in Sources */,
+				7CBE53D517AA749000647D68 /* UIColor+AppColours.m in Sources */,
+				7CBE53D817AA75E500647D68 /* NSString+UIColor.m in Sources */,
+				7CBE53E017AA81A800647D68 /* JHYoutubeSongCellBackgroundView.m in Sources */,
+				7CBE53EE17AA933000647D68 /* JHFontAwesome.m in Sources */,
+				7CBE53EF17AA933000647D68 /* UIFont+AppFonts.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -260,6 +423,7 @@
 		};
 		7C6465E017A9DE3C00A4E2A3 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 079349673FEE4912A476FA9F /* Pods.xcconfig */;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "tubedj/tubedj-Prefix.pch";
@@ -271,6 +435,7 @@
 		};
 		7C6465E117A9DE3C00A4E2A3 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 079349673FEE4912A476FA9F /* Pods.xcconfig */;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "tubedj/tubedj-Prefix.pch";
@@ -299,6 +464,7 @@
 				7C6465E117A9DE3C00A4E2A3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

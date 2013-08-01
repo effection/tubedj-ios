@@ -9,17 +9,26 @@
 #import "JHAppDelegate.h"
 
 #import "JHViewController.h"
+#import "JHClientViewController.h"
 
 @implementation JHAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    // Override point for customization after application launch.
-	self.viewController = [[JHViewController alloc] initWithNibName:@"JHViewController" bundle:nil];
-	self.window.rootViewController = self.viewController;
+	
+	UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:[[JHClientViewController alloc] initWithNibName:@"JHClientViewController" bundle:nil]];
+
+	self.window.rootViewController = navController;
     [self.window makeKeyAndVisible];
-    return YES;
+	
+	[self.window setBackgroundColor:[UIColor app_darkGrey]];
+	
+	
+	[[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"navbar-background"] forBarMetrics:UIBarMetricsDefault];
+	UIImage *shadow = [[UIImage alloc] init];
+	[[UINavigationBar appearance] setShadowImage:shadow];
+	 return YES;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

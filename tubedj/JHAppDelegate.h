@@ -8,12 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@class JHViewController;
+@class JHClientViewController;
 
 @interface JHAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 
-@property (strong, nonatomic) JHViewController *viewController;
 
 @end
