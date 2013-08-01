@@ -1,0 +1,306 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		7C6465C017A9DE3C00A4E2A3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C6465BF17A9DE3C00A4E2A3 /* UIKit.framework */; };
+		7C6465C217A9DE3C00A4E2A3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C6465C117A9DE3C00A4E2A3 /* Foundation.framework */; };
+		7C6465C417A9DE3C00A4E2A3 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C6465C317A9DE3C00A4E2A3 /* CoreGraphics.framework */; };
+		7C6465CA17A9DE3C00A4E2A3 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7C6465C817A9DE3C00A4E2A3 /* InfoPlist.strings */; };
+		7C6465CC17A9DE3C00A4E2A3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C6465CB17A9DE3C00A4E2A3 /* main.m */; };
+		7C6465D017A9DE3C00A4E2A3 /* JHAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C6465CF17A9DE3C00A4E2A3 /* JHAppDelegate.m */; };
+		7C6465D217A9DE3C00A4E2A3 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C6465D117A9DE3C00A4E2A3 /* Default.png */; };
+		7C6465D417A9DE3C00A4E2A3 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C6465D317A9DE3C00A4E2A3 /* Default@2x.png */; };
+		7C6465D617A9DE3C00A4E2A3 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C6465D517A9DE3C00A4E2A3 /* Default-568h@2x.png */; };
+		7C6465D917A9DE3C00A4E2A3 /* JHViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C6465D817A9DE3C00A4E2A3 /* JHViewController.m */; };
+		7C6465DC17A9DE3C00A4E2A3 /* JHViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C6465DA17A9DE3C00A4E2A3 /* JHViewController.xib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		7C6465BC17A9DE3C00A4E2A3 /* tubedj.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tubedj.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7C6465BF17A9DE3C00A4E2A3 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		7C6465C117A9DE3C00A4E2A3 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		7C6465C317A9DE3C00A4E2A3 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		7C6465C717A9DE3C00A4E2A3 /* tubedj-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "tubedj-Info.plist"; sourceTree = "<group>"; };
+		7C6465C917A9DE3C00A4E2A3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		7C6465CB17A9DE3C00A4E2A3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		7C6465CD17A9DE3C00A4E2A3 /* tubedj-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "tubedj-Prefix.pch"; sourceTree = "<group>"; };
+		7C6465CE17A9DE3C00A4E2A3 /* JHAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JHAppDelegate.h; sourceTree = "<group>"; };
+		7C6465CF17A9DE3C00A4E2A3 /* JHAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JHAppDelegate.m; sourceTree = "<group>"; };
+		7C6465D117A9DE3C00A4E2A3 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		7C6465D317A9DE3C00A4E2A3 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		7C6465D517A9DE3C00A4E2A3 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		7C6465D717A9DE3C00A4E2A3 /* JHViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JHViewController.h; sourceTree = "<group>"; };
+		7C6465D817A9DE3C00A4E2A3 /* JHViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JHViewController.m; sourceTree = "<group>"; };
+		7C6465DB17A9DE3C00A4E2A3 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/JHViewController.xib; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		7C6465B917A9DE3C00A4E2A3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7C6465C017A9DE3C00A4E2A3 /* UIKit.framework in Frameworks */,
+				7C6465C217A9DE3C00A4E2A3 /* Foundation.framework in Frameworks */,
+				7C6465C417A9DE3C00A4E2A3 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		7C6465B317A9DE3C00A4E2A3 = {
+			isa = PBXGroup;
+			children = (
+				7C6465C517A9DE3C00A4E2A3 /* tubedj */,
+				7C6465BE17A9DE3C00A4E2A3 /* Frameworks */,
+				7C6465BD17A9DE3C00A4E2A3 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		7C6465BD17A9DE3C00A4E2A3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7C6465BC17A9DE3C00A4E2A3 /* tubedj.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		7C6465BE17A9DE3C00A4E2A3 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7C6465BF17A9DE3C00A4E2A3 /* UIKit.framework */,
+				7C6465C117A9DE3C00A4E2A3 /* Foundation.framework */,
+				7C6465C317A9DE3C00A4E2A3 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		7C6465C517A9DE3C00A4E2A3 /* tubedj */ = {
+			isa = PBXGroup;
+			children = (
+				7C6465CE17A9DE3C00A4E2A3 /* JHAppDelegate.h */,
+				7C6465CF17A9DE3C00A4E2A3 /* JHAppDelegate.m */,
+				7C6465D717A9DE3C00A4E2A3 /* JHViewController.h */,
+				7C6465D817A9DE3C00A4E2A3 /* JHViewController.m */,
+				7C6465DA17A9DE3C00A4E2A3 /* JHViewController.xib */,
+				7C6465C617A9DE3C00A4E2A3 /* Supporting Files */,
+			);
+			path = tubedj;
+			sourceTree = "<group>";
+		};
+		7C6465C617A9DE3C00A4E2A3 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				7C6465C717A9DE3C00A4E2A3 /* tubedj-Info.plist */,
+				7C6465C817A9DE3C00A4E2A3 /* InfoPlist.strings */,
+				7C6465CB17A9DE3C00A4E2A3 /* main.m */,
+				7C6465CD17A9DE3C00A4E2A3 /* tubedj-Prefix.pch */,
+				7C6465D117A9DE3C00A4E2A3 /* Default.png */,
+				7C6465D317A9DE3C00A4E2A3 /* Default@2x.png */,
+				7C6465D517A9DE3C00A4E2A3 /* Default-568h@2x.png */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		7C6465BB17A9DE3C00A4E2A3 /* tubedj */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7C6465DF17A9DE3C00A4E2A3 /* Build configuration list for PBXNativeTarget "tubedj" */;
+			buildPhases = (
+				7C6465B817A9DE3C00A4E2A3 /* Sources */,
+				7C6465B917A9DE3C00A4E2A3 /* Frameworks */,
+				7C6465BA17A9DE3C00A4E2A3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = tubedj;
+			productName = tubedj;
+			productReference = 7C6465BC17A9DE3C00A4E2A3 /* tubedj.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		7C6465B417A9DE3C00A4E2A3 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = JH;
+				LastUpgradeCheck = 0460;
+				ORGANIZATIONNAME = "Jordan Hamill";
+			};
+			buildConfigurationList = 7C6465B717A9DE3C00A4E2A3 /* Build configuration list for PBXProject "tubedj" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 7C6465B317A9DE3C00A4E2A3;
+			productRefGroup = 7C6465BD17A9DE3C00A4E2A3 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				7C6465BB17A9DE3C00A4E2A3 /* tubedj */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		7C6465BA17A9DE3C00A4E2A3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7C6465CA17A9DE3C00A4E2A3 /* InfoPlist.strings in Resources */,
+				7C6465D217A9DE3C00A4E2A3 /* Default.png in Resources */,
+				7C6465D417A9DE3C00A4E2A3 /* Default@2x.png in Resources */,
+				7C6465D617A9DE3C00A4E2A3 /* Default-568h@2x.png in Resources */,
+				7C6465DC17A9DE3C00A4E2A3 /* JHViewController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		7C6465B817A9DE3C00A4E2A3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7C6465CC17A9DE3C00A4E2A3 /* main.m in Sources */,
+				7C6465D017A9DE3C00A4E2A3 /* JHAppDelegate.m in Sources */,
+				7C6465D917A9DE3C00A4E2A3 /* JHViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		7C6465C817A9DE3C00A4E2A3 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7C6465C917A9DE3C00A4E2A3 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		7C6465DA17A9DE3C00A4E2A3 /* JHViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7C6465DB17A9DE3C00A4E2A3 /* en */,
+			);
+			name = JHViewController.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		7C6465DD17A9DE3C00A4E2A3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		7C6465DE17A9DE3C00A4E2A3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		7C6465E017A9DE3C00A4E2A3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "tubedj/tubedj-Prefix.pch";
+				INFOPLIST_FILE = "tubedj/tubedj-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		7C6465E117A9DE3C00A4E2A3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "tubedj/tubedj-Prefix.pch";
+				INFOPLIST_FILE = "tubedj/tubedj-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		7C6465B717A9DE3C00A4E2A3 /* Build configuration list for PBXProject "tubedj" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7C6465DD17A9DE3C00A4E2A3 /* Debug */,
+				7C6465DE17A9DE3C00A4E2A3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7C6465DF17A9DE3C00A4E2A3 /* Build configuration list for PBXNativeTarget "tubedj" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7C6465E017A9DE3C00A4E2A3 /* Debug */,
+				7C6465E117A9DE3C00A4E2A3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 7C6465B417A9DE3C00A4E2A3 /* Project object */;
+}
