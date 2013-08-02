@@ -31,6 +31,14 @@
     [super viewDidLoad];
 	self.view.backgroundColor = [UIColor app_darkGrey];
 	
+	UIButton *doneButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 60, 44)];
+	[doneButton setTitle:@"done" forState:UIControlStateNormal];
+	[doneButton setTitleColor:[UIColor app_blue] forState:UIControlStateNormal];
+	[doneButton addTarget:self action:@selector(doneButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+	
+	UIBarButtonItem *doneBarButton = [[UIBarButtonItem alloc] initWithCustomView:doneButton];
+	self.navigationController.visibleViewController.navigationItem.rightBarButtonItem = doneBarButton;
+	
     DataMatrix *dm = [QREncoder encodeWithECLevel:QR_ECLEVEL_AUTO version:QR_VERSION_AUTO string:@"Test"];
 	UIImage *qrCode = [QREncoder renderDataMatrix:dm imageDimension:320];
 	self.qrImageView.image = qrCode;
@@ -40,6 +48,11 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)doneButtonPressed:(id)sender
+{
+	[self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

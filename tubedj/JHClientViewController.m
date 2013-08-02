@@ -90,7 +90,9 @@
 - (void)showQRCode
 {
 	JHQRCodeViewController *qrViewController = [GeneralUI loadController:[JHQRCodeViewController class]];
-	[self.navigationController pushViewController:qrViewController animated:YES];
+	//JHGoogleQRCodeViewController *qrViewController = [GeneralUI loadController:[JHGoogleQRCodeViewController class]];
+	UINavigationController *extraNavController = [[UINavigationController alloc] initWithRootViewController:qrViewController];
+	[self.navigationController presentViewController:extraNavController animated:YES completion:nil];
 }
 
 - (void)showMenu
@@ -121,6 +123,8 @@
 	_sideMenu.backgroundImage = img;
     _sideMenu.verticalOffset = IS_WIDESCREEN ? 160 : 126;
 	_sideMenu.itemHeight = 40.0;
+	_sideMenu.font = [UIFont helveticaNeueRegularWithSize:22.0];
+	_sideMenu.textColor = [UIColor app_offWhite];
     //_sideMenu.hideStatusBarArea = [[[UIApplication sharedApplication] delegate] OSVersion] < 7;
     [_sideMenu show];
 }
