@@ -27,6 +27,13 @@
 		7C6465F517A9DFA000A4E2A3 /* JHYouTubeSearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C6465F317A9DFA000A4E2A3 /* JHYouTubeSearchViewController.xib */; };
 		7C6465F917A9DFAC00A4E2A3 /* JHPlaylistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C6465F717A9DFAC00A4E2A3 /* JHPlaylistViewController.m */; };
 		7C6465FA17A9DFAC00A4E2A3 /* JHPlaylistViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C6465F817A9DFAC00A4E2A3 /* JHPlaylistViewController.xib */; };
+		7C800ACF17AAF7F300D6251C /* DataMatrix.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7C800ACA17AAF7F300D6251C /* DataMatrix.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		7C800AD017AAF7F300D6251C /* QR_Encode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7C800ACB17AAF7F300D6251C /* QR_Encode.cpp */; };
+		7C800AD117AAF7F300D6251C /* QREncoder.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7C800ACE17AAF7F300D6251C /* QREncoder.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		7C800AD417AB108300D6251C /* menu-bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C800AD217AB108300D6251C /* menu-bg.png */; };
+		7C800AD517AB108300D6251C /* menu-bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C800AD317AB108300D6251C /* menu-bg@2x.png */; };
+		7C800ADD17AB159C00D6251C /* RESideMenuPrefixCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C800ADC17AB159C00D6251C /* RESideMenuPrefixCell.m */; };
+		7C800ADF17ABD00000D6251C /* RESideMenuPrefixCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C800ADE17ABD00000D6251C /* RESideMenuPrefixCell.xib */; };
 		7CBE53D517AA749000647D68 /* UIColor+AppColours.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CBE53D417AA749000647D68 /* UIColor+AppColours.m */; };
 		7CBE53D817AA75E500647D68 /* NSString+UIColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CBE53D717AA75E500647D68 /* NSString+UIColor.m */; };
 		7CBE53DC17AA7B8E00647D68 /* navbar-background.png in Resources */ = {isa = PBXBuildFile; fileRef = 7CBE53DA17AA7B8E00647D68 /* navbar-background.png */; };
@@ -37,6 +44,16 @@
 		7CBE53EE17AA933000647D68 /* JHFontAwesome.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CBE53EB17AA933000647D68 /* JHFontAwesome.m */; };
 		7CBE53EF17AA933000647D68 /* UIFont+AppFonts.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CBE53ED17AA933000647D68 /* UIFont+AppFonts.m */; };
 		7CBE53F117AA936D00647D68 /* FontAwesome.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7CBE53F017AA936D00647D68 /* FontAwesome.otf */; };
+		7CBE540117AAEAC000647D68 /* AccelerationAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CBE53F417AAEAC000647D68 /* AccelerationAnimation.m */; };
+		7CBE540217AAEAC000647D68 /* Evaluate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CBE53F617AAEAC000647D68 /* Evaluate.m */; };
+		7CBE540317AAEAC000647D68 /* REBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CBE53F817AAEAC000647D68 /* REBackgroundView.m */; };
+		7CBE540417AAEAC000647D68 /* RESideMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CBE53FA17AAEAC000647D68 /* RESideMenu.m */; };
+		7CBE540517AAEAC000647D68 /* RESideMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CBE53FC17AAEAC000647D68 /* RESideMenuCell.m */; };
+		7CBE540617AAEAC000647D68 /* RESideMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CBE53FE17AAEAC000647D68 /* RESideMenuItem.m */; };
+		7CBE540717AAEAC000647D68 /* UIWindow+RESideMenuExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CBE540017AAEAC000647D68 /* UIWindow+RESideMenuExtensions.m */; };
+		7CBE540917AAECF100647D68 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CBE540817AAECF100647D68 /* QuartzCore.framework */; };
+		7CBE540E17AAEF6300647D68 /* JHQRCodeViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7CBE540C17AAEF6300647D68 /* JHQRCodeViewController.mm */; };
+		7CBE540F17AAEF6300647D68 /* JHQRCodeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CBE540D17AAEF6300647D68 /* JHQRCodeViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -70,6 +87,17 @@
 		7C6465F617A9DFAC00A4E2A3 /* JHPlaylistViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHPlaylistViewController.h; sourceTree = "<group>"; };
 		7C6465F717A9DFAC00A4E2A3 /* JHPlaylistViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JHPlaylistViewController.m; sourceTree = "<group>"; };
 		7C6465F817A9DFAC00A4E2A3 /* JHPlaylistViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JHPlaylistViewController.xib; sourceTree = "<group>"; };
+		7C800AC917AAF7F300D6251C /* DataMatrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataMatrix.h; sourceTree = "<group>"; };
+		7C800ACA17AAF7F300D6251C /* DataMatrix.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DataMatrix.mm; sourceTree = "<group>"; };
+		7C800ACB17AAF7F300D6251C /* QR_Encode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = QR_Encode.cpp; sourceTree = "<group>"; };
+		7C800ACC17AAF7F300D6251C /* QR_Encode.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; path = QR_Encode.h; sourceTree = "<group>"; };
+		7C800ACD17AAF7F300D6251C /* QREncoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QREncoder.h; sourceTree = "<group>"; };
+		7C800ACE17AAF7F300D6251C /* QREncoder.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = QREncoder.mm; sourceTree = "<group>"; };
+		7C800AD217AB108300D6251C /* menu-bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "menu-bg.png"; path = "Resources/menu-bg.png"; sourceTree = "<group>"; };
+		7C800AD317AB108300D6251C /* menu-bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "menu-bg@2x.png"; path = "Resources/menu-bg@2x.png"; sourceTree = "<group>"; };
+		7C800ADB17AB159C00D6251C /* RESideMenuPrefixCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RESideMenuPrefixCell.h; sourceTree = "<group>"; };
+		7C800ADC17AB159C00D6251C /* RESideMenuPrefixCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RESideMenuPrefixCell.m; sourceTree = "<group>"; };
+		7C800ADE17ABD00000D6251C /* RESideMenuPrefixCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RESideMenuPrefixCell.xib; sourceTree = "<group>"; };
 		7CBE53D317AA749000647D68 /* UIColor+AppColours.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+AppColours.h"; sourceTree = "<group>"; };
 		7CBE53D417AA749000647D68 /* UIColor+AppColours.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+AppColours.m"; sourceTree = "<group>"; };
 		7CBE53D617AA75E500647D68 /* NSString+UIColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+UIColor.h"; sourceTree = "<group>"; };
@@ -85,6 +113,24 @@
 		7CBE53EC17AA933000647D68 /* UIFont+AppFonts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIFont+AppFonts.h"; path = "../../Why Dont We (ios6)/Why Dont We (ios6)/UIFont+AppFonts.h"; sourceTree = "<group>"; };
 		7CBE53ED17AA933000647D68 /* UIFont+AppFonts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIFont+AppFonts.m"; path = "../../Why Dont We (ios6)/Why Dont We (ios6)/UIFont+AppFonts.m"; sourceTree = "<group>"; };
 		7CBE53F017AA936D00647D68 /* FontAwesome.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome.otf; sourceTree = "<group>"; };
+		7CBE53F317AAEAC000647D68 /* AccelerationAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccelerationAnimation.h; sourceTree = "<group>"; };
+		7CBE53F417AAEAC000647D68 /* AccelerationAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccelerationAnimation.m; sourceTree = "<group>"; };
+		7CBE53F517AAEAC000647D68 /* Evaluate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Evaluate.h; sourceTree = "<group>"; };
+		7CBE53F617AAEAC000647D68 /* Evaluate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Evaluate.m; sourceTree = "<group>"; };
+		7CBE53F717AAEAC000647D68 /* REBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REBackgroundView.h; sourceTree = "<group>"; };
+		7CBE53F817AAEAC000647D68 /* REBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = REBackgroundView.m; sourceTree = "<group>"; };
+		7CBE53F917AAEAC000647D68 /* RESideMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RESideMenu.h; sourceTree = "<group>"; };
+		7CBE53FA17AAEAC000647D68 /* RESideMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RESideMenu.m; sourceTree = "<group>"; };
+		7CBE53FB17AAEAC000647D68 /* RESideMenuCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RESideMenuCell.h; sourceTree = "<group>"; };
+		7CBE53FC17AAEAC000647D68 /* RESideMenuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RESideMenuCell.m; sourceTree = "<group>"; };
+		7CBE53FD17AAEAC000647D68 /* RESideMenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RESideMenuItem.h; sourceTree = "<group>"; };
+		7CBE53FE17AAEAC000647D68 /* RESideMenuItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RESideMenuItem.m; sourceTree = "<group>"; };
+		7CBE53FF17AAEAC000647D68 /* UIWindow+RESideMenuExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWindow+RESideMenuExtensions.h"; sourceTree = "<group>"; };
+		7CBE540017AAEAC000647D68 /* UIWindow+RESideMenuExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWindow+RESideMenuExtensions.m"; sourceTree = "<group>"; };
+		7CBE540817AAECF100647D68 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		7CBE540B17AAEF6300647D68 /* JHQRCodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHQRCodeViewController.h; sourceTree = "<group>"; };
+		7CBE540C17AAEF6300647D68 /* JHQRCodeViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = JHQRCodeViewController.mm; sourceTree = "<group>"; };
+		7CBE540D17AAEF6300647D68 /* JHQRCodeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JHQRCodeViewController.xib; sourceTree = "<group>"; };
 		CBFB221824DF4DA888384C44 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -93,6 +139,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7CBE540917AAECF100647D68 /* QuartzCore.framework in Frameworks */,
 				7C6465C017A9DE3C00A4E2A3 /* UIKit.framework in Frameworks */,
 				7C6465C217A9DE3C00A4E2A3 /* Foundation.framework in Frameworks */,
 				7C6465C417A9DE3C00A4E2A3 /* CoreGraphics.framework in Frameworks */,
@@ -106,6 +153,7 @@
 		7C6465B317A9DE3C00A4E2A3 = {
 			isa = PBXGroup;
 			children = (
+				7CBE540817AAECF100647D68 /* QuartzCore.framework */,
 				7C6465C517A9DE3C00A4E2A3 /* tubedj */,
 				7C6465BE17A9DE3C00A4E2A3 /* Frameworks */,
 				7C6465BD17A9DE3C00A4E2A3 /* Products */,
@@ -135,6 +183,8 @@
 		7C6465C517A9DE3C00A4E2A3 /* tubedj */ = {
 			isa = PBXGroup;
 			children = (
+				7CBE540A17AAEF4D00647D68 /* QR Code */,
+				7CBE53F217AAEAA600647D68 /* RESideMenu */,
 				7CBE53D217AA746900647D68 /* Navigation Bar */,
 				7C6465E817A9DED200A4E2A3 /* Utils */,
 				7C6465E717A9DEC300A4E2A3 /* Shared */,
@@ -212,11 +262,53 @@
 		7CBE53D917AA7A8800647D68 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				7C800AD217AB108300D6251C /* menu-bg.png */,
+				7C800AD317AB108300D6251C /* menu-bg@2x.png */,
 				7CBE53F017AA936D00647D68 /* FontAwesome.otf */,
 				7CBE53DA17AA7B8E00647D68 /* navbar-background.png */,
 				7CBE53DB17AA7B8E00647D68 /* navbar-background@2x.png */,
 			);
 			name = Resources;
+			sourceTree = "<group>";
+		};
+		7CBE53F217AAEAA600647D68 /* RESideMenu */ = {
+			isa = PBXGroup;
+			children = (
+				7CBE53F317AAEAC000647D68 /* AccelerationAnimation.h */,
+				7CBE53F417AAEAC000647D68 /* AccelerationAnimation.m */,
+				7CBE53F517AAEAC000647D68 /* Evaluate.h */,
+				7CBE53F617AAEAC000647D68 /* Evaluate.m */,
+				7CBE53F717AAEAC000647D68 /* REBackgroundView.h */,
+				7CBE53F817AAEAC000647D68 /* REBackgroundView.m */,
+				7CBE53F917AAEAC000647D68 /* RESideMenu.h */,
+				7CBE53FA17AAEAC000647D68 /* RESideMenu.m */,
+				7CBE53FB17AAEAC000647D68 /* RESideMenuCell.h */,
+				7CBE53FC17AAEAC000647D68 /* RESideMenuCell.m */,
+				7CBE53FD17AAEAC000647D68 /* RESideMenuItem.h */,
+				7CBE53FE17AAEAC000647D68 /* RESideMenuItem.m */,
+				7CBE53FF17AAEAC000647D68 /* UIWindow+RESideMenuExtensions.h */,
+				7CBE540017AAEAC000647D68 /* UIWindow+RESideMenuExtensions.m */,
+				7C800ADB17AB159C00D6251C /* RESideMenuPrefixCell.h */,
+				7C800ADC17AB159C00D6251C /* RESideMenuPrefixCell.m */,
+				7C800ADE17ABD00000D6251C /* RESideMenuPrefixCell.xib */,
+			);
+			name = RESideMenu;
+			sourceTree = "<group>";
+		};
+		7CBE540A17AAEF4D00647D68 /* QR Code */ = {
+			isa = PBXGroup;
+			children = (
+				7C800AC917AAF7F300D6251C /* DataMatrix.h */,
+				7C800ACA17AAF7F300D6251C /* DataMatrix.mm */,
+				7C800ACB17AAF7F300D6251C /* QR_Encode.cpp */,
+				7C800ACC17AAF7F300D6251C /* QR_Encode.h */,
+				7C800ACD17AAF7F300D6251C /* QREncoder.h */,
+				7C800ACE17AAF7F300D6251C /* QREncoder.mm */,
+				7CBE540B17AAEF6300647D68 /* JHQRCodeViewController.h */,
+				7CBE540C17AAEF6300647D68 /* JHQRCodeViewController.mm */,
+				7CBE540D17AAEF6300647D68 /* JHQRCodeViewController.xib */,
+			);
+			name = "QR Code";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -286,6 +378,10 @@
 				7CBE53E217AA81B000647D68 /* JHYoutubeSongCellBackgroundView.xib in Resources */,
 				7CBE53E917AA8C9B00647D68 /* JHYoutubeSongCell.xib in Resources */,
 				7CBE53F117AA936D00647D68 /* FontAwesome.otf in Resources */,
+				7CBE540F17AAEF6300647D68 /* JHQRCodeViewController.xib in Resources */,
+				7C800AD417AB108300D6251C /* menu-bg.png in Resources */,
+				7C800AD517AB108300D6251C /* menu-bg@2x.png in Resources */,
+				7C800ADF17ABD00000D6251C /* RESideMenuPrefixCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -340,6 +436,18 @@
 				7CBE53E017AA81A800647D68 /* JHYoutubeSongCellBackgroundView.m in Sources */,
 				7CBE53EE17AA933000647D68 /* JHFontAwesome.m in Sources */,
 				7CBE53EF17AA933000647D68 /* UIFont+AppFonts.m in Sources */,
+				7CBE540117AAEAC000647D68 /* AccelerationAnimation.m in Sources */,
+				7CBE540217AAEAC000647D68 /* Evaluate.m in Sources */,
+				7CBE540317AAEAC000647D68 /* REBackgroundView.m in Sources */,
+				7CBE540417AAEAC000647D68 /* RESideMenu.m in Sources */,
+				7CBE540517AAEAC000647D68 /* RESideMenuCell.m in Sources */,
+				7CBE540617AAEAC000647D68 /* RESideMenuItem.m in Sources */,
+				7CBE540717AAEAC000647D68 /* UIWindow+RESideMenuExtensions.m in Sources */,
+				7CBE540E17AAEF6300647D68 /* JHQRCodeViewController.mm in Sources */,
+				7C800ACF17AAF7F300D6251C /* DataMatrix.mm in Sources */,
+				7C800AD017AAF7F300D6251C /* QR_Encode.cpp in Sources */,
+				7C800AD117AAF7F300D6251C /* QREncoder.mm in Sources */,
+				7C800ADD17AB159C00D6251C /* RESideMenuPrefixCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -427,6 +535,11 @@
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "tubedj/tubedj-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				HEADER_SEARCH_PATHS = (
+					"${PODS_HEADERS_SEARCH_PATHS}",
+					"Users/jordan-hamill/Work/Projects/Samples/QR-Code-Encoder-for-Objective-C/",
+				);
 				INFOPLIST_FILE = "tubedj/tubedj-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
@@ -439,6 +552,11 @@
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "tubedj/tubedj-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				HEADER_SEARCH_PATHS = (
+					"${PODS_HEADERS_SEARCH_PATHS}",
+					"Users/jordan-hamill/Work/Projects/Samples/QR-Code-Encoder-for-Objective-C/",
+				);
 				INFOPLIST_FILE = "tubedj/tubedj-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;

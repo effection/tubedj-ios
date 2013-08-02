@@ -14,5 +14,6 @@
 
 @property (strong, nonatomic) UIWindow *window;
 
+- (int)OSVersion;
 
 @end
