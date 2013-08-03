@@ -13,4 +13,9 @@
 
 @property (nonatomic, readwrite) BOOL canDelete;
 
+@property (weak, nonatomic) IBOutlet UIImageView *previewImage;
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *ownerLabel;
+@property (weak, nonatomic) IBOutlet UILabel *ageLabel;
+
 @end

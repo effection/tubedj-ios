@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "JHYoutubeClient.h"
 
-@interface JHYouTubeSearchViewController : UITableViewController
+@interface JHYouTubeSearchViewController : UITableViewController <UISearchBarDelegate, JHYoutubeClientDelegate>
 
 @end

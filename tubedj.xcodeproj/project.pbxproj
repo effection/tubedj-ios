@@ -34,6 +34,10 @@
 		7C800AD517AB108300D6251C /* menu-bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C800AD317AB108300D6251C /* menu-bg@2x.png */; };
 		7C800ADD17AB159C00D6251C /* RESideMenuPrefixCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C800ADC17AB159C00D6251C /* RESideMenuPrefixCell.m */; };
 		7C800ADF17ABD00000D6251C /* RESideMenuPrefixCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C800ADE17ABD00000D6251C /* RESideMenuPrefixCell.xib */; };
+		7C800AE917AC2B7E00D6251C /* JHYoutubeClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C800AE817AC2B7E00D6251C /* JHYoutubeClient.m */; };
+		7C800AEC17AC335100D6251C /* JHYoutubeSearchResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C800AEB17AC335100D6251C /* JHYoutubeSearchResult.m */; };
+		7C800AF217AD362700D6251C /* SORelativeDateTransformer.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7C800AEF17AD362700D6251C /* SORelativeDateTransformer.bundle */; };
+		7C800AF317AD362700D6251C /* SORelativeDateTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C800AF117AD362700D6251C /* SORelativeDateTransformer.m */; };
 		7CBE53D517AA749000647D68 /* UIColor+AppColours.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CBE53D417AA749000647D68 /* UIColor+AppColours.m */; };
 		7CBE53D817AA75E500647D68 /* NSString+UIColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CBE53D717AA75E500647D68 /* NSString+UIColor.m */; };
 		7CBE53DC17AA7B8E00647D68 /* navbar-background.png in Resources */ = {isa = PBXBuildFile; fileRef = 7CBE53DA17AA7B8E00647D68 /* navbar-background.png */; };
@@ -98,6 +102,13 @@
 		7C800ADB17AB159C00D6251C /* RESideMenuPrefixCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RESideMenuPrefixCell.h; sourceTree = "<group>"; };
 		7C800ADC17AB159C00D6251C /* RESideMenuPrefixCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RESideMenuPrefixCell.m; sourceTree = "<group>"; };
 		7C800ADE17ABD00000D6251C /* RESideMenuPrefixCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RESideMenuPrefixCell.xib; sourceTree = "<group>"; };
+		7C800AE717AC2B7E00D6251C /* JHYoutubeClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHYoutubeClient.h; sourceTree = "<group>"; };
+		7C800AE817AC2B7E00D6251C /* JHYoutubeClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JHYoutubeClient.m; sourceTree = "<group>"; };
+		7C800AEA17AC335100D6251C /* JHYoutubeSearchResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHYoutubeSearchResult.h; sourceTree = "<group>"; };
+		7C800AEB17AC335100D6251C /* JHYoutubeSearchResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JHYoutubeSearchResult.m; sourceTree = "<group>"; };
+		7C800AEF17AD362700D6251C /* SORelativeDateTransformer.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SORelativeDateTransformer.bundle; sourceTree = "<group>"; };
+		7C800AF017AD362700D6251C /* SORelativeDateTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SORelativeDateTransformer.h; sourceTree = "<group>"; };
+		7C800AF117AD362700D6251C /* SORelativeDateTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SORelativeDateTransformer.m; sourceTree = "<group>"; };
 		7CBE53D317AA749000647D68 /* UIColor+AppColours.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+AppColours.h"; sourceTree = "<group>"; };
 		7CBE53D417AA749000647D68 /* UIColor+AppColours.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+AppColours.m"; sourceTree = "<group>"; };
 		7CBE53D617AA75E500647D68 /* NSString+UIColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+UIColor.h"; sourceTree = "<group>"; };
@@ -183,6 +194,9 @@
 		7C6465C517A9DE3C00A4E2A3 /* tubedj */ = {
 			isa = PBXGroup;
 			children = (
+				7C800AEE17AD35F600D6251C /* SORelativeDateTransformer */,
+				7C800AE617AC0B8C00D6251C /* Rest API Client */,
+				7C800AE517AC0B7700D6251C /* Youtube client */,
 				7CBE540A17AAEF4D00647D68 /* QR Code */,
 				7CBE53F217AAEAA600647D68 /* RESideMenu */,
 				7CBE53D217AA746900647D68 /* Navigation Bar */,
@@ -250,6 +264,34 @@
 				7CBE53D717AA75E500647D68 /* NSString+UIColor.m */,
 			);
 			name = Utils;
+			sourceTree = "<group>";
+		};
+		7C800AE517AC0B7700D6251C /* Youtube client */ = {
+			isa = PBXGroup;
+			children = (
+				7C800AE717AC2B7E00D6251C /* JHYoutubeClient.h */,
+				7C800AE817AC2B7E00D6251C /* JHYoutubeClient.m */,
+				7C800AEA17AC335100D6251C /* JHYoutubeSearchResult.h */,
+				7C800AEB17AC335100D6251C /* JHYoutubeSearchResult.m */,
+			);
+			name = "Youtube client";
+			sourceTree = "<group>";
+		};
+		7C800AE617AC0B8C00D6251C /* Rest API Client */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "Rest API Client";
+			sourceTree = "<group>";
+		};
+		7C800AEE17AD35F600D6251C /* SORelativeDateTransformer */ = {
+			isa = PBXGroup;
+			children = (
+				7C800AEF17AD362700D6251C /* SORelativeDateTransformer.bundle */,
+				7C800AF017AD362700D6251C /* SORelativeDateTransformer.h */,
+				7C800AF117AD362700D6251C /* SORelativeDateTransformer.m */,
+			);
+			name = SORelativeDateTransformer;
 			sourceTree = "<group>";
 		};
 		7CBE53D217AA746900647D68 /* Navigation Bar */ = {
@@ -382,6 +424,7 @@
 				7C800AD417AB108300D6251C /* menu-bg.png in Resources */,
 				7C800AD517AB108300D6251C /* menu-bg@2x.png in Resources */,
 				7C800ADF17ABD00000D6251C /* RESideMenuPrefixCell.xib in Resources */,
+				7C800AF217AD362700D6251C /* SORelativeDateTransformer.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -448,6 +491,9 @@
 				7C800AD017AAF7F300D6251C /* QR_Encode.cpp in Sources */,
 				7C800AD117AAF7F300D6251C /* QREncoder.mm in Sources */,
 				7C800ADD17AB159C00D6251C /* RESideMenuPrefixCell.m in Sources */,
+				7C800AE917AC2B7E00D6251C /* JHYoutubeClient.m in Sources */,
+				7C800AEC17AC335100D6251C /* JHYoutubeSearchResult.m in Sources */,
+				7C800AF317AD362700D6251C /* SORelativeDateTransformer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
