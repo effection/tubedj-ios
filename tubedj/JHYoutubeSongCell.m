@@ -19,7 +19,8 @@
 @end
 
 @implementation JHYoutubeSongCell {
-	BOOL hitAddButton;
+	
+
 }
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
@@ -50,18 +51,19 @@
 	self.backView = self.addBackground = [GeneralUI loadViewFromNib:[JHYoutubeSongCellBackgroundView class]];
 	
 	self.revealDirection = RMSwipeTableViewCellRevealDirectionLeft;
+	self.isSwipeable = YES;
 }
 
 - (void)prepareForReuse
 {
 	[super prepareForReuse];
-	hitAddButton = NO;
+	self.isSwipeable = YES;//TODO fix
 	self.animationDuration = 0.2;
 }
 
 -(BOOL)gestureRecognizerShouldBegin:(UIPanGestureRecognizer *)panGestureRecognizer
 {
-	if(hitAddButton) return NO;
+	if(!self.isSwipeable) return NO;
 	
 	return [super gestureRecognizerShouldBegin:panGestureRecognizer];
 }
@@ -78,9 +80,13 @@
 		if(alpha < 1)
 			self.addBackground.addButton.titleLabel.textColor = [UIColor app_lightGrey];
 		else {
+			self.isSwipeable = NO;
+			
 			self.addBackground.addButton.titleLabel.textColor = [UIColor app_red];
-			hitAddButton = YES;
-			self.animationDuration = 1.0;
+			self.animationDuration = 0.6;
+			
+			if([self.actionDelegate respondsToSelector:@selector(songCellTriggeredDeleteAction:)])
+				[self.actionDelegate songCellTriggeredDeleteAction:self];
 		}
 		alpha = MIN(1, 1);
 	} else {
@@ -90,9 +96,13 @@
 		if(alpha < 1)
 			self.addBackground.addButton.titleLabel.textColor = [UIColor app_lightGrey];
 		else {
+			self.isSwipeable = NO;
+			
 			self.addBackground.addButton.titleLabel.textColor = [UIColor app_green];
-			hitAddButton = YES;
-			self.animationDuration = 1.0;
+			self.animationDuration = 0.6;
+			
+			if([self.actionDelegate respondsToSelector:@selector(songCellTriggeredAddAction:)])
+				[self.actionDelegate songCellTriggeredAddAction:self];
 		}
 		alpha = MIN(1, (point.x - 30) / 320);
 	}
@@ -117,6 +127,20 @@
 	}
 	self.addBackground.canDelete = canDelete;
 }
+
+- (void)setIsSwipeable:(BOOL)isSwipeable
+{
+	_isSwipeable = isSwipeable;
+	[UIView animateWithDuration:0.3f
+					 animations:^{
+						 float alpha = (isSwipeable ? 1.0f : 0.4f);
+						 self.previewImage.alpha = alpha;
+						 self.titleLabel.alpha = alpha;
+						 self.ownerLabel.alpha = alpha;
+						 self.ageLabel.alpha = alpha;
+						 self.titleLabel.textColor = (isSwipeable ? [UIColor app_offWhite] : (self.canDelete ? [UIColor app_red] : [UIColor app_green]));
+					 }];
+	}
 
 
 @end

@@ -11,6 +11,7 @@
 #import "JHYoutubeSongCell.h"
 #import "UIImageView+AFNetworking.h"
 #import "SORelativeDateTransformer.h"
+#import "JHStandardYoutubeViewController.h"
 
 @interface JHYouTubeSearchViewController ()
 
@@ -18,6 +19,7 @@
 
 @implementation JHYouTubeSearchViewController {
 	JHYoutubeClient *youtubeClient;
+	NSMutableArray *addedItems;
 }
 
 NSString * const CellIdentifier = @"JHYoutubeSongCell";
@@ -50,6 +52,7 @@ NSString * const CellIdentifier = @"JHYoutubeSongCell";
 	
 	youtubeClient = [[JHYoutubeClient alloc] init];
 	youtubeClient.delegate = self;
+	addedItems = [[NSMutableArray alloc] initWithCapacity:5];
 	
 	//Keyboard dismissal
 
@@ -80,6 +83,8 @@ NSString * const CellIdentifier = @"JHYoutubeSongCell";
 
 - (void)youtubeClient:(JHYoutubeClient *)client searchStartedFor:(NSString *)search
 {
+	//New search
+	[addedItems removeAllObjects];
 	[self.tableView reloadData];
 }
 
@@ -102,11 +107,15 @@ NSString * const CellIdentifier = @"JHYoutubeSongCell";
 	[self.tableView endUpdates];
 }
 
-#pragma mark - Scroll view delegate
+#pragma mark - JHYoutubeSongCell delegate
 
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+- (void)songCellTriggeredAddAction:(JHYoutubeSongCell *)cell
 {
-	
+	[addedItems addObject:cell.songId];
+	if([self.delegate respondsToSelector:@selector(youtubeSearch:requestToAddItemToPlaylist:cell:)])
+	{
+		[self.delegate youtubeSearch:self requestToAddItemToPlaylist:cell.songId cell:(JHYoutubeSongCell *)cell];
+	}
 }
 
 #pragma mark - Table view data source
@@ -132,10 +141,14 @@ NSString * const CellIdentifier = @"JHYoutubeSongCell";
 	cell.canDelete = NO;
 	
 	JHYoutubeSearchResult *searchItem = [youtubeClient.searchResults objectAtIndex:indexPath.row];
+	cell.songId = searchItem.id;
 	cell.titleLabel.text = searchItem.title;
 	cell.ownerLabel.text = searchItem.author;
 	cell.ageLabel.text = [[SORelativeDateTransformer registeredTransformer] transformedValue:searchItem.date];
+	cell.isSwipeable = ![addedItems containsObject:searchItem.id];
+	cell.actionDelegate = self;
 	[cell.previewImage setImageWithURL:searchItem.thumbnailUrl];
+	
 	
 	if(indexPath.row >= youtubeClient.searchResults.count -1)
 	{
@@ -150,7 +163,12 @@ NSString * const CellIdentifier = @"JHYoutubeSongCell";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    JHYoutubeSongCell *cell = (JHYoutubeSongCell *)[tableView cellForRowAtIndexPath:indexPath];
+	NSLog(@"Clicked %@", cell.songId);
+	if([self.delegate respondsToSelector:@selector(youtubeSearch:searchItemSelected:cell:)])
+	{
+		[self.delegate youtubeSearch:self searchItemSelected:cell.songId cell:cell];
+	}
 }
 
 @end

@@ -9,10 +9,26 @@
 #import <UIKit/UIKit.h>
 #import "RMSwipeTableViewCell.h"
 
+@class JHYoutubeSongCell;
+
+@protocol JHYoutubeSongCellDelegate <NSObject>
+
+@optional
+
+- (void)songCellTriggeredAddAction:(JHYoutubeSongCell *)cell;
+- (void)songCellTriggeredDeleteAction:(JHYoutubeSongCell *)cell;
+
+@end
+
 @interface JHYoutubeSongCell : RMSwipeTableViewCell <RMSwipeTableViewCellDelegate>
+
+@property (nonatomic, assign) id<JHYoutubeSongCellDelegate>actionDelegate;
 
 @property (nonatomic, readwrite) BOOL canDelete;
 
+@property (nonatomic, readwrite) BOOL isSwipeable;
+
+@property (strong, nonatomic) NSString *songId;
 @property (weak, nonatomic) IBOutlet UIImageView *previewImage;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *ownerLabel;

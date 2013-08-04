@@ -8,7 +8,21 @@
 
 #import <UIKit/UIKit.h>
 #import "JHYoutubeClient.h"
+#import "JHYoutubeSongCell.h"
 
-@interface JHYouTubeSearchViewController : UITableViewController <UISearchBarDelegate, JHYoutubeClientDelegate>
+@class JHYouTubeSearchViewController;
+
+@protocol JHYoutubeSearchViewControllerDelegate <NSObject>
+
+@optional
+
+- (void)youtubeSearch:(JHYouTubeSearchViewController *)controller searchItemSelected:(NSString *)songId cell:(JHYoutubeSongCell *)cell;
+- (void)youtubeSearch:(JHYouTubeSearchViewController *)controller requestToAddItemToPlaylist:(NSString *)songId cell:(JHYoutubeSongCell *)cell;
+
+@end
+
+@interface JHYouTubeSearchViewController : UITableViewController <UISearchBarDelegate, JHYoutubeClientDelegate, JHYoutubeSongCellDelegate>
+
+@property (nonatomic, assign) id<JHYoutubeSearchViewControllerDelegate> delegate;
 
 @end

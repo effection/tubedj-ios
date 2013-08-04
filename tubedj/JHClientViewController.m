@@ -9,10 +9,10 @@
 #import "JHAppDelegate.h"
 #import "JHClientViewController.h"
 #import "JHYoutubeSongCell.h"
-#import "JHYouTubeSearchViewController.h"
 #import "JHPlaylistViewController.h"
 #import "RESideMenu.h"
 #import "JHQRCodeViewController.h"
+#import "JHStandardYoutubeViewController.h"
 
 @interface JHClientViewController ()
 @property (strong, nonatomic) JHYouTubeSearchViewController *youtubeSearchController;
@@ -35,6 +35,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
 	
 	//Navigation items
 	
@@ -65,6 +66,7 @@
 	self.scrollView.backgroundColor = [UIColor clearColor];
 	
 	self.youtubeSearchController = [GeneralUI loadController:[JHYouTubeSearchViewController class]];
+	self.youtubeSearchController.delegate = self;
 	self.playlistController = [GeneralUI loadController:[JHPlaylistViewController class]];
 	UIView *searchView = self.youtubeSearchController.view;
 	UIView *playlistView = self.playlistController.view;
@@ -87,6 +89,22 @@
 {
     [super didReceiveMemoryWarning];
 }
+
+#pragma mark - JHYoutubeSearchViewControllerDelegate
+
+- (void)youtubeSearch:(JHYouTubeSearchViewController *)controller searchItemSelected:(NSString *)songId cell:(JHYoutubeSongCell *)cell
+{
+	JHStandardYoutubeViewController *youtubeViewController = [GeneralUI loadController:[JHStandardYoutubeViewController class]];
+	UINavigationController *extraNavController = [[UINavigationController alloc] initWithRootViewController:youtubeViewController];
+	[self.navigationController presentViewController:extraNavController animated:YES completion:nil];
+	[youtubeViewController loadYouTubeEmbed:cell.songId];
+}
+
+- (void)youtubeSearch:(JHYouTubeSearchViewController *)controller requestToAddItemToPlaylist:(NSString *)songId cell:(JHYoutubeSongCell *)cell
+{
+	//cell.isSwipeable = YES;
+}
+
 - (void)showQRCode
 {
 	JHQRCodeViewController *qrViewController = [GeneralUI loadController:[JHQRCodeViewController class]];
@@ -97,6 +115,8 @@
 
 - (void)showMenu
 {
+	[self.view endEditing:YES];
+	
     RESideMenuItem *homeItem = [[RESideMenuItem alloc] initWithTitle:@"disconnect" prefix:[JHFontAwesome standardIcon:FontAwesome_Off] ofSize:28.0f ofColour:[UIColor app_red] action:^(RESideMenu *menu, RESideMenuItem *item) {
         [menu hide];
         /*

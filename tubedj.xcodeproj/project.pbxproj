@@ -38,6 +38,8 @@
 		7C800AEC17AC335100D6251C /* JHYoutubeSearchResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C800AEB17AC335100D6251C /* JHYoutubeSearchResult.m */; };
 		7C800AF217AD362700D6251C /* SORelativeDateTransformer.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7C800AEF17AD362700D6251C /* SORelativeDateTransformer.bundle */; };
 		7C800AF317AD362700D6251C /* SORelativeDateTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C800AF117AD362700D6251C /* SORelativeDateTransformer.m */; };
+		7C800AF717AE776300D6251C /* JHStandardYoutubeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C800AF517AE776300D6251C /* JHStandardYoutubeViewController.m */; };
+		7C800AF817AE776300D6251C /* JHStandardYoutubeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C800AF617AE776300D6251C /* JHStandardYoutubeViewController.xib */; };
 		7CBE53D517AA749000647D68 /* UIColor+AppColours.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CBE53D417AA749000647D68 /* UIColor+AppColours.m */; };
 		7CBE53D817AA75E500647D68 /* NSString+UIColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CBE53D717AA75E500647D68 /* NSString+UIColor.m */; };
 		7CBE53DC17AA7B8E00647D68 /* navbar-background.png in Resources */ = {isa = PBXBuildFile; fileRef = 7CBE53DA17AA7B8E00647D68 /* navbar-background.png */; };
@@ -109,6 +111,9 @@
 		7C800AEF17AD362700D6251C /* SORelativeDateTransformer.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SORelativeDateTransformer.bundle; sourceTree = "<group>"; };
 		7C800AF017AD362700D6251C /* SORelativeDateTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SORelativeDateTransformer.h; sourceTree = "<group>"; };
 		7C800AF117AD362700D6251C /* SORelativeDateTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SORelativeDateTransformer.m; sourceTree = "<group>"; };
+		7C800AF417AE776300D6251C /* JHStandardYoutubeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHStandardYoutubeViewController.h; sourceTree = "<group>"; };
+		7C800AF517AE776300D6251C /* JHStandardYoutubeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JHStandardYoutubeViewController.m; sourceTree = "<group>"; };
+		7C800AF617AE776300D6251C /* JHStandardYoutubeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JHStandardYoutubeViewController.xib; sourceTree = "<group>"; };
 		7CBE53D317AA749000647D68 /* UIColor+AppColours.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+AppColours.h"; sourceTree = "<group>"; };
 		7CBE53D417AA749000647D68 /* UIColor+AppColours.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+AppColours.m"; sourceTree = "<group>"; };
 		7CBE53D617AA75E500647D68 /* NSString+UIColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+UIColor.h"; sourceTree = "<group>"; };
@@ -245,6 +250,9 @@
 				7CBE53DE17AA81A700647D68 /* JHYoutubeSongCellBackgroundView.h */,
 				7CBE53DF17AA81A700647D68 /* JHYoutubeSongCellBackgroundView.m */,
 				7CBE53E117AA81B000647D68 /* JHYoutubeSongCellBackgroundView.xib */,
+				7C800AF417AE776300D6251C /* JHStandardYoutubeViewController.h */,
+				7C800AF517AE776300D6251C /* JHStandardYoutubeViewController.m */,
+				7C800AF617AE776300D6251C /* JHStandardYoutubeViewController.xib */,
 			);
 			name = Shared;
 			sourceTree = "<group>";
@@ -425,6 +433,7 @@
 				7C800AD517AB108300D6251C /* menu-bg@2x.png in Resources */,
 				7C800ADF17ABD00000D6251C /* RESideMenuPrefixCell.xib in Resources */,
 				7C800AF217AD362700D6251C /* SORelativeDateTransformer.bundle in Resources */,
+				7C800AF817AE776300D6251C /* JHStandardYoutubeViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -494,6 +503,7 @@
 				7C800AE917AC2B7E00D6251C /* JHYoutubeClient.m in Sources */,
 				7C800AEC17AC335100D6251C /* JHYoutubeSearchResult.m in Sources */,
 				7C800AF317AD362700D6251C /* SORelativeDateTransformer.m in Sources */,
+				7C800AF717AE776300D6251C /* JHStandardYoutubeViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -8,6 +8,18 @@
 
 #import <UIKit/UIKit.h>
 
+@class JHPlaylistViewController;
+
+@protocol JHPlaylistViewControllerDelegate <NSObject>
+
+@optional
+
+- (void)playlist:(JHPlaylistViewController *)controller requestToRemoveItemFromPlaylist:(id)item;
+
+@end
+
 @interface JHPlaylistViewController : UITableViewController
+
+@property (nonatomic, assign) id<JHPlaylistViewControllerDelegate> delegate;
 
 @end
