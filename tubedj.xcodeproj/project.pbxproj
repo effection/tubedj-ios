@@ -202,7 +202,7 @@
 				7C800AEE17AD35F600D6251C /* SORelativeDateTransformer */,
 				7C800AE617AC0B8C00D6251C /* Rest API Client */,
 				7C800AE517AC0B7700D6251C /* Youtube client */,
-				7CBE540A17AAEF4D00647D68 /* QR Code */,
+				7CBE540A17AAEF4D00647D68 /* QR Code Encoder */,
 				7CBE53F217AAEAA600647D68 /* RESideMenu */,
 				7CBE53D217AA746900647D68 /* Navigation Bar */,
 				7C6465E817A9DED200A4E2A3 /* Utils */,
@@ -345,7 +345,7 @@
 			name = RESideMenu;
 			sourceTree = "<group>";
 		};
-		7CBE540A17AAEF4D00647D68 /* QR Code */ = {
+		7CBE540A17AAEF4D00647D68 /* QR Code Encoder */ = {
 			isa = PBXGroup;
 			children = (
 				7C800AC917AAF7F300D6251C /* DataMatrix.h */,
@@ -358,7 +358,7 @@
 				7CBE540C17AAEF6300647D68 /* JHQRCodeViewController.mm */,
 				7CBE540D17AAEF6300647D68 /* JHQRCodeViewController.xib */,
 			);
-			name = "QR Code";
+			name = "QR Code Encoder";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

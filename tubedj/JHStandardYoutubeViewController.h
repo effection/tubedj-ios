@@ -9,6 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface JHStandardYoutubeViewController : UIViewController <UIWebViewDelegate>
+
+@property (nonatomic, readonly) NSString *videoId;
+
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
 
 - (void)loadYouTubeEmbed:(NSString *)videoId;

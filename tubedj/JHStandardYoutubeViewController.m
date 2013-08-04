@@ -51,6 +51,7 @@
 
 - (void)loadYouTubeEmbed:(NSString *)videoId
 {
+	_videoId = videoId;
     NSString* searchQuery = [NSString stringWithFormat:@"http://www.youtube.com/embed/%@?showinfo=0&loop=1&modestbranding=1&controls=1&playsinline=1",videoId];
     searchQuery = [searchQuery stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding];
 	
@@ -59,12 +60,12 @@
 }
 
 -(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
-    if ([[[request URL] absoluteString] isEqualToString:@"<URL String Youtube spits out when video selected>"]) {
+    if ([[[request URL] absoluteString] isEqualToString:[NSString stringWithFormat:@"http://www.youtube.com/embed/%@?showinfo=0&loop=1&modestbranding=1&controls=1&playsinline=1",_videoId]]) {
+        
+        return YES;
+    } else {
         NSLog(@"Blocking YouTube...");
         return NO;
-    } else {
-        NSLog(@"Link is fine, continue...");
-        return YES;
     }
 }
 

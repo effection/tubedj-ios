@@ -361,7 +361,14 @@ const int INTERSTITIAL_STEPS = 99;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    RESideMenuItem *item = [_items objectAtIndex:indexPath.row];
+	
+	RESideMenuItem *item = nil;
+	if(jhSections > 0) {
+		item = jhItems[indexPath.section][indexPath.row];
+	} else {
+		item = [_items objectAtIndex:indexPath.row];
+	}
+
     if (item.action)
         item.action(self, item);
 }

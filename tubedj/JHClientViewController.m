@@ -13,6 +13,7 @@
 #import "RESideMenu.h"
 #import "JHQRCodeViewController.h"
 #import "JHStandardYoutubeViewController.h"
+#import "ZBarSDK.h"
 
 @interface JHClientViewController ()
 @property (strong, nonatomic) JHYouTubeSearchViewController *youtubeSearchController;
@@ -119,6 +120,7 @@
 	
     RESideMenuItem *homeItem = [[RESideMenuItem alloc] initWithTitle:@"disconnect" prefix:[JHFontAwesome standardIcon:FontAwesome_Off] ofSize:28.0f ofColour:[UIColor app_red] action:^(RESideMenu *menu, RESideMenuItem *item) {
         [menu hide];
+		[self showQRCodeReader];
         /*
         SecondViewController *secondViewController = [[SecondViewController alloc] init];
         secondViewController.title = item.title;
@@ -138,7 +140,7 @@
         [menu hide];
     }];
 	
-    _sideMenu = [[RESideMenu alloc] initWithJHItems:@[@[homeItem, nameItem, startServerItem], @[musicItem, youtubeItem]]];
+    _sideMenu = [[RESideMenu alloc] initWithJHItems:@[@[homeItem, nameItem], @[]]];
 	UIImage *img = [UIImage imageNamed:@"menu-bg"];
 	_sideMenu.backgroundImage = img;
     _sideMenu.verticalOffset = IS_WIDESCREEN ? 160 : 126;
@@ -149,5 +151,53 @@
     [_sideMenu show];
 }
 
+- (void)showQRCodeReader
+{
+	ZBarReaderViewController *reader = [ZBarReaderViewController new];
+    reader.readerDelegate = self;
+    reader.supportedOrientationsMask = ZBarOrientationMaskAll;
+	reader.showsZBarControls = NO;
+	reader.wantsFullScreenLayout = NO;
+    ZBarImageScanner *scanner = reader.scanner;
+    // TODO: (optional) additional reader configuration here
+	
+    // EXAMPLE: disable rarely used I2/5 to improve performance
+    [scanner setSymbology: ZBAR_I25
+				   config: ZBAR_CFG_ENABLE
+					   to: 0];
+	UINavigationController *extraNavController = [[UINavigationController alloc] initWithRootViewController:reader];
+	
+	UIButton *doneButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 60, 44)];
+	[doneButton setTitle:@"done" forState:UIControlStateNormal];
+	[doneButton setTitleColor:[UIColor app_blue] forState:UIControlStateNormal];
+	[doneButton addTarget:self action:@selector(doneButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+	
+	UIBarButtonItem *doneBarButton = [[UIBarButtonItem alloc] initWithCustomView:doneButton];
+	reader.navigationItem.rightBarButtonItem = doneBarButton;
+	
+    [self.navigationController presentViewController:extraNavController animated:YES completion:nil];
+}
+
+#pragma mark - ZBar QR Code delegate
+
+- (void) imagePickerController: (UIImagePickerController*) reader
+ didFinishPickingMediaWithInfo: (NSDictionary*) info
+{
+    // ADD: get the decode results
+    id<NSFastEnumeration> results =
+	[info objectForKey: ZBarReaderControllerResults];
+    ZBarSymbol *symbol = nil;
+    for(symbol in results) {
+        
+        break;
+	}
+	
+    [reader dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)doneButtonPressed:(id)sender
+{
+	[self.navigationController dismissViewControllerAnimated:YES completion:nil];
+}
 
 @end
