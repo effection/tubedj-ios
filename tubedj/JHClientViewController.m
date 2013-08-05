@@ -14,6 +14,7 @@
 #import "JHQRCodeViewController.h"
 #import "JHStandardYoutubeViewController.h"
 #import "ZBarSDK.h"
+#import "JHRestClient.h"
 
 @interface JHClientViewController ()
 @property (strong, nonatomic) JHYouTubeSearchViewController *youtubeSearchController;
@@ -83,6 +84,8 @@
 	[self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[playlistView(460)]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(playlistView)]];
 	[self.view updateConstraints];
 	[self.view layoutIfNeeded];
+	
+	//[[JHRestClient sharedClient] createUser:@"Jordan"];
 	
 }
 

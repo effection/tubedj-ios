@@ -32,7 +32,8 @@
 	return view;
 }
 
-+ (id)loadController:(Class)classType {
++ (id)loadController:(Class)classType
+{
     NSString *className = NSStringFromClass(classType);
     UIViewController *controller = [[classType alloc] initWithNibName:className bundle:nil];
     return controller;

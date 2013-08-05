@@ -17,8 +17,6 @@
 		7C6465D217A9DE3C00A4E2A3 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C6465D117A9DE3C00A4E2A3 /* Default.png */; };
 		7C6465D417A9DE3C00A4E2A3 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C6465D317A9DE3C00A4E2A3 /* Default@2x.png */; };
 		7C6465D617A9DE3C00A4E2A3 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C6465D517A9DE3C00A4E2A3 /* Default-568h@2x.png */; };
-		7C6465D917A9DE3C00A4E2A3 /* JHViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C6465D817A9DE3C00A4E2A3 /* JHViewController.m */; };
-		7C6465DC17A9DE3C00A4E2A3 /* JHViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C6465DA17A9DE3C00A4E2A3 /* JHViewController.xib */; };
 		7C6465E517A9DE5C00A4E2A3 /* JHClientViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C6465E317A9DE5C00A4E2A3 /* JHClientViewController.m */; };
 		7C6465E617A9DE5C00A4E2A3 /* JHClientViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C6465E417A9DE5C00A4E2A3 /* JHClientViewController.xib */; };
 		7C6465EB17A9DEEB00A4E2A3 /* GeneralUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C6465EA17A9DEEB00A4E2A3 /* GeneralUI.m */; };
@@ -40,6 +38,20 @@
 		7C800AF317AD362700D6251C /* SORelativeDateTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C800AF117AD362700D6251C /* SORelativeDateTransformer.m */; };
 		7C800AF717AE776300D6251C /* JHStandardYoutubeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C800AF517AE776300D6251C /* JHStandardYoutubeViewController.m */; };
 		7C800AF817AE776300D6251C /* JHStandardYoutubeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C800AF617AE776300D6251C /* JHStandardYoutubeViewController.xib */; };
+		7C800B0117AE992200D6251C /* JHRestClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C800B0017AE992200D6251C /* JHRestClient.m */; };
+		7C800B0417AEA94900D6251C /* JHTubeDjManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C800B0317AEA94900D6251C /* JHTubeDjManager.m */; };
+		7C800B0D17AEBA1B00D6251C /* JHHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C800B0B17AEBA1800D6251C /* JHHomeViewController.m */; };
+		7C800B0E17AEBA1B00D6251C /* JHHomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C800B0C17AEBA1900D6251C /* JHHomeViewController.xib */; };
+		7C800B1217AEBA2C00D6251C /* JHNewUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C800B1017AEBA2900D6251C /* JHNewUserViewController.m */; };
+		7C800B1317AEBA2C00D6251C /* JHNewUserViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C800B1117AEBA2B00D6251C /* JHNewUserViewController.xib */; };
+		7C90D68A17AFB7990055D876 /* gradient-bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C90D68617AFB7990055D876 /* gradient-bg.png */; };
+		7C90D68B17AFB7990055D876 /* gradient-bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C90D68717AFB7990055D876 /* gradient-bg@2x.png */; };
+		7C90D68C17AFB7990055D876 /* red-divider.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C90D68817AFB7990055D876 /* red-divider.png */; };
+		7C90D68D17AFB7990055D876 /* red-divider@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C90D68917AFB7990055D876 /* red-divider@2x.png */; };
+		7C90D69117AFC22B0055D876 /* JHDiscalimerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C90D68F17AFC22B0055D876 /* JHDiscalimerViewController.m */; };
+		7C90D69217AFC22B0055D876 /* JHDiscalimerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C90D69017AFC22B0055D876 /* JHDiscalimerViewController.xib */; };
+		7C90D69517B015760055D876 /* hexagon-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C90D69317B015760055D876 /* hexagon-button.png */; };
+		7C90D69617B015760055D876 /* hexagon-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C90D69417B015760055D876 /* hexagon-button@2x.png */; };
 		7CBE53D517AA749000647D68 /* UIColor+AppColours.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CBE53D417AA749000647D68 /* UIColor+AppColours.m */; };
 		7CBE53D817AA75E500647D68 /* NSString+UIColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CBE53D717AA75E500647D68 /* NSString+UIColor.m */; };
 		7CBE53DC17AA7B8E00647D68 /* navbar-background.png in Resources */ = {isa = PBXBuildFile; fileRef = 7CBE53DA17AA7B8E00647D68 /* navbar-background.png */; };
@@ -77,9 +89,6 @@
 		7C6465D117A9DE3C00A4E2A3 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		7C6465D317A9DE3C00A4E2A3 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		7C6465D517A9DE3C00A4E2A3 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		7C6465D717A9DE3C00A4E2A3 /* JHViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JHViewController.h; sourceTree = "<group>"; };
-		7C6465D817A9DE3C00A4E2A3 /* JHViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JHViewController.m; sourceTree = "<group>"; };
-		7C6465DB17A9DE3C00A4E2A3 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/JHViewController.xib; sourceTree = "<group>"; };
 		7C6465E217A9DE5C00A4E2A3 /* JHClientViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHClientViewController.h; sourceTree = "<group>"; };
 		7C6465E317A9DE5C00A4E2A3 /* JHClientViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JHClientViewController.m; sourceTree = "<group>"; };
 		7C6465E417A9DE5C00A4E2A3 /* JHClientViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JHClientViewController.xib; sourceTree = "<group>"; };
@@ -114,6 +123,25 @@
 		7C800AF417AE776300D6251C /* JHStandardYoutubeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHStandardYoutubeViewController.h; sourceTree = "<group>"; };
 		7C800AF517AE776300D6251C /* JHStandardYoutubeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JHStandardYoutubeViewController.m; sourceTree = "<group>"; };
 		7C800AF617AE776300D6251C /* JHStandardYoutubeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JHStandardYoutubeViewController.xib; sourceTree = "<group>"; };
+		7C800AFF17AE992200D6251C /* JHRestClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHRestClient.h; sourceTree = "<group>"; };
+		7C800B0017AE992200D6251C /* JHRestClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JHRestClient.m; sourceTree = "<group>"; };
+		7C800B0217AEA94900D6251C /* JHTubeDjManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHTubeDjManager.h; sourceTree = "<group>"; };
+		7C800B0317AEA94900D6251C /* JHTubeDjManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JHTubeDjManager.m; sourceTree = "<group>"; };
+		7C800B0A17AEBA1600D6251C /* JHHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHHomeViewController.h; sourceTree = "<group>"; };
+		7C800B0B17AEBA1800D6251C /* JHHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JHHomeViewController.m; sourceTree = "<group>"; };
+		7C800B0C17AEBA1900D6251C /* JHHomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JHHomeViewController.xib; sourceTree = "<group>"; };
+		7C800B0F17AEBA2800D6251C /* JHNewUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHNewUserViewController.h; sourceTree = "<group>"; };
+		7C800B1017AEBA2900D6251C /* JHNewUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JHNewUserViewController.m; sourceTree = "<group>"; };
+		7C800B1117AEBA2B00D6251C /* JHNewUserViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JHNewUserViewController.xib; sourceTree = "<group>"; };
+		7C90D68617AFB7990055D876 /* gradient-bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "gradient-bg.png"; path = "Resources/gradient-bg.png"; sourceTree = "<group>"; };
+		7C90D68717AFB7990055D876 /* gradient-bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "gradient-bg@2x.png"; path = "Resources/gradient-bg@2x.png"; sourceTree = "<group>"; };
+		7C90D68817AFB7990055D876 /* red-divider.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "red-divider.png"; path = "Resources/red-divider.png"; sourceTree = "<group>"; };
+		7C90D68917AFB7990055D876 /* red-divider@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "red-divider@2x.png"; path = "Resources/red-divider@2x.png"; sourceTree = "<group>"; };
+		7C90D68E17AFC22B0055D876 /* JHDiscalimerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHDiscalimerViewController.h; sourceTree = "<group>"; };
+		7C90D68F17AFC22B0055D876 /* JHDiscalimerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JHDiscalimerViewController.m; sourceTree = "<group>"; };
+		7C90D69017AFC22B0055D876 /* JHDiscalimerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JHDiscalimerViewController.xib; sourceTree = "<group>"; };
+		7C90D69317B015760055D876 /* hexagon-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "hexagon-button.png"; path = "Resources/hexagon-button.png"; sourceTree = "<group>"; };
+		7C90D69417B015760055D876 /* hexagon-button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "hexagon-button@2x.png"; path = "Resources/hexagon-button@2x.png"; sourceTree = "<group>"; };
 		7CBE53D317AA749000647D68 /* UIColor+AppColours.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+AppColours.h"; sourceTree = "<group>"; };
 		7CBE53D417AA749000647D68 /* UIColor+AppColours.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+AppColours.m"; sourceTree = "<group>"; };
 		7CBE53D617AA75E500647D68 /* NSString+UIColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+UIColor.h"; sourceTree = "<group>"; };
@@ -209,13 +237,14 @@
 				7C6465E717A9DEC300A4E2A3 /* Shared */,
 				7C6465CE17A9DE3C00A4E2A3 /* JHAppDelegate.h */,
 				7C6465CF17A9DE3C00A4E2A3 /* JHAppDelegate.m */,
-				7C6465D717A9DE3C00A4E2A3 /* JHViewController.h */,
-				7C6465D817A9DE3C00A4E2A3 /* JHViewController.m */,
-				7C6465DA17A9DE3C00A4E2A3 /* JHViewController.xib */,
+				7C800B1417AFB49500D6251C /* Start Screens */,
 				7C6465C617A9DE3C00A4E2A3 /* Supporting Files */,
 				7C6465E217A9DE5C00A4E2A3 /* JHClientViewController.h */,
 				7C6465E317A9DE5C00A4E2A3 /* JHClientViewController.m */,
 				7C6465E417A9DE5C00A4E2A3 /* JHClientViewController.xib */,
+				7C800B0A17AEBA1600D6251C /* JHHomeViewController.h */,
+				7C800B0B17AEBA1800D6251C /* JHHomeViewController.m */,
+				7C800B0C17AEBA1900D6251C /* JHHomeViewController.xib */,
 			);
 			path = tubedj;
 			sourceTree = "<group>";
@@ -288,6 +317,10 @@
 		7C800AE617AC0B8C00D6251C /* Rest API Client */ = {
 			isa = PBXGroup;
 			children = (
+				7C800AFF17AE992200D6251C /* JHRestClient.h */,
+				7C800B0017AE992200D6251C /* JHRestClient.m */,
+				7C800B0217AEA94900D6251C /* JHTubeDjManager.h */,
+				7C800B0317AEA94900D6251C /* JHTubeDjManager.m */,
 			);
 			name = "Rest API Client";
 			sourceTree = "<group>";
@@ -302,6 +335,19 @@
 			name = SORelativeDateTransformer;
 			sourceTree = "<group>";
 		};
+		7C800B1417AFB49500D6251C /* Start Screens */ = {
+			isa = PBXGroup;
+			children = (
+				7C800B0F17AEBA2800D6251C /* JHNewUserViewController.h */,
+				7C800B1017AEBA2900D6251C /* JHNewUserViewController.m */,
+				7C800B1117AEBA2B00D6251C /* JHNewUserViewController.xib */,
+				7C90D68E17AFC22B0055D876 /* JHDiscalimerViewController.h */,
+				7C90D68F17AFC22B0055D876 /* JHDiscalimerViewController.m */,
+				7C90D69017AFC22B0055D876 /* JHDiscalimerViewController.xib */,
+			);
+			name = "Start Screens";
+			sourceTree = "<group>";
+		};
 		7CBE53D217AA746900647D68 /* Navigation Bar */ = {
 			isa = PBXGroup;
 			children = (
@@ -312,6 +358,12 @@
 		7CBE53D917AA7A8800647D68 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				7C90D69317B015760055D876 /* hexagon-button.png */,
+				7C90D69417B015760055D876 /* hexagon-button@2x.png */,
+				7C90D68617AFB7990055D876 /* gradient-bg.png */,
+				7C90D68717AFB7990055D876 /* gradient-bg@2x.png */,
+				7C90D68817AFB7990055D876 /* red-divider.png */,
+				7C90D68917AFB7990055D876 /* red-divider@2x.png */,
 				7C800AD217AB108300D6251C /* menu-bg.png */,
 				7C800AD317AB108300D6251C /* menu-bg@2x.png */,
 				7CBE53F017AA936D00647D68 /* FontAwesome.otf */,
@@ -419,7 +471,6 @@
 				7C6465D217A9DE3C00A4E2A3 /* Default.png in Resources */,
 				7C6465D417A9DE3C00A4E2A3 /* Default@2x.png in Resources */,
 				7C6465D617A9DE3C00A4E2A3 /* Default-568h@2x.png in Resources */,
-				7C6465DC17A9DE3C00A4E2A3 /* JHViewController.xib in Resources */,
 				7C6465E617A9DE5C00A4E2A3 /* JHClientViewController.xib in Resources */,
 				7C6465F517A9DFA000A4E2A3 /* JHYouTubeSearchViewController.xib in Resources */,
 				7C6465FA17A9DFAC00A4E2A3 /* JHPlaylistViewController.xib in Resources */,
@@ -434,6 +485,15 @@
 				7C800ADF17ABD00000D6251C /* RESideMenuPrefixCell.xib in Resources */,
 				7C800AF217AD362700D6251C /* SORelativeDateTransformer.bundle in Resources */,
 				7C800AF817AE776300D6251C /* JHStandardYoutubeViewController.xib in Resources */,
+				7C800B0E17AEBA1B00D6251C /* JHHomeViewController.xib in Resources */,
+				7C800B1317AEBA2C00D6251C /* JHNewUserViewController.xib in Resources */,
+				7C90D68A17AFB7990055D876 /* gradient-bg.png in Resources */,
+				7C90D68B17AFB7990055D876 /* gradient-bg@2x.png in Resources */,
+				7C90D68C17AFB7990055D876 /* red-divider.png in Resources */,
+				7C90D68D17AFB7990055D876 /* red-divider@2x.png in Resources */,
+				7C90D69217AFC22B0055D876 /* JHDiscalimerViewController.xib in Resources */,
+				7C90D69517B015760055D876 /* hexagon-button.png in Resources */,
+				7C90D69617B015760055D876 /* hexagon-button@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -477,7 +537,6 @@
 			files = (
 				7C6465CC17A9DE3C00A4E2A3 /* main.m in Sources */,
 				7C6465D017A9DE3C00A4E2A3 /* JHAppDelegate.m in Sources */,
-				7C6465D917A9DE3C00A4E2A3 /* JHViewController.m in Sources */,
 				7C6465E517A9DE5C00A4E2A3 /* JHClientViewController.m in Sources */,
 				7C6465EB17A9DEEB00A4E2A3 /* GeneralUI.m in Sources */,
 				7C6465EE17A9DF3000A4E2A3 /* JHYoutubeSongCell.m in Sources */,
@@ -504,6 +563,11 @@
 				7C800AEC17AC335100D6251C /* JHYoutubeSearchResult.m in Sources */,
 				7C800AF317AD362700D6251C /* SORelativeDateTransformer.m in Sources */,
 				7C800AF717AE776300D6251C /* JHStandardYoutubeViewController.m in Sources */,
+				7C800B0117AE992200D6251C /* JHRestClient.m in Sources */,
+				7C800B0417AEA94900D6251C /* JHTubeDjManager.m in Sources */,
+				7C800B0D17AEBA1B00D6251C /* JHHomeViewController.m in Sources */,
+				7C800B1217AEBA2C00D6251C /* JHNewUserViewController.m in Sources */,
+				7C90D69117AFC22B0055D876 /* JHDiscalimerViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -516,14 +580,6 @@
 				7C6465C917A9DE3C00A4E2A3 /* en */,
 			);
 			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		7C6465DA17A9DE3C00A4E2A3 /* JHViewController.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				7C6465DB17A9DE3C00A4E2A3 /* en */,
-			);
-			name = JHViewController.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

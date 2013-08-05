@@ -10,6 +10,8 @@
 
 #import "JHViewController.h"
 #import "JHClientViewController.h"
+#import "JHHomeViewController.h"
+#import "JHNewUserViewController.h"
 
 @implementation JHAppDelegate
 
@@ -27,7 +29,17 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 	
-	UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:[[JHClientViewController alloc] initWithNibName:@"JHClientViewController" bundle:nil]];
+	[[NSUserDefaults standardUserDefaults] registerDefaults:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:YES],@"firstRun",nil]];
+	BOOL isFirstRun = [[NSUserDefaults standardUserDefaults] boolForKey:@"firstRun"];
+	
+	UIViewController *viewController = nil;
+	
+	if(isFirstRun)
+		viewController = [GeneralUI loadController:[JHNewUserViewController class]];
+	else
+		viewController = [GeneralUI loadController:[JHHomeViewController class]];
+	
+	UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:viewController];
 
 	self.window.rootViewController = navController;
     [self.window makeKeyAndVisible];
