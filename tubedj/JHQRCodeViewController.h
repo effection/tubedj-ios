@@ -10,4 +10,6 @@
 
 @interface JHQRCodeViewController : UIViewController
 
+- (void)setCode:(NSString *)code;
+
 @end

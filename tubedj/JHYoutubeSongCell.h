@@ -24,6 +24,8 @@
 
 @property (nonatomic, assign) id<JHYoutubeSongCellDelegate>actionDelegate;
 
+@property (nonatomic, readwrite) BOOL isPerformingAction;
+
 @property (nonatomic, readwrite) BOOL canDelete;
 
 @property (nonatomic, readwrite) BOOL isSwipeable;

@@ -14,7 +14,8 @@
 #import "JHQRCodeViewController.h"
 #import "JHStandardYoutubeViewController.h"
 #import "ZBarSDK.h"
-#import "JHRestClient.h"
+#import "JHTubeDjManager.h"
+
 
 @interface JHClientViewController ()
 @property (strong, nonatomic) JHYouTubeSearchViewController *youtubeSearchController;
@@ -49,6 +50,7 @@
 	
 	UIBarButtonItem *customItem = [[UIBarButtonItem alloc] initWithCustomView:button];
 	self.navigationController.visibleViewController.navigationItem.leftBarButtonItem = customItem;
+	self.navigationItem.hidesBackButton = YES;
 	
 	//QR Code button
 	
@@ -70,6 +72,7 @@
 	self.youtubeSearchController = [GeneralUI loadController:[JHYouTubeSearchViewController class]];
 	self.youtubeSearchController.delegate = self;
 	self.playlistController = [GeneralUI loadController:[JHPlaylistViewController class]];
+	self.playlistController.delegate = self;
 	UIView *searchView = self.youtubeSearchController.view;
 	UIView *playlistView = self.playlistController.view;
 
@@ -85,13 +88,57 @@
 	[self.view updateConstraints];
 	[self.view layoutIfNeeded];
 	
-	//[[JHRestClient sharedClient] createUser:@"Jordan"];
 	
+	[[NSNotificationCenter defaultCenter] addObserver:self 
+											  selector:@selector(tubedjRequestErrorNotification:)
+												 name:@"tubedj-request-error"
+											   object:nil];
+	//[self showQRCodeReader];
+	[self loadRoom:@"KTdeKsyT"];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
+}
+
+- (void)tubedjRequestErrorNotification:(NSNotification *) notification
+{
+
+}
+
+
+- (BOOL)loadRoom:(NSString *)roomid
+{
+	//Sanatise
+	
+	if(roomid.length > 7 && roomid.length < 15) {
+		[[JHTubeDjManager sharedManager] joinRoom:roomid success:^(NSString *roomId, NSString *ownerId, NSDictionary *users, NSArray *playlist) {
+			
+			//Populate playlist controller
+			//self.playlistController
+			
+			//Populate users menu
+			
+			
+		} error:^(NSError *error) {
+			
+			//TODO Error
+			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Ooops" message:@"Sorry, we couldn't find that room" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+			
+			[alert show];
+
+			
+		}];
+		return YES;
+	}
+	
+	return NO;
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+	[self.navigationController popToRootViewControllerAnimated:YES];//TODO Not always leave room
 }
 
 #pragma mark - JHYoutubeSearchViewControllerDelegate
@@ -106,7 +153,23 @@
 
 - (void)youtubeSearch:(JHYouTubeSearchViewController *)controller requestToAddItemToPlaylist:(NSString *)songId cell:(JHYoutubeSongCell *)cell
 {
-	//cell.isSwipeable = YES;
+	[[JHTubeDjManager sharedManager] addYoutubeSongToPlaylist:songId success:^(JHPlaylistItem *song) {
+		//Song request successful. WebSocket should make table update
+		
+	} error:^(NSError *error) {
+		cell.isSwipeable = YES;
+		cell.isPerformingAction = NO;
+	}];
+}
+
+- (void)playlist:(JHPlaylistViewController *)controller requestToRemoveItemFromPlaylist:(NSString *)uid cell:(JHYoutubeSongCell *)cell
+{
+	[[JHTubeDjManager sharedManager] removeSongFromPlaylist:uid success:^(NSString *uid) {
+		
+	} error:^(NSError *error) {
+		cell.isSwipeable = YES;
+		cell.isPerformingAction = NO;
+	}];
 }
 
 - (void)showQRCode
@@ -115,6 +178,7 @@
 	//JHGoogleQRCodeViewController *qrViewController = [GeneralUI loadController:[JHGoogleQRCodeViewController class]];
 	UINavigationController *extraNavController = [[UINavigationController alloc] initWithRootViewController:qrViewController];
 	[self.navigationController presentViewController:extraNavController animated:YES completion:nil];
+	[qrViewController setCode:[JHTubeDjManager sharedManager].roomId];
 }
 
 - (void)showMenu
@@ -123,7 +187,7 @@
 	
     RESideMenuItem *homeItem = [[RESideMenuItem alloc] initWithTitle:@"disconnect" prefix:[JHFontAwesome standardIcon:FontAwesome_Off] ofSize:28.0f ofColour:[UIColor app_red] action:^(RESideMenu *menu, RESideMenuItem *item) {
         [menu hide];
-		[self showQRCodeReader];
+		[self.navigationController popToRootViewControllerAnimated:YES];
         /*
         SecondViewController *secondViewController = [[SecondViewController alloc] init];
         secondViewController.title = item.title;
@@ -171,7 +235,7 @@
 	UINavigationController *extraNavController = [[UINavigationController alloc] initWithRootViewController:reader];
 	
 	UIButton *doneButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 60, 44)];
-	[doneButton setTitle:@"done" forState:UIControlStateNormal];
+	[doneButton setTitle:@"cancel" forState:UIControlStateNormal];
 	[doneButton setTitleColor:[UIColor app_blue] forState:UIControlStateNormal];
 	[doneButton addTarget:self action:@selector(doneButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
 	
@@ -190,17 +254,21 @@
     id<NSFastEnumeration> results =
 	[info objectForKey: ZBarReaderControllerResults];
     ZBarSymbol *symbol = nil;
-    for(symbol in results) {
-        
-        break;
+    for(symbol in results) {		
+		if([self loadRoom:symbol.data])
+		{
+			[reader dismissViewControllerAnimated:YES completion:nil];
+			break;
+		}
 	}
 	
-    [reader dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)doneButtonPressed:(id)sender
 {
-	[self.navigationController dismissViewControllerAnimated:YES completion:nil];
+	[self.navigationController dismissViewControllerAnimated:YES completion:^ {
+		[self.navigationController popToRootViewControllerAnimated:YES];
+	}];
 }
 
 @end

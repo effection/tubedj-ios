@@ -8,42 +8,14 @@
 
 #import <Foundation/Foundation.h>
 #import "JHRestClient.h"
-
-@class JHTubeDjManager;
-
-@protocol JHTubeDjManagerDelegate <NSObject>
-
-@optional
-
-- (void)tubedj:(JHTubeDjManager *)manager error:(NSError *)error;
-
-- (void)tubedjUserDoesntExist:(JHTubeDjManager *)manager;
-
-- (void)tubedjUserValid:(JHTubeDjManager *)manager;
-
-- (void)tubedj:(JHTubeDjManager *)manager createdUserWithId:(NSString *)userId andName:(NSString *)name;
-
-- (void)tubedj:(JHTubeDjManager *)manager user:(NSString *)userid changedNameTo:(NSString *)newName;
-
-- (void)tubedj:(JHTubeDjManager *)manager createdRoomWithId:(NSString *)roomId;
-
-- (void)tubedj:(JHTubeDjManager *)manager joinedRoomWithId:(NSString *)roomId withOwnerId:(NSString *)ownerId withUsers:(NSDictionary *)users andPlaylist:(NSArray *)playlist;
-
-- (void)tubedj:(JHTubeDjManager *)manager leftRoomWithId:(NSString *)roomId;
-
-- (void)tubedjSelectedNextSong:(JHTubeDjManager *)manager;
-
-- (void)tubedj:(JHTubeDjManager *)manager updatedPlaylist:(NSArray *)playlist;
-
-- (void)tubedj:(JHTubeDjManager *)manager addedSongToPlaylist:(id)song;
-
-- (void)tubedj:(JHTubeDjManager *)manager removedSongFromPlaylist:(NSString *)songId;
-
-@end
+#import "JHPlaylistItem.h"
+#import "JHUserItem.h"
+#import "SocketIO.h"
 
 /**
  *
  * Notifications
+ *  tubedj-request-error {operation, error}
  *  tubedj-user-doesnt-exist {}
  *  tubedj-user-is-valid {}
  *  tubedj-user-created {id, name}
@@ -53,14 +25,12 @@
  *  tubedj-left-room {id}
  *  tubedj-next-song {}
  *  tubedj-playlist-refresh {playlist}
- *  tubedj-playlist-added-song {songId, uid}
+ *  tubedj-playlist-added-song {song}
  *  tubedj-playlist-removed-song {uid}
  */
-@interface JHTubeDjManager : NSObject
+@interface JHTubeDjManager : NSObject <SocketIODelegate>
 
 + (JHTubeDjManager *)sharedManager;
-
-@property (assign, nonatomic) id<JHTubeDjManagerDelegate> delegate;
 
 @property (strong, nonatomic) NSString *myName;
 @property (strong, nonatomic) NSString *myUserId;
@@ -72,20 +42,22 @@
 @property (strong, nonatomic) NSMutableArray *playlist;
 @property (strong, nonatomic) NSMutableDictionary *users;
 
-- (void)loadAndCheckUserDetails;
+- (BOOL)isUserMe:(NSString *)userId;
+
+- (void)loadAndCheckUserDetailsWithSuccess:(void (^)(BOOL found, BOOL valid))successBlock error:(void (^)(NSError *error))errorBlock;
 - (void)saveDetails;
 
-- (void)createUser:(NSString *)name;
-- (void)changeUserName:(NSString *)newName;
+- (void)createUser:(NSString *)name success:(void (^)(NSString *userId, NSString *name))successBlock error:(void (^)(NSError *error))errorBlock;
+- (void)changeUserName:(NSString *)newName success:(void (^)(NSString *userId, NSString *name))successBlock error:(void (^)(NSError *error))errorBlock;
 
-- (void)createRoom;
-- (void)joinRoom:(NSString *)roomId;
-- (void)leaveRoom;
+- (void)createRoomWithSuccess:(void (^)(NSString *roomId))successBlock error:(void (^)(NSError *error))errorBlock;
+- (void)joinRoom:(NSString *)roomId success:(void (^)(NSString *roomId, NSString *ownerId, NSDictionary *users, NSArray *playlist))successBlock error:(void (^)(NSError *error))errorBlock;
+- (void)leaveRoomWithSuccess:(void (^)(NSString *roomId))successBlock error:(void (^)(NSError *error))errorBlock;
 
-- (void)nextSong;
-- (void)updatePlaylist;
-- (void)addYoutubeSongToPlaylist:(NSString *)songId;
-- (void)removeSongFromPlaylist:(NSString *)songId;
+- (void)nextSongWithSuccess:(void (^)())successBlock error:(void (^)(NSError *error))errorBlock;
+- (void)updatePlaylistWithSuccess:(void (^)(NSArray *playlist))successBlock error:(void (^)(NSError *error))errorBlock;
+- (void)addYoutubeSongToPlaylist:(NSString *)songId success:(void (^)(JHPlaylistItem *song))successBlock error:(void (^)(NSError *error))errorBlock;
+- (void)removeSongFromPlaylist:(NSString *)songId success:(void (^)(NSString *uid))successBlock error:(void (^)(NSError *error))errorBlock;
 
 
 

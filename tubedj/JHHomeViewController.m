@@ -8,8 +8,12 @@
 
 #import "JHHomeViewController.h"
 #import "JHNewUserViewController.h"
+#import "JHClientViewController.h"
+#import	"JHTubeDjManager.h"
 
 @interface JHHomeViewController ()
+@property (weak, nonatomic) IBOutlet UIButton *createRoomButton;
+@property (weak, nonatomic) IBOutlet UIButton *joinRoomButton;
 
 @end
 
@@ -28,22 +32,39 @@
 {
     [super viewDidLoad];
 	self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"gradient-bg"]];
+	[self.createRoomButton setBackgroundImage:[UIImage imageNamed:@"hexagon-button"] forState:UIControlStateNormal];
+	[self.createRoomButton setBackgroundImage:[UIImage imageNamed:@"hexagon-button-highlighted"] forState:UIControlStateHighlighted];
+	[self.createRoomButton setBackgroundImage:[UIImage imageNamed:@"hexagon-button-highlighted"] forState:UIControlStateSelected];
+	[self.createRoomButton setBackgroundImage:[UIImage imageNamed:@"hexagon-button-highlighted"] forState:UIControlStateSelected | UIControlStateHighlighted];
+	[self.createRoomButton setTitleColor:[UIColor app_offWhite] forState:UIControlStateNormal];
+	[self.createRoomButton setTitleColor:[UIColor app_green] forState:UIControlStateHighlighted];
+	[self.createRoomButton setTitleColor:[UIColor app_offWhite] forState:UIControlStateSelected];
+	[self.createRoomButton setTitleColor:[UIColor app_offWhite] forState:UIControlStateSelected | UIControlStateHighlighted];
 	
-	[[JHTubeDjManager sharedManager] loadAndCheckUserDetails];
+	[self.joinRoomButton setBackgroundImage:[UIImage imageNamed:@"hexagon-button"] forState:UIControlStateNormal];
+	[self.joinRoomButton setBackgroundImage:[UIImage imageNamed:@"hexagon-button-highlighted"] forState:UIControlStateHighlighted];
+	[self.joinRoomButton setBackgroundImage:[UIImage imageNamed:@"hexagon-button-highlighted"] forState:UIControlStateSelected];
+	[self.joinRoomButton setBackgroundImage:[UIImage imageNamed:@"hexagon-button-highlighted"] forState:UIControlStateSelected | UIControlStateHighlighted];
 	
-	[[NSNotificationCenter defaultCenter] addObserver:self
-											 selector:@selector(tubedjUserValid:)
-												 name:@"tubedj-user-is-valid"
-											   object:nil];
-	[[NSNotificationCenter defaultCenter] addObserver:self
-											 selector:@selector(tubedjUserDoesntExist:)
-												 name:@"tubedj-user-doesnt-exist"
-											   object:nil];
+	[self.joinRoomButton setTitleColor:[UIColor app_offWhite] forState:UIControlStateNormal];
+	[self.joinRoomButton setTitleColor:[UIColor app_green] forState:UIControlStateHighlighted];
+	[self.joinRoomButton setTitleColor:[UIColor app_offWhite] forState:UIControlStateSelected];
+	[self.joinRoomButton setTitleColor:[UIColor app_offWhite] forState:UIControlStateSelected | UIControlStateHighlighted];
 	
-	[[NSNotificationCenter defaultCenter] addObserver:self
-											 selector:@selector(tubedjError:)
-												 name:@"tubedj-request-error"
-											   object:nil];
+	[[JHTubeDjManager sharedManager] loadAndCheckUserDetailsWithSuccess:^(BOOL found, BOOL valid) {
+		if(!found || !valid) {
+			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Something went wrong" message:@"Sorry, we couldn't find your details" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+			
+			[alert show];
+		} else {
+			NSLog(@"User ok");
+		}
+		
+	} error:^(NSError *error) {
+		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Something went wrong" message:@"Sorry, something happened while trying to check your details" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+		
+		[alert show];
+	}];
 }
 
 - (void)didReceiveMemoryWarning
@@ -57,24 +78,9 @@
 	self.navigationController.viewControllers = [[NSArray alloc] initWithObjects:[GeneralUI loadController:[JHNewUserViewController class]], nil];
 }
 
-- (void)tubedjUserDoesntExist:(NSNotification *)notifcation
-{
-	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Something went wrong" message:@"Sorry, we couldn't find your details" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-	
-	[alert show];
+- (IBAction)joinButtonPressed:(UIButton *)sender {
+	JHClientViewController *clientViewController = [GeneralUI loadController:[JHClientViewController class]];
+	[self.navigationController pushViewController:clientViewController animated:YES];
+
 }
-
-- (void)tubedjUserValid:(NSNotification *)notifcation
-{
-	NSLog(@"User ok");
-}
-
-- (void)tubedjError:(NSNotification *)notification
-{
-	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Something went wrong" message:@"Sorry, something happened while trying to check your details" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-	
-	[alert show];
-}
-
-
 @end

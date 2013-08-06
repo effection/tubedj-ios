@@ -7,8 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import	"JHTubeDjManager.h"
 
-@interface JHHomeViewController : UIViewController <JHTubeDjManagerDelegate>
+
+@interface JHHomeViewController : UIViewController
+- (IBAction)createButtonPressed:(UIButton *)sender;
+- (IBAction)joinButtonPressed:(UIButton *)sender;
 
 @end

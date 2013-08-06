@@ -8,6 +8,7 @@
 
 #import "JHYoutubeSongCell.h"
 #import "JHYoutubeSongCellBackgroundView.h"
+#import "JHYoutubeClient.h"
 
 @interface JHYoutubeSongCell()
 

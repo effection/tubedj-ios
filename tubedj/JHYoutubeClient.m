@@ -110,6 +110,53 @@
 		
 		isSearching = NO;
 		
+	} failure:nil];//TODO Failure
+	
+	[operation start];
+}
+
++ (void)getSongDetails:(NSString *)songId success:(void (^)(JHYoutubeSearchResult *result))successBlock error:(void (^)(NSError *error))errorBlock
+{
+	NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+	[dateFormat setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"];
+	
+	NSString* searchCall = [NSString stringWithFormat:@"https://gdata.youtube.com/feeds/api/videos/%@?v=2&alt=json", songId];
+	
+	NSURL *url = [NSURL URLWithString:searchCall];
+	NSURLRequest *request = [NSURLRequest requestWithURL:url];
+	
+	AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+		
+		id result = [JSON valueForKeyPath:@"entry"];
+
+		JHYoutubeSearchResult *searchResultItem = [[JHYoutubeSearchResult alloc] init];
+		searchResultItem.title = [result valueForKeyPath:@"title.$t"];
+		
+		searchResultItem.author = [result valueForKeyPath:@"author.name.$t"][0];
+		NSString *published = [result valueForKeyPath:@"published.$t"];
+		searchResultItem.date = [dateFormat dateFromString:published];
+		NSString *thumbnailUrl = [result valueForKeyPath:@"media$group.media$thumbnail.url"][0];
+		
+		
+		NSURL *href = [[NSURL alloc] initWithString:[result valueForKeyPath:@"link.href"][0]];
+		searchResultItem.videoUrl = href;
+		
+		NSString* videoId = nil;
+		NSArray *queryComponents = [href.query componentsSeparatedByString:@"&"];
+		for (NSString* pair in queryComponents) {
+			NSArray* pairComponents = [pair componentsSeparatedByString:@"="];
+			if ([pairComponents[0] isEqualToString:@"v"]) {
+				videoId = pairComponents[1];
+				break;
+			}
+		}
+		
+		searchResultItem.id = videoId;
+		searchResultItem.thumbnailUrl = [[NSURL alloc] initWithString:thumbnailUrl];
+		
+		if(successBlock) successBlock(searchResultItem);
+	
+		
 	} failure:nil];
 	
 	[operation start];

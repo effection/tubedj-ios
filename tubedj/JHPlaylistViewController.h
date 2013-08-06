@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "JHYoutubeSongCell.h"
 
 @class JHPlaylistViewController;
 
@@ -14,11 +15,11 @@
 
 @optional
 
-- (void)playlist:(JHPlaylistViewController *)controller requestToRemoveItemFromPlaylist:(id)item;
+- (void)playlist:(JHPlaylistViewController *)controller requestToRemoveItemFromPlaylist:(NSString *)uid cell:(JHYoutubeSongCell *)cell;
 
 @end
 
-@interface JHPlaylistViewController : UITableViewController
+@interface JHPlaylistViewController : UITableViewController <JHYoutubeSongCellDelegate>
 
 @property (nonatomic, assign) id<JHPlaylistViewControllerDelegate> delegate;
 

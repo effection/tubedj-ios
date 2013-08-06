@@ -111,6 +111,9 @@ NSString * const CellIdentifier = @"JHYoutubeSongCell";
 
 - (void)songCellTriggeredAddAction:(JHYoutubeSongCell *)cell
 {
+	if(cell.isPerformingAction) return;
+	cell.isPerformingAction = YES;
+	
 	[addedItems addObject:cell.songId];
 	if([self.delegate respondsToSelector:@selector(youtubeSearch:requestToAddItemToPlaylist:cell:)])
 	{

@@ -30,4 +30,6 @@
 - (void)searchFor:(NSString *)search start:(int)start maxResults:(int)max;
 - (void)nextSearchPage;
 
++ (void)getSongDetails:(NSString *)songId success:(void (^)(JHYoutubeSearchResult *result))successBlock error:(void (^)(NSError *error))errorBlock;
+
 @end

@@ -39,15 +39,20 @@
 	UIBarButtonItem *doneBarButton = [[UIBarButtonItem alloc] initWithCustomView:doneButton];
 	self.navigationController.visibleViewController.navigationItem.rightBarButtonItem = doneBarButton;
 	
-    DataMatrix *dm = [QREncoder encodeWithECLevel:QR_ECLEVEL_AUTO version:QR_VERSION_AUTO string:@"Test"];
-	UIImage *qrCode = [QREncoder renderDataMatrix:dm imageDimension:320];
-	self.qrImageView.image = qrCode;
+    
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)setCode:(NSString *)code
+{
+	DataMatrix *dm = [QREncoder encodeWithECLevel:QR_ECLEVEL_AUTO version:QR_VERSION_AUTO string:code];
+	UIImage *qrCode = [QREncoder renderDataMatrix:dm imageDimension:320];
+	self.qrImageView.image = qrCode;
 }
 
 - (void)doneButtonPressed:(id)sender

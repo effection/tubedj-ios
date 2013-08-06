@@ -82,7 +82,8 @@ static NSString * const kAFAPIBaseURLString = @"http://localhost:8081/api/";
 		success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON)
 		{
 			//Grab room id from JSON.id
-			BOOL exists = ((BOOL)[JSON valueForKey:@"exists"]);
+			id v = [JSON valueForKey:@"exists"];
+			BOOL exists = (BOOL)v;
 			if(successBlock) successBlock(exists, [JSON valueForKey:@"id"], [JSON valueForKey:@"name"]);
 		}
 		failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON)
@@ -118,7 +119,7 @@ static NSString * const kAFAPIBaseURLString = @"http://localhost:8081/api/";
 	[self enqueueHTTPRequestOperation:requestOperation];
 }
 
-- (void)joinRoom:(NSString *)roomId success:(void (^)(NSString *roomId, NSString *ownerId, NSDictionary *users, NSArray *playlist))successBlock error:(void (^)(NSError *error))errorBlock
+- (void)joinRoom:(NSString *)roomId success:(void (^)(NSString *roomId, NSString *ownerId, NSArray *users, NSArray *playlist))successBlock error:(void (^)(NSError *error))errorBlock
 {
 	//Escape roomId!!!!!
 	
@@ -128,7 +129,7 @@ static NSString * const kAFAPIBaseURLString = @"http://localhost:8081/api/";
 		success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON)
 		{
 			//Grab room id from JSON.id, users from JSON.users:[] and playlist from JSON.playlist:[]
-			if(successBlock) successBlock([JSON valueForKey:@"id"], [JSON valueForKey:@"owner"], [JSON valueForKey:@"playlist"], [JSON valueForKey:@"users"]);
+			if(successBlock) successBlock([JSON valueForKey:@"id"], [JSON valueForKey:@"owner"], [JSON valueForKey:@"users"], [JSON valueForKey:@"playlist"]);
 		}
 		failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON)
 		{
@@ -194,15 +195,16 @@ static NSString * const kAFAPIBaseURLString = @"http://localhost:8081/api/";
 	[self enqueueHTTPRequestOperation:requestOperation];
 }
 
-- (void)addYoutubeSongToPlaylist:(NSString *)songId forRoom:(NSString *)roomId success:(void (^)(NSString *songId, NSString *uniqueSongId))successBlock error:(void (^)(NSError *error))errorBlock
+- (void)addYoutubeSongToPlaylist:(NSString *)songId forRoom:(NSString *)roomId success:(void (^)(NSString *songId, NSString *uniqueSongId, NSString *ownerId))successBlock error:(void (^)(NSError *error))errorBlock
 {
-	NSMutableURLRequest *request = [self requestWithMethod:@"POST" path:[NSString stringWithFormat:@"rooms/%@/playlist", roomId] parameters:@{@"yt":songId}];
+	NSDictionary *parameters = @{@"song" : @{@"yt" : songId}};
+	NSMutableURLRequest *request = [self requestWithMethod:@"POST" path:[NSString stringWithFormat:@"rooms/%@/playlist", roomId] parameters:parameters];
 	
 	AFJSONRequestOperation *requestOperation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request
 		success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON)
 		{
 			//JSON.song contains added song info but the websocket should update it correctly
-			if(successBlock) successBlock(songId, [JSON valueForKey:@"uid"]);
+			if(successBlock) successBlock([JSON valueForKeyPath:@"song.id"], [JSON valueForKeyPath:@"song.uid"], [JSON valueForKeyPath:@"song.owner"]);
 		}
 		failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON)
 		{

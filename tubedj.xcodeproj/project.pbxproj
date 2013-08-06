@@ -52,6 +52,15 @@
 		7C90D69217AFC22B0055D876 /* JHDiscalimerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C90D69017AFC22B0055D876 /* JHDiscalimerViewController.xib */; };
 		7C90D69517B015760055D876 /* hexagon-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C90D69317B015760055D876 /* hexagon-button.png */; };
 		7C90D69617B015760055D876 /* hexagon-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C90D69417B015760055D876 /* hexagon-button@2x.png */; };
+		7C90D69917B016DD0055D876 /* hexagon-button-highlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C90D69717B016DD0055D876 /* hexagon-button-highlighted.png */; };
+		7C90D69A17B016DD0055D876 /* hexagon-button-highlighted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C90D69817B016DD0055D876 /* hexagon-button-highlighted@2x.png */; };
+		7C90D69D17B119FE0055D876 /* JHPlaylistItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C90D69C17B119FE0055D876 /* JHPlaylistItem.m */; };
+		7C90D6A017B120740055D876 /* JHUserItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C90D69F17B120730055D876 /* JHUserItem.m */; };
+		7C90D6AD17B12EBC0055D876 /* SocketIO.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C90D6A317B12EBB0055D876 /* SocketIO.m */; };
+		7C90D6AE17B12EBC0055D876 /* SocketIOJSONSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C90D6A517B12EBB0055D876 /* SocketIOJSONSerialization.m */; };
+		7C90D6AF17B12EBC0055D876 /* SocketIOPacket.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C90D6A717B12EBC0055D876 /* SocketIOPacket.m */; };
+		7C90D6B017B12EBC0055D876 /* SocketIOTransportWebsocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C90D6AA17B12EBC0055D876 /* SocketIOTransportWebsocket.m */; };
+		7C90D6B117B12EBC0055D876 /* SocketIOTransportXHR.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C90D6AC17B12EBC0055D876 /* SocketIOTransportXHR.m */; };
 		7CBE53D517AA749000647D68 /* UIColor+AppColours.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CBE53D417AA749000647D68 /* UIColor+AppColours.m */; };
 		7CBE53D817AA75E500647D68 /* NSString+UIColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CBE53D717AA75E500647D68 /* NSString+UIColor.m */; };
 		7CBE53DC17AA7B8E00647D68 /* navbar-background.png in Resources */ = {isa = PBXBuildFile; fileRef = 7CBE53DA17AA7B8E00647D68 /* navbar-background.png */; };
@@ -142,6 +151,23 @@
 		7C90D69017AFC22B0055D876 /* JHDiscalimerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JHDiscalimerViewController.xib; sourceTree = "<group>"; };
 		7C90D69317B015760055D876 /* hexagon-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "hexagon-button.png"; path = "Resources/hexagon-button.png"; sourceTree = "<group>"; };
 		7C90D69417B015760055D876 /* hexagon-button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "hexagon-button@2x.png"; path = "Resources/hexagon-button@2x.png"; sourceTree = "<group>"; };
+		7C90D69717B016DD0055D876 /* hexagon-button-highlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "hexagon-button-highlighted.png"; path = "Resources/hexagon-button-highlighted.png"; sourceTree = "<group>"; };
+		7C90D69817B016DD0055D876 /* hexagon-button-highlighted@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "hexagon-button-highlighted@2x.png"; path = "Resources/hexagon-button-highlighted@2x.png"; sourceTree = "<group>"; };
+		7C90D69B17B119FE0055D876 /* JHPlaylistItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHPlaylistItem.h; sourceTree = "<group>"; };
+		7C90D69C17B119FE0055D876 /* JHPlaylistItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JHPlaylistItem.m; sourceTree = "<group>"; };
+		7C90D69E17B120730055D876 /* JHUserItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHUserItem.h; sourceTree = "<group>"; };
+		7C90D69F17B120730055D876 /* JHUserItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JHUserItem.m; sourceTree = "<group>"; };
+		7C90D6A217B12EBB0055D876 /* SocketIO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocketIO.h; sourceTree = "<group>"; };
+		7C90D6A317B12EBB0055D876 /* SocketIO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SocketIO.m; sourceTree = "<group>"; };
+		7C90D6A417B12EBB0055D876 /* SocketIOJSONSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocketIOJSONSerialization.h; sourceTree = "<group>"; };
+		7C90D6A517B12EBB0055D876 /* SocketIOJSONSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SocketIOJSONSerialization.m; sourceTree = "<group>"; };
+		7C90D6A617B12EBC0055D876 /* SocketIOPacket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocketIOPacket.h; sourceTree = "<group>"; };
+		7C90D6A717B12EBC0055D876 /* SocketIOPacket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SocketIOPacket.m; sourceTree = "<group>"; };
+		7C90D6A817B12EBC0055D876 /* SocketIOTransport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocketIOTransport.h; sourceTree = "<group>"; };
+		7C90D6A917B12EBC0055D876 /* SocketIOTransportWebsocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocketIOTransportWebsocket.h; sourceTree = "<group>"; };
+		7C90D6AA17B12EBC0055D876 /* SocketIOTransportWebsocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SocketIOTransportWebsocket.m; sourceTree = "<group>"; };
+		7C90D6AB17B12EBC0055D876 /* SocketIOTransportXHR.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocketIOTransportXHR.h; sourceTree = "<group>"; };
+		7C90D6AC17B12EBC0055D876 /* SocketIOTransportXHR.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SocketIOTransportXHR.m; sourceTree = "<group>"; };
 		7CBE53D317AA749000647D68 /* UIColor+AppColours.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+AppColours.h"; sourceTree = "<group>"; };
 		7CBE53D417AA749000647D68 /* UIColor+AppColours.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+AppColours.m"; sourceTree = "<group>"; };
 		7CBE53D617AA75E500647D68 /* NSString+UIColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+UIColor.h"; sourceTree = "<group>"; };
@@ -227,6 +253,7 @@
 		7C6465C517A9DE3C00A4E2A3 /* tubedj */ = {
 			isa = PBXGroup;
 			children = (
+				7C90D6A117B12EA70055D876 /* SocketIO */,
 				7C800AEE17AD35F600D6251C /* SORelativeDateTransformer */,
 				7C800AE617AC0B8C00D6251C /* Rest API Client */,
 				7C800AE517AC0B7700D6251C /* Youtube client */,
@@ -321,6 +348,10 @@
 				7C800B0017AE992200D6251C /* JHRestClient.m */,
 				7C800B0217AEA94900D6251C /* JHTubeDjManager.h */,
 				7C800B0317AEA94900D6251C /* JHTubeDjManager.m */,
+				7C90D69B17B119FE0055D876 /* JHPlaylistItem.h */,
+				7C90D69C17B119FE0055D876 /* JHPlaylistItem.m */,
+				7C90D69E17B120730055D876 /* JHUserItem.h */,
+				7C90D69F17B120730055D876 /* JHUserItem.m */,
 			);
 			name = "Rest API Client";
 			sourceTree = "<group>";
@@ -348,6 +379,24 @@
 			name = "Start Screens";
 			sourceTree = "<group>";
 		};
+		7C90D6A117B12EA70055D876 /* SocketIO */ = {
+			isa = PBXGroup;
+			children = (
+				7C90D6A217B12EBB0055D876 /* SocketIO.h */,
+				7C90D6A317B12EBB0055D876 /* SocketIO.m */,
+				7C90D6A417B12EBB0055D876 /* SocketIOJSONSerialization.h */,
+				7C90D6A517B12EBB0055D876 /* SocketIOJSONSerialization.m */,
+				7C90D6A617B12EBC0055D876 /* SocketIOPacket.h */,
+				7C90D6A717B12EBC0055D876 /* SocketIOPacket.m */,
+				7C90D6A817B12EBC0055D876 /* SocketIOTransport.h */,
+				7C90D6A917B12EBC0055D876 /* SocketIOTransportWebsocket.h */,
+				7C90D6AA17B12EBC0055D876 /* SocketIOTransportWebsocket.m */,
+				7C90D6AB17B12EBC0055D876 /* SocketIOTransportXHR.h */,
+				7C90D6AC17B12EBC0055D876 /* SocketIOTransportXHR.m */,
+			);
+			name = SocketIO;
+			sourceTree = "<group>";
+		};
 		7CBE53D217AA746900647D68 /* Navigation Bar */ = {
 			isa = PBXGroup;
 			children = (
@@ -358,6 +407,8 @@
 		7CBE53D917AA7A8800647D68 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				7C90D69717B016DD0055D876 /* hexagon-button-highlighted.png */,
+				7C90D69817B016DD0055D876 /* hexagon-button-highlighted@2x.png */,
 				7C90D69317B015760055D876 /* hexagon-button.png */,
 				7C90D69417B015760055D876 /* hexagon-button@2x.png */,
 				7C90D68617AFB7990055D876 /* gradient-bg.png */,
@@ -494,6 +545,8 @@
 				7C90D69217AFC22B0055D876 /* JHDiscalimerViewController.xib in Resources */,
 				7C90D69517B015760055D876 /* hexagon-button.png in Resources */,
 				7C90D69617B015760055D876 /* hexagon-button@2x.png in Resources */,
+				7C90D69917B016DD0055D876 /* hexagon-button-highlighted.png in Resources */,
+				7C90D69A17B016DD0055D876 /* hexagon-button-highlighted@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -568,6 +621,13 @@
 				7C800B0D17AEBA1B00D6251C /* JHHomeViewController.m in Sources */,
 				7C800B1217AEBA2C00D6251C /* JHNewUserViewController.m in Sources */,
 				7C90D69117AFC22B0055D876 /* JHDiscalimerViewController.m in Sources */,
+				7C90D69D17B119FE0055D876 /* JHPlaylistItem.m in Sources */,
+				7C90D6A017B120740055D876 /* JHUserItem.m in Sources */,
+				7C90D6AD17B12EBC0055D876 /* SocketIO.m in Sources */,
+				7C90D6AE17B12EBC0055D876 /* SocketIOJSONSerialization.m in Sources */,
+				7C90D6AF17B12EBC0055D876 /* SocketIOPacket.m in Sources */,
+				7C90D6B017B12EBC0055D876 /* SocketIOTransportWebsocket.m in Sources */,
+				7C90D6B117B12EBC0055D876 /* SocketIOTransportXHR.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
