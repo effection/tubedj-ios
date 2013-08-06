@@ -217,7 +217,7 @@ static NSString * const kAFAPIBaseURLString = @"http://localhost:8081/api/";
 
 - (void)removeYoutubeSongFromPlaylist:(NSString *)songId forRoom:(NSString *)roomId success:(void (^)(NSString *uniqueSongId))successBlock error:(void (^)(NSError *error))errorBlock
 {
-	NSMutableURLRequest *request = [self requestWithMethod:@"DEL" path:[NSString stringWithFormat:@"rooms/%@/playlist", roomId] parameters:@{@"songUid":songId}];
+	NSMutableURLRequest *request = [self requestWithMethod:@"DELETE" path:[NSString stringWithFormat:@"rooms/%@/playlist/%@", roomId,songId] parameters:nil];
 	
 	AFJSONRequestOperation *requestOperation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request
 		success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON)

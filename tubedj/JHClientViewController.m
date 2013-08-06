@@ -94,7 +94,7 @@
 												 name:@"tubedj-request-error"
 											   object:nil];
 	//[self showQRCodeReader];
-	[self loadRoom:@"KTdeKsyT"];
+	[self loadRoom:@"jTgaKskT"];
 }
 
 - (void)didReceiveMemoryWarning

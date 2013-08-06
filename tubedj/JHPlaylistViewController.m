@@ -83,9 +83,18 @@ NSString * const PlaylistCellIdentifier = @"JHYoutubeSongCell";
 - (void)tubedjPlaylistRemovedSong:(NSNotification *) notification
 {
 	[self.tableView beginUpdates];
-	//Determine row from song UID
-	NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-	[self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+	
+	for(int i = 0; i < [JHTubeDjManager sharedManager].playlist.count; i++)
+	{
+		JHPlaylistItem *song = [JHTubeDjManager sharedManager].playlist[i];
+		if(song.uid == [notification.userInfo objectForKey:@"uid"])
+		{
+			NSIndexPath *indexPath = [NSIndexPath indexPathForRow:i inSection:0];
+			[self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+			
+			break;
+		}
+	}
 	[self.tableView endUpdates];
 }
 

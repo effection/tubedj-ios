@@ -366,7 +366,7 @@
 - (void) socketIO:(SocketIO *)socket didReceiveEvent:(SocketIOPacket *)packet
 {
 	NSLog(@"SocketIO: Received Event");
-	id JSON = packet.args;
+
 	if ([packet.name isEqualToString:@"playlist:song-added"])
 	{
 		JHPlaylistItem *song = [JHPlaylistItem fromJSON:[packet.args[0] valueForKeyPath:@"song"]];
@@ -380,6 +380,20 @@
 		
 	} else if ([packet.name isEqualToString:@"playlist:song-removed"])
 	{
+		id uid = [packet.args valueForKey:@"songUid"][0];
+		
+		for (int i = 0; i < self.playlist.count; i++) {
+			JHPlaylistItem *song = self.playlist[i];
+			if(song.uid == uid)
+			{
+				[[NSNotificationCenter defaultCenter] postNotificationName:@"tubedj-playlist-removed-song"
+																	object:nil
+																  userInfo:@{@"uid" :uid}];
+				[self.playlist removeObjectAtIndex:i];
+				break;
+			}
+		}
+		
 		
 	} else if ([packet.name isEqualToString:@"playlist:next-song"])
 	{
