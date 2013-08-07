@@ -44,6 +44,11 @@ NSString * const PlaylistCellIdentifier = @"JHYoutubeSongCell";
 	
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(tubedjPlaylistRefreshed:)
+												 name:@"tubedj-playlist-refresh"
+											   object:nil];
+	
+	[[NSNotificationCenter defaultCenter] addObserver:self
 											 selector:@selector(tubedjPlaylistAddedSong:)
 												 name:@"tubedj-playlist-added-song"
 											   object:nil];
@@ -72,29 +77,28 @@ NSString * const PlaylistCellIdentifier = @"JHYoutubeSongCell";
 	[self.tableView endUpdates];
 }
 
+- (void)tubedjPlaylistRefreshed:(NSNotification *) notification
+{
+	[self.tableView reloadData];
+}
+
 - (void)tubedjPlaylistAddedSong:(NSNotification *) notification
 {
 	JHPlaylistItem *song = [notification.userInfo objectForKey:@"song"];
 	if(song) {
-		[self.tableView reloadData];
+		[self.tableView beginUpdates];
+		NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[[notification.userInfo objectForKey:@"index"] integerValue] inSection:0];
+		[self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+		[self.tableView endUpdates];
 	}
 }
 
 - (void)tubedjPlaylistRemovedSong:(NSNotification *) notification
 {
 	[self.tableView beginUpdates];
-	
-	for(int i = 0; i < [JHTubeDjManager sharedManager].playlist.count; i++)
-	{
-		JHPlaylistItem *song = [JHTubeDjManager sharedManager].playlist[i];
-		if(song.uid == [notification.userInfo objectForKey:@"uid"])
-		{
-			NSIndexPath *indexPath = [NSIndexPath indexPathForRow:i inSection:0];
-			[self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-			
-			break;
-		}
-	}
+	NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[[notification.userInfo objectForKey:@"index"] integerValue] inSection:0];
+	[self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+
 	[self.tableView endUpdates];
 }
 

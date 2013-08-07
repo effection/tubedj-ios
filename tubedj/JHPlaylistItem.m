@@ -16,7 +16,8 @@
 	
 	song.isYoutube = (BOOL)[JSON valueForKey:@"isYt"];
 	song.songId = [JSON valueForKey:@"id"];
-	song.uid = [JSON valueForKey:@"uid"];
+	NSString *temp = [JSON valueForKey:@"uid"];
+	song.uid = temp.intValue;
 	song.ownerId = [JSON valueForKey:@"owner"];
 	if(!song.isYoutube)
 	{

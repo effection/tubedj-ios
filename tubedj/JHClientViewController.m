@@ -162,9 +162,9 @@
 	}];
 }
 
-- (void)playlist:(JHPlaylistViewController *)controller requestToRemoveItemFromPlaylist:(NSString *)uid cell:(JHYoutubeSongCell *)cell
+- (void)playlist:(JHPlaylistViewController *)controller requestToRemoveItemFromPlaylist:(int)uid cell:(JHYoutubeSongCell *)cell
 {
-	[[JHTubeDjManager sharedManager] removeSongFromPlaylist:uid success:^(NSString *uid) {
+	[[JHTubeDjManager sharedManager] removeSongFromPlaylist:uid success:^(int uid) {
 		
 	} error:^(NSError *error) {
 		cell.isSwipeable = YES;

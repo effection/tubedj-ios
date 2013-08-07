@@ -33,8 +33,8 @@
 
 - (void)getPlaylistForRoom:(NSString *)roomId success:(void (^)(NSArray *playlist))successBlock error:(void (^)(NSError *error))errorBlock;
 
-- (void)addYoutubeSongToPlaylist:(NSString *)songId forRoom:(NSString *)roomId success:(void (^)(NSString *songId, NSString *uniqueSongId, NSString *ownerId))successBlock error:(void (^)(NSError *error))errorBlock;
+- (void)addYoutubeSongToPlaylist:(NSString *)songId forRoom:(NSString *)roomId success:(void (^)(NSString *songId, int uniqueSongId, NSString *ownerId))successBlock error:(void (^)(NSError *error))errorBlock;
 
-- (void)removeYoutubeSongFromPlaylist:(NSString *)songId forRoom:(NSString *)roomId success:(void (^)(NSString *uniqueSongId))successBlock error:(void (^)(NSError *error))errorBlock;
+- (void)removeYoutubeSongFromPlaylist:(int)songId forRoom:(NSString *)roomId success:(void (^)(int uniqueSongId))successBlock error:(void (^)(NSError *error))errorBlock;
 
 @end

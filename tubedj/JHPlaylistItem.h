@@ -12,7 +12,7 @@
 
 @property (nonatomic) BOOL isYoutube; //song.isYt
 @property (copy, nonatomic) NSString *songId;//id
-@property (copy, nonatomic) NSString *uid;
+@property (nonatomic) int uid;
 @property (copy, nonatomic) NSString *ownerId;
 @property (copy, nonatomic) NSString *title;
 @property (copy, nonatomic) NSString *artist;

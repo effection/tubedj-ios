@@ -197,7 +197,9 @@
 			[self.users setObject:user forKey:user.userId];
 		}
 		
-		
+		[[NSNotificationCenter defaultCenter] postNotificationName:@"tubedj-playlist-refresh"
+															object:nil
+														  userInfo:@{@"playlist" : self.playlist}];
 		
 //		[[NSNotificationCenter defaultCenter] postNotificationName:@"tubedj-joined-room"
 //															object:nil
@@ -296,7 +298,7 @@
 
 - (void)addYoutubeSongToPlaylist:(NSString *)songId success:(void (^)(JHPlaylistItem *song))successBlock error:(void (^)(NSError *error))errorBlock
 {
-	[[JHRestClient sharedClient] addYoutubeSongToPlaylist:songId forRoom:self.roomId success:^(NSString *songId, NSString *uniqueSongId, NSString *ownerId) {
+	[[JHRestClient sharedClient] addYoutubeSongToPlaylist:songId forRoom:self.roomId success:^(NSString *songId, int uniqueSongId, NSString *ownerId) {
 		
 		JHPlaylistItem *song = [[JHPlaylistItem alloc] init];
 		song.songId = songId;
@@ -320,9 +322,9 @@
 	}];
 }
 
-- (void)removeSongFromPlaylist:(NSString *)songId success:(void (^)(NSString *uid))successBlock error:(void (^)(NSError *error))errorBlock
+- (void)removeSongFromPlaylist:(int)songId success:(void (^)(int uid))successBlock error:(void (^)(NSError *error))errorBlock
 {
-	[[JHRestClient sharedClient] removeYoutubeSongFromPlaylist:songId forRoom:self.roomId success:^(NSString *uniqueSongId) {
+	[[JHRestClient sharedClient] removeYoutubeSongFromPlaylist:songId forRoom:self.roomId success:^(int uniqueSongId) {
 		
 //		[[NSNotificationCenter defaultCenter] postNotificationName:@"tubedj-playlist-removed-song"
 //															object:nil
@@ -372,24 +374,25 @@
 		JHPlaylistItem *song = [JHPlaylistItem fromJSON:[packet.args[0] valueForKeyPath:@"song"]];
 		
 		[self.playlist addObject:song];
+		int index = self.playlist.count - 1;
 		
 		[[NSNotificationCenter defaultCenter] postNotificationName:@"tubedj-playlist-added-song"
 															object:nil
-														  userInfo:@{@"song" :song}];
+														  userInfo:@{@"song" :song, @"index" : @(index)}];
 
 		
 	} else if ([packet.name isEqualToString:@"playlist:song-removed"])
 	{
-		id uid = [packet.args valueForKey:@"songUid"][0];
+		NSInteger uid = [[packet.args valueForKey:@"songUid"][0] integerValue];
 		
 		for (int i = 0; i < self.playlist.count; i++) {
 			JHPlaylistItem *song = self.playlist[i];
 			if(song.uid == uid)
 			{
+				[self.playlist removeObjectAtIndex:i];
 				[[NSNotificationCenter defaultCenter] postNotificationName:@"tubedj-playlist-removed-song"
 																	object:nil
-																  userInfo:@{@"uid" :uid}];
-				[self.playlist removeObjectAtIndex:i];
+																  userInfo:@{@"uid" :@(uid), @"index" : @(i)}];
 				break;
 			}
 		}

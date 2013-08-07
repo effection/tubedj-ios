@@ -25,8 +25,8 @@
  *  tubedj-left-room {id}
  *  tubedj-next-song {}
  *  tubedj-playlist-refresh {playlist}
- *  tubedj-playlist-added-song {song}
- *  tubedj-playlist-removed-song {uid}
+ *  tubedj-playlist-added-song {song, index}
+ *  tubedj-playlist-removed-song {uid, index}
  */
 @interface JHTubeDjManager : NSObject <SocketIODelegate>
 
@@ -57,7 +57,7 @@
 - (void)nextSongWithSuccess:(void (^)())successBlock error:(void (^)(NSError *error))errorBlock;
 - (void)updatePlaylistWithSuccess:(void (^)(NSArray *playlist))successBlock error:(void (^)(NSError *error))errorBlock;
 - (void)addYoutubeSongToPlaylist:(NSString *)songId success:(void (^)(JHPlaylistItem *song))successBlock error:(void (^)(NSError *error))errorBlock;
-- (void)removeSongFromPlaylist:(NSString *)songId success:(void (^)(NSString *uid))successBlock error:(void (^)(NSError *error))errorBlock;
+- (void)removeSongFromPlaylist:(int)songId success:(void (^)(int uid))successBlock error:(void (^)(NSError *error))errorBlock;
 
 
 
