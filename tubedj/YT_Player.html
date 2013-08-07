@@ -1,0 +1,72 @@
+<html>
+    <head>
+        <script src="https://www.youtube.com/player_api"></script>
+        <style>
+            body, div {
+                margin: 0px;
+                padding: 0px;
+            }
+            </style>
+    </head>
+    <body>
+        <div id="media_area"></div>
+    </body>
+    <script>
+        var ytPlayer = null;
+        
+        function onYouTubePlayerAPIReady() {
+            ytPlayer = new YT.Player('media_area', {
+										 height: '200',
+										 width: '320',
+										 videoId: 'SbPFDcspRBA',
+										 playerVars: {
+											playsinline: 1,
+											autoplay: 1
+										 },
+										 events: {
+											'onReady': onPlayerReady,
+											'onStateChange': onPlayerStateChange
+										 }
+                                     });
+        }
+        
+        function onPlayerReady(e) {
+			e.target.setVolume(100);
+            //e.target.playVideo();
+        }
+		
+		function onPlayerStateChange(e) {
+            var state = e.data;
+			switch(state) {
+				case YT.PlayerState.PLAYING:
+				break;
+				case YT.PlayerState.PAUSED:
+				break;
+				case YT.PlayerState.BUFFERING:
+				break;
+				case YT.PlayerState.CUED:
+				break;
+				case YT.PlayerState.ENDED:
+					
+				break;
+			};
+        }
+		
+		function APP_loadVideoById(videoid) {
+			player.loadVideoById(videoId, 0, 'large');
+		}
+		
+		function APP_playVideo() {
+			player.playVideo();
+		}
+		
+		function APP_pauseVideo() {
+			player.pauseVideo();
+		}
+		
+		function APP_stopVideo() {
+			player.stopVideo();
+		}
+		
+        </script>
+</html>

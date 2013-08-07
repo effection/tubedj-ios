@@ -1,29 +1,29 @@
 //
-//  JHClientViewController.m
+//  JHServerViewController.m
 //  tubedj
 //
-//  Created by Jordan Hamill on 01/08/2013.
+//  Created by Jordan Hamill on 07/08/2013.
 //  Copyright (c) 2013 Jordan Hamill. All rights reserved.
 //
 
+#import "JHServerViewController.h"
 #import "JHAppDelegate.h"
-#import "JHClientViewController.h"
 #import "JHYoutubeSongCell.h"
 #import "JHPlaylistViewController.h"
 #import "RESideMenu.h"
 #import "JHQRCodeViewController.h"
 #import "JHStandardYoutubeViewController.h"
-#import "ZBarSDK.h"
 #import "JHTubeDjManager.h"
+#import "JHYoutubePlayer.h"
 
-
-@interface JHClientViewController ()
+@interface JHServerViewController ()
+@property (weak, nonatomic) IBOutlet JHYoutubePlayer *youtubePlayer;
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (strong, nonatomic) JHYouTubeSearchViewController *youtubeSearchController;
 @property (strong, nonatomic) JHPlaylistViewController *playlistController;
-
 @end
 
-@implementation JHClientViewController
+@implementation JHServerViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -34,11 +34,10 @@
     return self;
 }
 
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+	
 	
 	//Navigation items
 	
@@ -67,6 +66,7 @@
 	//
 	
 	self.view.backgroundColor = [UIColor app_darkGrey];
+	
 	self.scrollView.backgroundColor = [UIColor clearColor];
 	
 	self.youtubeSearchController = [GeneralUI loadController:[JHYouTubeSearchViewController class]];
@@ -75,7 +75,7 @@
 	self.playlistController.delegate = self;
 	UIView *searchView = self.youtubeSearchController.view;
 	UIView *playlistView = self.playlistController.view;
-
+	
 	searchView.translatesAutoresizingMaskIntoConstraints = NO;
 	playlistView.translatesAutoresizingMaskIntoConstraints = NO;
 	[self.scrollView addSubview:searchView];
@@ -89,51 +89,130 @@
 	[self.view layoutIfNeeded];
 	
 	
-	[[NSNotificationCenter defaultCenter] addObserver:self 
-											  selector:@selector(tubedjRequestErrorNotification:)
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(tubedjRequestErrorNotification:)
 												 name:@"tubedj-request-error"
 											   object:nil];
-	//[self showQRCodeReader];
-	[self loadRoom:@"jTgaKskT"];
+	
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(tubedjPlaylistRefreshed:)
+												 name:@"tubedj-playlist-refresh"
+											   object:nil];
+	
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(tubedjPlaylistAddedSong:)
+												 name:@"tubedj-playlist-added-song"
+											   object:nil];
+	
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(tubedjPlaylistRemovedSong:)
+												 name:@"tubedj-playlist-removed-song"
+											   object:nil];
+
+	
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
 }
 
 - (void)tubedjRequestErrorNotification:(NSNotification *) notification
 {
+	
+}
+
+- (void)tubedjPlaylistRefreshed:(NSNotification *) notification
+{
+	if(self.isPlaying)
+	{
+		if([JHTubeDjManager sharedManager].playlist.count > 0)
+		{
+			JHPlaylistItem *song = (JHPlaylistItem *)[[JHTubeDjManager sharedManager].playlist objectAtIndex:0];
+			if([song.songId isEqualToString:self.currentSongId])
+			{
+				//Do nothing
+			} else {
+				//TODO Stop current song and play new song
+			}
+		} else {
+			//TODO Stop current song
+		}
+		
+	} else {
+		//Do nothing
+	}
+	//[self.tableView reloadData];
+}
+
+- (void)tubedjPlaylistAddedSong:(NSNotification *) notification
+{
+	JHPlaylistItem *song = [notification.userInfo objectForKey:@"song"];
+	int index = [[notification.userInfo objectForKey:@"index"] integerValue];
+	if(index == 0) {
+		if(!self.isPlaying)
+		{
+			//play first song added to playlist
+			[self playSong:song];
+		} else {
+			//What??? lol
+			// play first song added to playlist
+			[self stopCurrentSong];
+			[self playSong:song];
+		}
+	} 
 
 }
 
-
-- (BOOL)loadRoom:(NSString *)roomid
+- (void)tubedjPlaylistRemovedSong:(NSNotification *) notification
 {
-	//Sanatise
-	
-	if(roomid.length > 7 && roomid.length < 15) {
-		[[JHTubeDjManager sharedManager] joinRoom:roomid success:^(NSString *roomId, NSString *ownerId, NSDictionary *users, NSArray *playlist) {
-			
-			//Populate playlist controller
-			//self.playlistController
-			
-			//Populate users menu
-			
-			
-		} error:^(NSError *error) {
-			
-			//TODO Error
-			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Ooops" message:@"Sorry, we couldn't find that room" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-			
-			[alert show];
-
-			
-		}];
-		return YES;
+	int index = [[notification.userInfo objectForKey:@"index"] integerValue];
+	if(index == 0) {
+		if(!self.isPlaying)
+		{
+			//Nothing
+		} else {
+			//First song removed
+			if([JHTubeDjManager sharedManager].playlist.count > 0)
+			{
+				//Send next song and play
+				[self playNextSong];
+			} else {
+				//Stop current song
+				[self stopCurrentSong];
+			}
+		}
 	}
 	
-	return NO;
+}
+
+- (void)playSong: (JHPlaylistItem *)song
+{
+	[self.youtubePlayer loadYoutubeVideo:song.songId];
+}
+
+- (void)playNextSong
+{
+	[[JHTubeDjManager sharedManager] nextSongWithSuccess:^{
+		
+		//Alerts everyone to next song
+		JHPlaylistItem *song = [JHTubeDjManager sharedManager].playlist[0];
+		if(!song ||!song.isYoutube)
+		{
+			//TODO error
+			return;
+		}
+		[self.youtubePlayer loadYoutubeVideo:song.songId];
+		
+	} error:^(NSError *error) {
+		//TODO error
+	}];
+}
+
+- (void)stopCurrentSong
+{
+	[self.youtubePlayer pauseYoutubeVideo];
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
@@ -145,10 +224,11 @@
 
 - (void)youtubeSearch:(JHYouTubeSearchViewController *)controller searchItemSelected:(NSString *)songId cell:(JHYoutubeSongCell *)cell
 {
-	JHStandardYoutubeViewController *youtubeViewController = [GeneralUI loadController:[JHStandardYoutubeViewController class]];
+	/*JHStandardYoutubeViewController *youtubeViewController = [GeneralUI loadController:[JHStandardYoutubeViewController class]];
 	UINavigationController *extraNavController = [[UINavigationController alloc] initWithRootViewController:youtubeViewController];
 	[self.navigationController presentViewController:extraNavController animated:YES completion:nil];
-	[youtubeViewController loadYouTubeEmbed:cell.songId];
+	[youtubeViewController loadYouTubeEmbed:cell.songId];*/
+	//TODO PLAY THIS SONG INSTEAD
 }
 
 - (void)youtubeSearch:(JHYouTubeSearchViewController *)controller requestToAddItemToPlaylist:(NSString *)songId cell:(JHYoutubeSongCell *)cell
@@ -172,33 +252,9 @@
 	}];
 }
 
-- (void)showQRCode
-{
-	JHQRCodeViewController *qrViewController = [GeneralUI loadController:[JHQRCodeViewController class]];
-	//JHGoogleQRCodeViewController *qrViewController = [GeneralUI loadController:[JHGoogleQRCodeViewController class]];
-	UINavigationController *extraNavController = [[UINavigationController alloc] initWithRootViewController:qrViewController];
-	[self.navigationController presentViewController:extraNavController animated:YES completion:nil];
-	[qrViewController setCode:[JHTubeDjManager sharedManager].roomId];
-}
-
 - (void)showMenu
 {
 	[self.view endEditing:YES];
-	
-    RESideMenuItem *homeItem = [[RESideMenuItem alloc] initWithTitle:@"disconnect" prefix:[JHFontAwesome standardIcon:FontAwesome_Off] ofSize:28.0f ofColour:[UIColor app_red] action:^(RESideMenu *menu, RESideMenuItem *item) {
-        [menu hide];
-		[[JHTubeDjManager sharedManager] leaveRoomWithSuccess:^(NSString *roomId) {
-			[self.navigationController popToRootViewControllerAnimated:YES];
-		} error:^(NSError *error) {
-			//TODO
-		}];
-		
-        /*
-        SecondViewController *secondViewController = [[SecondViewController alloc] init];
-        secondViewController.title = item.title;
-        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:secondViewController];
-        [menu setRootViewController:navigationController];*/
-    }];
 	
 	RESideMenuItem *nameItem = [[RESideMenuItem alloc] initWithTitle:[JHTubeDjManager sharedManager].myName prefix:[JHFontAwesome standardIcon:FontAwesome_Pencil] ofSize:28.0f ofColour:[UIColor app_offWhite] action:^(RESideMenu *menu, RESideMenuItem *item) {
         [menu hide];
@@ -215,11 +271,17 @@
 	}
 	
 	
-	
-	
-	RESideMenuItem *startServerItem = [[RESideMenuItem alloc] initWithTitle:@"start server" prefix:[JHFontAwesome standardIcon:FontAwesome_Cloud] ofSize:23.0f ofColour:[UIColor app_offWhite] action:^(RESideMenu *menu, RESideMenuItem *item) {
+	RESideMenuItem *stopServerItem = [[RESideMenuItem alloc] initWithTitle:@"stop server" prefix:[JHFontAwesome standardIcon:FontAwesome_Cloud] ofSize:23.0f ofColour:[UIColor app_red] action:^(RESideMenu *menu, RESideMenuItem *item) {
         [menu hide];
+		
+		[[JHTubeDjManager sharedManager] leaveRoomWithSuccess:^(NSString *roomId) {
+			[self.navigationController popToRootViewControllerAnimated:YES];
+		} error:^(NSError *error) {
+			//TODO
+		}];
+
     }];
+	
 	RESideMenuItem *musicItem = [[RESideMenuItem alloc] initWithTitle:@"music library" prefix:[JHFontAwesome standardIcon:FontAwesome_HDD] ofSize:28.0f ofColour:[UIColor app_offWhite] action:^(RESideMenu *menu, RESideMenuItem *item) {
         [menu hide];
     }];
@@ -227,7 +289,7 @@
         [menu hide];
     }];
 	
-    _sideMenu = [[RESideMenu alloc] initWithJHItems:@[@[homeItem, nameItem], userItems]];
+    _sideMenu = [[RESideMenu alloc] initWithJHItems:@[@[stopServerItem, nameItem, musicItem, youtubeItem], userItems]];
 	UIImage *img = [UIImage imageNamed:@"menu-bg"];
 	_sideMenu.backgroundImage = img;
     _sideMenu.verticalOffset = IS_WIDESCREEN ? 160 : 126;
@@ -238,57 +300,5 @@
     [_sideMenu show];
 }
 
-- (void)showQRCodeReader
-{
-	ZBarReaderViewController *reader = [ZBarReaderViewController new];
-    reader.readerDelegate = self;
-    reader.supportedOrientationsMask = ZBarOrientationMaskAll;
-	reader.showsZBarControls = NO;
-	reader.wantsFullScreenLayout = NO;
-    ZBarImageScanner *scanner = reader.scanner;
-    // TODO: (optional) additional reader configuration here
-	
-    // EXAMPLE: disable rarely used I2/5 to improve performance
-    [scanner setSymbology: ZBAR_I25
-				   config: ZBAR_CFG_ENABLE
-					   to: 0];
-	UINavigationController *extraNavController = [[UINavigationController alloc] initWithRootViewController:reader];
-	
-	UIButton *doneButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 60, 44)];
-	[doneButton setTitle:@"cancel" forState:UIControlStateNormal];
-	[doneButton setTitleColor:[UIColor app_blue] forState:UIControlStateNormal];
-	[doneButton addTarget:self action:@selector(doneButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-	
-	UIBarButtonItem *doneBarButton = [[UIBarButtonItem alloc] initWithCustomView:doneButton];
-	reader.navigationItem.rightBarButtonItem = doneBarButton;
-	
-    [self.navigationController presentViewController:extraNavController animated:YES completion:nil];
-}
-
-#pragma mark - ZBar QR Code delegate
-
-- (void) imagePickerController: (UIImagePickerController*) reader
- didFinishPickingMediaWithInfo: (NSDictionary*) info
-{
-    // ADD: get the decode results
-    id<NSFastEnumeration> results =
-	[info objectForKey: ZBarReaderControllerResults];
-    ZBarSymbol *symbol = nil;
-    for(symbol in results) {		
-		if([self loadRoom:symbol.data])
-		{
-			[reader dismissViewControllerAnimated:YES completion:nil];
-			break;
-		}
-	}
-	
-}
-
-- (void)doneButtonPressed:(id)sender
-{
-	[self.navigationController dismissViewControllerAnimated:YES completion:^ {
-		[self.navigationController popToRootViewControllerAnimated:YES];
-	}];
-}
 
 @end

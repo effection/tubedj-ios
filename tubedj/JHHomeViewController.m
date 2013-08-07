@@ -9,6 +9,7 @@
 #import "JHHomeViewController.h"
 #import "JHNewUserViewController.h"
 #import "JHClientViewController.h"
+#import "JHServerViewController.h"
 #import	"JHTubeDjManager.h"
 
 @interface JHHomeViewController ()
@@ -75,7 +76,8 @@
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-	self.navigationController.viewControllers = [[NSArray alloc] initWithObjects:[GeneralUI loadController:[JHNewUserViewController class]], nil];
+	//TODO DEFINITELY Differentiate between not finding user and joining/creating room failures
+	//self.navigationController.viewControllers = [[NSArray alloc] initWithObjects:[GeneralUI loadController:[JHNewUserViewController class]], nil];
 }
 
 - (IBAction)joinButtonPressed:(UIButton *)sender {
@@ -83,6 +85,25 @@
 	
 	//Load QR Code Decoder and then on successful decode show the ClientViewController and load the room for it
 	[self.navigationController pushViewController:clientViewController animated:YES];
+}
 
+- (IBAction)createButtonPressed:(UIButton *)sender
+{
+	[[JHTubeDjManager sharedManager] createRoomWithSuccess:^(NSString *roomId) {
+		NSLog(@"Created room %@", roomId);
+		[[JHTubeDjManager sharedManager] joinRoom:roomId success:^(NSString *roomId, NSString *ownerId, NSDictionary *users, NSArray *playlist) {
+			
+			JHServerViewController *serverViewController = [GeneralUI loadController:[JHServerViewController class]];
+			[self.navigationController pushViewController:serverViewController animated:YES];
+			
+		} error:^(NSError *error) {
+			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Something went wrong" message:@"Sorry, something happened while trying to join your room" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+			[alert show];
+		}];
+	} error:^(NSError *error) {
+		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Something went wrong" message:@"Sorry, something happened while trying to create a room" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+		[alert show];
+	}];
+	
 }
 @end
