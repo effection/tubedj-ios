@@ -230,7 +230,7 @@
 //														  userInfo:@{@"id" : self.roomId}];
 		
 		if(successBlock) successBlock(self.roomId);
-		
+		[socketIO disconnect];
 		self.roomId = nil;
 		self.roomOwnerId = nil;
 		self.users = nil;
@@ -408,10 +408,24 @@
 
 	} else if ([packet.name isEqualToString:@"user:disconnected"])
 	{
+		NSString *userId = [packet.args valueForKey:@"user"];
+		[self.users removeObjectForKey:userId];
+		
+		[[NSNotificationCenter defaultCenter] postNotificationName:@"tubedj-user-disconnected"
+															object:nil
+														  userInfo:@{@"id" : userId}];
 		
 	} else if ([packet.name isEqualToString:@"user:joined"])
 	{
+		NSString *userId = [packet.args valueForKeyPath:@"user.id"][0];
+		JHUserItem *user = [[JHUserItem alloc] init];
+		user.userId = userId;
+		user.name = [packet.args valueForKeyPath:@"user.name"][0];
+		[self.users setObject:user forKey:userId];
 		
+		[[NSNotificationCenter defaultCenter] postNotificationName:@"tubedj-user-joined"
+															object:nil
+														  userInfo:@{@"id" : userId}];
 	}
 }
 

@@ -80,6 +80,8 @@
 
 - (IBAction)joinButtonPressed:(UIButton *)sender {
 	JHClientViewController *clientViewController = [GeneralUI loadController:[JHClientViewController class]];
+	
+	//Load QR Code Decoder and then on successful decode show the ClientViewController and load the room for it
 	[self.navigationController pushViewController:clientViewController animated:YES];
 
 }

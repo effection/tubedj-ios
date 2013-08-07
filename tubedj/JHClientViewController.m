@@ -187,16 +187,36 @@
 	
     RESideMenuItem *homeItem = [[RESideMenuItem alloc] initWithTitle:@"disconnect" prefix:[JHFontAwesome standardIcon:FontAwesome_Off] ofSize:28.0f ofColour:[UIColor app_red] action:^(RESideMenu *menu, RESideMenuItem *item) {
         [menu hide];
-		[self.navigationController popToRootViewControllerAnimated:YES];
+		[[JHTubeDjManager sharedManager] leaveRoomWithSuccess:^(NSString *roomId) {
+			[self.navigationController popToRootViewControllerAnimated:YES];
+		} error:^(NSError *error) {
+			//TODO
+		}];
+		
         /*
         SecondViewController *secondViewController = [[SecondViewController alloc] init];
         secondViewController.title = item.title;
         UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:secondViewController];
         [menu setRootViewController:navigationController];*/
     }];
+	
 	RESideMenuItem *nameItem = [[RESideMenuItem alloc] initWithTitle:@"jordan" prefix:[JHFontAwesome standardIcon:FontAwesome_Pencil] ofSize:28.0f ofColour:[UIColor app_offWhite] action:^(RESideMenu *menu, RESideMenuItem *item) {
         [menu hide];
     }];
+	
+	NSMutableArray *userItems = [[NSMutableArray alloc] initWithCapacity:[JHTubeDjManager sharedManager].users.count];
+	
+	for (NSString* key in [JHTubeDjManager sharedManager].users) {
+		JHUserItem *user = [[JHTubeDjManager sharedManager].users objectForKey:key];
+		RESideMenuItem *userMenuItem = [[RESideMenuItem alloc] initWithTitle:user.name prefix:[JHFontAwesome standardIcon:FontAwesome_EllipsisVertical] ofSize:23.0f ofColour:[UIColor app_offWhite] action:^(RESideMenu *menu, RESideMenuItem *item) {
+			[menu hide];
+		}];
+		[userItems addObject:userMenuItem];
+	}
+	
+	
+	
+	
 	RESideMenuItem *startServerItem = [[RESideMenuItem alloc] initWithTitle:@"start server" prefix:[JHFontAwesome standardIcon:FontAwesome_Cloud] ofSize:23.0f ofColour:[UIColor app_offWhite] action:^(RESideMenu *menu, RESideMenuItem *item) {
         [menu hide];
     }];
@@ -207,7 +227,7 @@
         [menu hide];
     }];
 	
-    _sideMenu = [[RESideMenu alloc] initWithJHItems:@[@[homeItem, nameItem], @[]]];
+    _sideMenu = [[RESideMenu alloc] initWithJHItems:@[@[homeItem, nameItem], userItems]];
 	UIImage *img = [UIImage imageNamed:@"menu-bg"];
 	_sideMenu.backgroundImage = img;
     _sideMenu.verticalOffset = IS_WIDESCREEN ? 160 : 126;
