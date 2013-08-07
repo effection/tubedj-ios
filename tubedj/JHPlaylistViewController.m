@@ -75,6 +75,9 @@ NSString * const PlaylistCellIdentifier = @"JHYoutubeSongCell";
 	NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
 	[self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
 	[self.tableView endUpdates];
+	
+	JHYoutubeSongCell *cell = (JHYoutubeSongCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+	cell.isPlaying = YES;
 }
 
 - (void)tubedjPlaylistRefreshed:(NSNotification *) notification
@@ -112,6 +115,10 @@ NSString * const PlaylistCellIdentifier = @"JHYoutubeSongCell";
 	if([self.delegate respondsToSelector:@selector(playlist:requestToRemoveItemFromPlaylist:cell:)])
 	{
 		NSIndexPath *indexPath = [(UITableView *)self.tableView indexPathForCell: cell];
+		if(indexPath.row == 0)
+		{
+			//TODO Deleting currently playing song!!!
+		}
 		JHPlaylistItem *song = [JHTubeDjManager sharedManager].playlist[indexPath.row];
 		[self.delegate playlist:self requestToRemoveItemFromPlaylist:song.uid cell:cell];
 	}
@@ -142,7 +149,7 @@ NSString * const PlaylistCellIdentifier = @"JHYoutubeSongCell";
 	cell.canDelete = [[JHTubeDjManager sharedManager] isUserMe:song.ownerId];
 	cell.actionDelegate = self;
 	cell.ageLabel.text = ((JHUserItem *)[[JHTubeDjManager sharedManager].users objectForKey:song.ownerId]).name;
-
+	cell.isPlaying = 0 == indexPath.row;
 	if(song.isYoutube)
 	{
 		[JHYoutubeClient getSongDetails:song.songId success:^(JHYoutubeSearchResult *result) {
@@ -151,7 +158,8 @@ NSString * const PlaylistCellIdentifier = @"JHYoutubeSongCell";
 			cell.ownerLabel.text = result.author;
 			[cell.previewImage setImageWithURL:result.thumbnailUrl];
 		} error:^(NSError *error) {
-			//TODO Error
+			cell.titleLabel.text = @"Error loading youtube";
+			cell.ownerLabel.text = @"";
 		}];
 	}
     return cell;

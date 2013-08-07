@@ -30,6 +30,8 @@
 
 @property (nonatomic, readwrite) BOOL isSwipeable;
 
+@property (nonatomic, readwrite) BOOL isPlaying;
+
 @property (strong, nonatomic) NSString *songId;
 @property (weak, nonatomic) IBOutlet UIImageView *previewImage;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;

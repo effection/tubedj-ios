@@ -12,7 +12,7 @@
 
 @interface JHYoutubeSongCell()
 
-
+@property (strong, nonatomic) UIImageView *playIndicator;
 @property (strong, nonatomic) JHYoutubeSongCellBackgroundView *addBackground;
 
 - (void)commonInit;
@@ -44,6 +44,7 @@
 {
 	self.selectionStyle = UITableViewCellSelectionStyleNone;
 	self.contentView.backgroundColor = [UIColor app_darkGrey];
+	self.contentView.clipsToBounds = YES;
 	
 	self.backgroundColor = [UIColor app_darkGrey];
 	self.titleLabel.textColor = [UIColor app_offWhite];
@@ -53,12 +54,22 @@
 	
 	self.revealDirection = RMSwipeTableViewCellRevealDirectionLeft;
 	self.isSwipeable = YES;
+	
+	self.playIndicator = [[UIImageView alloc] initWithFrame:CGRectMake(273, 35, 47, 47)];
+	self.playIndicator.image = [UIImage imageNamed:@"play-indicator"];
+	self.playIndicator.alpha = 0.4;
+	self.playIndicator.contentMode = UIViewContentModeTopLeft;
+	self.playIndicator.clipsToBounds = YES;
+	[self.contentView addSubview:self.playIndicator];
+	self.playIndicator.hidden = YES;
+	
 }
 
 - (void)prepareForReuse
 {
 	[super prepareForReuse];
-	self.isSwipeable = YES;//TODO fix
+	self.isSwipeable = YES;
+	self.isPlaying = NO;
 	self.animationDuration = 0.2;
 }
 
@@ -141,7 +152,13 @@
 						 self.ageLabel.alpha = alpha;
 						 self.titleLabel.textColor = (isSwipeable ? [UIColor app_offWhite] : (self.canDelete ? [UIColor app_red] : [UIColor app_green]));
 					 }];
-	}
+}
+
+- (void)setIsPlaying:(BOOL)isPlaying
+{
+	_isPlaying = isPlaying;
+	self.playIndicator.hidden = !_isPlaying;
+}
 
 
 @end

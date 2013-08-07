@@ -44,6 +44,8 @@
 		7C800B0E17AEBA1B00D6251C /* JHHomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C800B0C17AEBA1900D6251C /* JHHomeViewController.xib */; };
 		7C800B1217AEBA2C00D6251C /* JHNewUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C800B1017AEBA2900D6251C /* JHNewUserViewController.m */; };
 		7C800B1317AEBA2C00D6251C /* JHNewUserViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C800B1117AEBA2B00D6251C /* JHNewUserViewController.xib */; };
+		7C8918CF17B2723200FCF104 /* play-indicator.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C8918CD17B2723200FCF104 /* play-indicator.png */; };
+		7C8918D017B2723200FCF104 /* play-indicator@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C8918CE17B2723200FCF104 /* play-indicator@2x.png */; };
 		7C90D68A17AFB7990055D876 /* gradient-bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C90D68617AFB7990055D876 /* gradient-bg.png */; };
 		7C90D68B17AFB7990055D876 /* gradient-bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C90D68717AFB7990055D876 /* gradient-bg@2x.png */; };
 		7C90D68C17AFB7990055D876 /* red-divider.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C90D68817AFB7990055D876 /* red-divider.png */; };
@@ -142,6 +144,8 @@
 		7C800B0F17AEBA2800D6251C /* JHNewUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHNewUserViewController.h; sourceTree = "<group>"; };
 		7C800B1017AEBA2900D6251C /* JHNewUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JHNewUserViewController.m; sourceTree = "<group>"; };
 		7C800B1117AEBA2B00D6251C /* JHNewUserViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JHNewUserViewController.xib; sourceTree = "<group>"; };
+		7C8918CD17B2723200FCF104 /* play-indicator.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "play-indicator.png"; path = "Resources/play-indicator.png"; sourceTree = "<group>"; };
+		7C8918CE17B2723200FCF104 /* play-indicator@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "play-indicator@2x.png"; path = "Resources/play-indicator@2x.png"; sourceTree = "<group>"; };
 		7C90D68617AFB7990055D876 /* gradient-bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "gradient-bg.png"; path = "Resources/gradient-bg.png"; sourceTree = "<group>"; };
 		7C90D68717AFB7990055D876 /* gradient-bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "gradient-bg@2x.png"; path = "Resources/gradient-bg@2x.png"; sourceTree = "<group>"; };
 		7C90D68817AFB7990055D876 /* red-divider.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "red-divider.png"; path = "Resources/red-divider.png"; sourceTree = "<group>"; };
@@ -407,6 +411,8 @@
 		7CBE53D917AA7A8800647D68 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				7C8918CD17B2723200FCF104 /* play-indicator.png */,
+				7C8918CE17B2723200FCF104 /* play-indicator@2x.png */,
 				7C90D69717B016DD0055D876 /* hexagon-button-highlighted.png */,
 				7C90D69817B016DD0055D876 /* hexagon-button-highlighted@2x.png */,
 				7C90D69317B015760055D876 /* hexagon-button.png */,
@@ -547,6 +553,8 @@
 				7C90D69617B015760055D876 /* hexagon-button@2x.png in Resources */,
 				7C90D69917B016DD0055D876 /* hexagon-button-highlighted.png in Resources */,
 				7C90D69A17B016DD0055D876 /* hexagon-button-highlighted@2x.png in Resources */,
+				7C8918CF17B2723200FCF104 /* play-indicator.png in Resources */,
+				7C8918D017B2723200FCF104 /* play-indicator@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
