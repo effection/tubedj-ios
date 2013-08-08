@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ZBarSDK.h"
 
-
-@interface JHHomeViewController : UIViewController
+@interface JHHomeViewController : UIViewController <ZBarReaderDelegate>
 - (IBAction)createButtonPressed:(UIButton *)sender;
 - (IBAction)joinButtonPressed:(UIButton *)sender;
 

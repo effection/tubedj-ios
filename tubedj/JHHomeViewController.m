@@ -11,6 +11,7 @@
 #import "JHClientViewController.h"
 #import "JHServerViewController.h"
 #import	"JHTubeDjManager.h"
+#import "UIAlertView+Blocks.h"
 
 @interface JHHomeViewController ()
 @property (weak, nonatomic) IBOutlet UIButton *createRoomButton;
@@ -54,7 +55,10 @@
 	
 	[[JHTubeDjManager sharedManager] loadAndCheckUserDetailsWithSuccess:^(BOOL found, BOOL valid) {
 		if(!found || !valid) {
-			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Something went wrong" message:@"Sorry, we couldn't find your details" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+			
+			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Ooops" message:@"Sorry, we couldn't find your details" cancelButtonItem:[UIAlertButtonItem itemWithLabel:@"OK" action:^{
+				self.navigationController.viewControllers = [[NSArray alloc] initWithObjects:[GeneralUI loadController:[JHNewUserViewController class]], nil];
+			}] otherButtonItems: nil];
 			
 			[alert show];
 		} else {
@@ -62,9 +66,13 @@
 		}
 		
 	} error:^(NSError *error) {
-		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Something went wrong" message:@"Sorry, something happened while trying to check your details" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+		
+		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Ooops" message:@"Sorry, something happened while trying to check your details" cancelButtonItem:[UIAlertButtonItem itemWithLabel:@"OK" action:^{
+			self.navigationController.viewControllers = [[NSArray alloc] initWithObjects:[GeneralUI loadController:[JHNewUserViewController class]], nil];
+		}] otherButtonItems: nil];
 		
 		[alert show];
+
 	}];
 }
 
@@ -74,17 +82,10 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-	//TODO DEFINITELY Differentiate between not finding user and joining/creating room failures
-	//self.navigationController.viewControllers = [[NSArray alloc] initWithObjects:[GeneralUI loadController:[JHNewUserViewController class]], nil];
-}
-
 - (IBAction)joinButtonPressed:(UIButton *)sender {
-	JHClientViewController *clientViewController = [GeneralUI loadController:[JHClientViewController class]];
-	
-	//Load QR Code Decoder and then on successful decode show the ClientViewController and load the room for it
-	[self.navigationController pushViewController:clientViewController animated:YES];
+	//JHClientViewController *clientViewController = [GeneralUI loadController:[JHClientViewController class]];
+	//[self.navigationController pushViewController:clientViewController animated:YES];
+	[self showQRCodeReader];
 }
 
 - (IBAction)createButtonPressed:(UIButton *)sender
@@ -97,13 +98,86 @@
 			[self.navigationController pushViewController:serverViewController animated:YES];
 			
 		} error:^(NSError *error) {
-			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Something went wrong" message:@"Sorry, something happened while trying to join your room" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+
+			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Ooops" message:@"Sorry, something happened while trying to join your room" cancelButtonItem:[UIAlertButtonItem itemWithLabel:@"OK" action:^{
+				//Do nothing
+			}] otherButtonItems: nil];
+			
 			[alert show];
+
 		}];
 	} error:^(NSError *error) {
-		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Something went wrong" message:@"Sorry, something happened while trying to create a room" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+
+		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Ooops" message:@"Sorry, something happened while trying to create a room" cancelButtonItem:[UIAlertButtonItem itemWithLabel:@"OK" action:^{
+			//Do nothing
+		}] otherButtonItems: nil];
+		
 		[alert show];
+
 	}];
-	
 }
+
+- (void)showQRCodeReader
+{
+	ZBarReaderViewController *reader = [ZBarReaderViewController new];
+    reader.readerDelegate = self;
+    reader.supportedOrientationsMask = ZBarOrientationMaskAll;
+	reader.showsZBarControls = NO;
+	reader.wantsFullScreenLayout = NO;
+    ZBarImageScanner *scanner = reader.scanner;
+	
+    // EXAMPLE: disable rarely used I2/5 to improve performance
+    [scanner setSymbology: ZBAR_I25
+				   config: ZBAR_CFG_ENABLE
+					   to: 0];
+	UINavigationController *extraNavController = [[UINavigationController alloc] initWithRootViewController:reader];
+	
+	UIButton *doneButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 60, 44)];
+	[doneButton setTitle:@"cancel" forState:UIControlStateNormal];
+	[doneButton setTitleColor:[UIColor app_blue] forState:UIControlStateNormal];
+	[doneButton addTarget:self action:@selector(doneButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+	
+	UIBarButtonItem *doneBarButton = [[UIBarButtonItem alloc] initWithCustomView:doneButton];
+	reader.navigationItem.rightBarButtonItem = doneBarButton;
+	
+    [self.navigationController presentViewController:extraNavController animated:YES completion:nil];
+}
+
+#pragma mark - ZBar QR Code delegate
+
+- (void) imagePickerController: (UIImagePickerController*) reader
+ didFinishPickingMediaWithInfo: (NSDictionary*) info
+{
+    // ADD: get the decode results
+    id<NSFastEnumeration> results = [info objectForKey: ZBarReaderControllerResults];
+
+    for(ZBarSymbol *symbol in results) {
+		
+		[[JHTubeDjManager sharedManager] joinRoom:symbol.data success:^(NSString *roomId, NSString *ownerId, NSDictionary *users, NSArray *playlist) {
+			JHClientViewController *clientViewController = [GeneralUI loadController:[JHClientViewController class]];
+			[reader dismissViewControllerAnimated:YES completion:^{
+				[self.navigationController pushViewController:clientViewController animated:YES];
+			}];
+			
+		} error:^(NSError *error) {
+			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Ooops" message:@"Sorry, something happened while trying to join the room" cancelButtonItem:[UIAlertButtonItem itemWithLabel:@"OK" action:^{
+				//Do nothing
+			}] otherButtonItems: nil];
+			
+			[alert show];
+
+		}];
+		
+		break;
+	}
+}
+
+
+- (void)doneButtonPressed:(id)sender
+{
+	[self.navigationController dismissViewControllerAnimated:YES completion:^ {
+		
+	}];
+}
+
 @end

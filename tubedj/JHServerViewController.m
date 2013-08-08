@@ -14,6 +14,7 @@
 #import "JHQRCodeViewController.h"
 #import "JHStandardYoutubeViewController.h"
 #import "JHTubeDjManager.h"
+#import "UIAlertView+Blocks.h"
 
 
 @interface JHServerViewController ()
@@ -251,7 +252,9 @@
 		[self.youtubePlayer loadYoutubeVideo:song.songId];
 		
 	} error:^(NSError *error) {
-		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Ooops" message:@"Sorry, we couldn't find the next song to play" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Ooops" message:@"Sorry, we could't find the next song to play" cancelButtonItem:[UIAlertButtonItem itemWithLabel:@"OK" action:^{
+			//Do nothing
+		}] otherButtonItems: nil];
 		
 		[alert show];
 	}];
@@ -309,6 +312,10 @@
 	} error:^(NSError *error) {
 		cell.actionSuccessful = NO;
 		cell.isPerformingAction = NO;
+		
+		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Ooops" message:@"Sorry, we could't add the song to the playlist" cancelButtonItem:[UIAlertButtonItem itemWithLabel:@"OK" action:^{
+			//Do nothing
+		}] otherButtonItems: nil];
 	}];
 }
 
@@ -324,6 +331,10 @@
 		} error:^(NSError *error) {
 			cell.actionSuccessful = NO;
 			cell.isPerformingAction = NO;
+			
+			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Ooops" message:@"Sorry, we could't remove the song from the playlist" cancelButtonItem:[UIAlertButtonItem itemWithLabel:@"OK" action:^{
+				//Do nothing
+			}] otherButtonItems: nil];
 		}];
 	}
 }

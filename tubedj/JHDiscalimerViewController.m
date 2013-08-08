@@ -9,6 +9,7 @@
 #import "JHDiscalimerViewController.h"
 #import "JHHomeViewController.h"
 #import "JHTubeDjManager.h"
+#import "UIAlertView+Blocks.h"
 
 @interface JHDiscalimerViewController ()
 
@@ -52,8 +53,12 @@
 		
 		self.navigationController.viewControllers = [[NSArray alloc] initWithObjects:[GeneralUI loadController:[JHHomeViewController class]], nil];
 	} error:^(NSError *error) {
-		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Something went wrong" message:@"Sorry, something happened while trying to add your details" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+
+		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Ooops" message:@"Sorry, something happened while trying to add your details" cancelButtonItem:[UIAlertButtonItem itemWithLabel:@"OK" action:^{
+			[self.navigationController popToRootViewControllerAnimated:YES];
+		}] otherButtonItems: nil];
 		
+
 		[alert show];
 	}];
 }
