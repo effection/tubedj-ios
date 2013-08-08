@@ -12,7 +12,8 @@
 #import "JHTubeDjManager.h"
 #import "JHYoutubeClient.h"
 #import "UIImageView+AFNetworking.h"
-
+#import "JHNoItemsInPlaylistView.h"
+#import "JHPlaylistHeader.h"
 
 @interface JHPlaylistViewController ()
 
@@ -72,11 +73,11 @@ NSString * const PlaylistCellIdentifier = @"JHYoutubeSongCell";
 - (void)tubedjPlaylistNextSong:(NSNotification *) notification
 {
 	[self.tableView beginUpdates];
-	NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+	NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:1];
 	[self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
 	[self.tableView endUpdates];
 	
-	JHYoutubeSongCell *cell = (JHYoutubeSongCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+	JHYoutubeSongCell *cell = (JHYoutubeSongCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]];
 	cell.isPlaying = YES;
 }
 
@@ -90,7 +91,7 @@ NSString * const PlaylistCellIdentifier = @"JHYoutubeSongCell";
 	JHPlaylistItem *song = [notification.userInfo objectForKey:@"song"];
 	if(song) {
 		[self.tableView beginUpdates];
-		NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[[notification.userInfo objectForKey:@"index"] integerValue] inSection:0];
+		NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[[notification.userInfo objectForKey:@"index"] integerValue] inSection:1];
 		[self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
 		[self.tableView endUpdates];
 	}
@@ -99,7 +100,7 @@ NSString * const PlaylistCellIdentifier = @"JHYoutubeSongCell";
 - (void)tubedjPlaylistRemovedSong:(NSNotification *) notification
 {
 	[self.tableView beginUpdates];
-	NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[[notification.userInfo objectForKey:@"index"] integerValue] inSection:0];
+	NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[[notification.userInfo objectForKey:@"index"] integerValue] inSection:1];
 	[self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
 
 	[self.tableView endUpdates];
@@ -128,17 +129,50 @@ NSString * const PlaylistCellIdentifier = @"JHYoutubeSongCell";
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [JHTubeDjManager sharedManager].playlist.count;
+	if(section == 0)
+		return 0;
+	else if(section == 1)
+		return [JHTubeDjManager sharedManager].playlist.count;
+	else
+		return 0;
+}
+
+- (float)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+	if(section == 0)
+		return 44;
+	else if(section == 1) 
+		return 0;//return ([JHTubeDjManager sharedManager].playlist.count > 0) ? 0 : 40;
+	else
+		return 0;
 }
 
 - (float)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	return 80;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+	if(section == 0)
+	{
+		UIView *header = [GeneralUI loadViewFromNib:[JHPlaylistHeader class]];
+		return header;
+	} /*else if(section == 1 && [JHTubeDjManager sharedManager].playlist.count == 0)
+	{
+		UIView *header = [GeneralUI loadViewFromNib:[JHNoItemsInPlaylistView class]];
+		return header;
+	} else if(section == 1 && [JHTubeDjManager sharedManager].playlist.count > 0)
+	{
+		return nil;
+	} */else {
+		return nil;
+	}
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -168,14 +202,6 @@ NSString * const PlaylistCellIdentifier = @"JHYoutubeSongCell";
 
 //TODO
 // * Check all error routines 
-
-// * register in JHPlaylistViewController for playlist updates and update the table as needed
-
-// * Deal with song owners so only song owners and room owner can swipe to delete songs
-
-
-// * change all JHTubeDjManager notifications except request errors to be generic updates on the whole state such as websocket updates of playlist!!
-// * register for next-song notifcation and update table view in JHPlalistViewController to show next song playing and remove items from playlist previous
 // * sanitise all room id's going to manager/in manager so web end doesnt barf.
 // * test all initial start up error paths
 

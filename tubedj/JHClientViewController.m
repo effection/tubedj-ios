@@ -88,6 +88,7 @@
 	[self.view updateConstraints];
 	[self.view layoutIfNeeded];
 	
+	[self.scrollView setContentOffset:CGPointMake(320, 0)];
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self 
 											  selector:@selector(tubedjRequestErrorNotification:)
@@ -164,12 +165,19 @@
 
 - (void)playlist:(JHPlaylistViewController *)controller requestToRemoveItemFromPlaylist:(int)uid cell:(JHYoutubeSongCell *)cell
 {
-	[[JHTubeDjManager sharedManager] removeSongFromPlaylist:uid success:^(int uid) {
-		
-	} error:^(NSError *error) {
+	NSIndexPath *indexPath = [self.playlistController.tableView indexPathForCell:cell];
+	if(indexPath.row == 0) {
+		//Can't remove currently playing song
 		cell.isSwipeable = YES;
 		cell.isPerformingAction = NO;
-	}];
+	} else {
+		[[JHTubeDjManager sharedManager] removeSongFromPlaylist:uid success:^(int uid) {
+			
+		} error:^(NSError *error) {
+			cell.isSwipeable = YES;
+			cell.isPerformingAction = NO;
+		}];
+	}
 }
 
 - (void)showQRCode

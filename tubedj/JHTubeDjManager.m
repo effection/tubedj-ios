@@ -251,10 +251,6 @@
 	
 	[[JHRestClient sharedClient] nextSongForRoom:self.roomId success:^{
 		
-//		[[NSNotificationCenter defaultCenter] postNotificationName:@"tubedj-next-song"
-//															object:nil
-//														  userInfo:nil];
-		
 		if(successBlock) successBlock();
 		
 	} error:^(NSError *error) {

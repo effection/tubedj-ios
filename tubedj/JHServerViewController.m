@@ -95,7 +95,6 @@
 	[self.view updateConstraints];
 	[self.view layoutIfNeeded];
 	
-	
 	[[NSNotificationCenter defaultCenter] addObserver:self
 											 selector:@selector(keyboardWillShow:)
 												 name:UIKeyboardWillShowNotification
@@ -209,10 +208,7 @@
 {
 	int index = [[notification.userInfo objectForKey:@"index"] integerValue];
 	if(index == 0) {
-		if(!self.isPlaying)
-		{
-			//Nothing
-		} else {
+
 			//First song removed
 			if([JHTubeDjManager sharedManager].playlist.count > 0)
 			{
@@ -222,7 +218,6 @@
 				//Stop current song
 				[self stopCurrentSong];
 			}
-		}
 	}
 	
 }
@@ -235,9 +230,11 @@
 - (void)playNextSong
 {
 	[[JHTubeDjManager sharedManager] nextSongWithSuccess:^{
-		
+		if([JHTubeDjManager sharedManager].playlist.count == 0) {
+			return;//Shouldn't ever happen
+		}
 		//Alerts everyone to next song
-		JHPlaylistItem *song = [JHTubeDjManager sharedManager].playlist[0];
+		JHPlaylistItem *song = [[JHTubeDjManager sharedManager].playlist objectAtIndex:0];
 		if(!song ||!song.isYoutube)
 		{
 			//TODO error
@@ -294,12 +291,18 @@
 
 - (void)playlist:(JHPlaylistViewController *)controller requestToRemoveItemFromPlaylist:(int)uid cell:(JHYoutubeSongCell *)cell
 {
-	[[JHTubeDjManager sharedManager] removeSongFromPlaylist:uid success:^(int uid) {
-		
-	} error:^(NSError *error) {
-		cell.isSwipeable = YES;
-		cell.isPerformingAction = NO;
-	}];
+	NSIndexPath *indexPath = [self.playlistController.tableView indexPathForCell:cell];
+	if(indexPath.row == 0) {
+		//First item being removed. Instead of remove call next-song
+		[self playNextSong];
+	} else {
+		[[JHTubeDjManager sharedManager] removeSongFromPlaylist:uid success:^(int uid) {
+			
+		} error:^(NSError *error) {
+			cell.isSwipeable = YES;
+			cell.isPerformingAction = NO;
+		}];
+	}
 }
 
 - (void)showMenu
