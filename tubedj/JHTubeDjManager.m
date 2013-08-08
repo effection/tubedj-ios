@@ -40,6 +40,51 @@
 	return [self.myUserId isEqualToString:userId];
 }
 
+- (void)fakeRoomSetup
+{
+	self.roomId = @"BLAH";
+	self.roomOwnerId = self.myUserId;
+	self.users = [[NSMutableDictionary alloc] initWithCapacity:1];
+	self.playlist = [[NSMutableArray alloc] initWithCapacity:1];
+	JHUserItem *me = [[JHUserItem alloc] init];
+	me.userId = self.myUserId;
+	me.name = self.myName;
+	[self.users setObject:me forKey:me.userId];
+
+}
+
+- (void)fakeSongAdd:(NSString *)youtubeSongId
+{
+	JHPlaylistItem *song = [[JHPlaylistItem alloc] init];
+	song.songId = youtubeSongId;
+	song.uid = 9999;
+	song.isYoutube = YES;
+	song.ownerId = self.myUserId;
+	[self.playlist insertObject:song atIndex:0];
+	
+	[[NSNotificationCenter defaultCenter] postNotificationName:@"tubedj-playlist-added-song"
+														object:nil
+													  userInfo:@{@"song" :song, @"index" : @(0)}];
+}
+
+- (void)fakeSongRemove
+{
+	NSInteger uid = 9999;
+	
+	for (int i = 0; i < self.playlist.count; i++) {
+		JHPlaylistItem *song = self.playlist[i];
+		if(song.uid == uid)
+		{
+			[self.playlist removeObjectAtIndex:i];
+			[[NSNotificationCenter defaultCenter] postNotificationName:@"tubedj-playlist-removed-song"
+																object:nil
+															  userInfo:@{@"uid" :@(uid), @"index" : @(i)}];
+			break;
+		}
+	}
+
+}
+
 - (void)loadAndCheckUserDetailsWithSuccess:(void (^)(BOOL found, BOOL valid))successBlock error:(void (^)(NSError *error))errorBlock
 {
 	//Grab my name and take id out of plain cookie

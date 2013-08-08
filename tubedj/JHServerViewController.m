@@ -135,8 +135,6 @@
 	
 	BOOL coachMarksShown = [[NSUserDefaults standardUserDefaults] boolForKey:@"WSCoachMarksShown_ServerView"];
     if (coachMarksShown == NO) {
-		//[[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"WSCoachMarksShown_ServerView"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
 		
 		NSArray *coachMarks = @[
 			@{
@@ -178,6 +176,7 @@
 		[self.navigationController.view addSubview:coachMarksView];
 		[coachMarksView start];
 		isCoaching = YES;
+		[[JHTubeDjManager sharedManager] fakeRoomSetup];
 	}
 
 	
@@ -213,11 +212,7 @@
 		//Swipe right to add song - make it bounce
 		cell0 = (JHYoutubeSongCell *)[self.youtubeSearchController.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
 		
-		[[JHTubeDjManager sharedManager] addYoutubeSongToPlaylist:cell0.songId success:^(JHPlaylistItem *song) {
-			
-		} error:^(NSError *error) {
-			
-		}];
+		[[JHTubeDjManager sharedManager] fakeSongAdd:cell0.songId];
 		
 		[cell0 didStartSwiping];
 		[UIView animateWithDuration:0.5
@@ -254,11 +249,7 @@
 							 cell0.contentView.frame = CGRectOffset(cell0.contentView.bounds, -198, 0);
 						 }
 						 completion:^(BOOL finished) {
-							 [[JHTubeDjManager sharedManager] removeSongFromPlaylist:1 success:^(int uid) {
-								 
-							 } error:^(NSError *error) {
-								 
-							 }];
+							 [[JHTubeDjManager sharedManager] fakeSongRemove];
 						 }];
 
 	}
@@ -267,8 +258,15 @@
 		//Swipe right to show search
 		[self.scrollView setContentOffset:CGPointMake(0, 0) animated:YES];
 		[self.youtubeSearchController clearSearch];
-		isCoaching = NO;
 	}
+}
+
+- (void)coachMarksViewWillCleanup:(WSCoachMarksView *)coachMarksView
+{
+	isCoaching = NO;
+	[[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"WSCoachMarksShown_ServerView"];
+	[[NSUserDefaults standardUserDefaults] synchronize];
+	[self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 #pragma mark -Keyboard

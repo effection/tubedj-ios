@@ -42,6 +42,10 @@
 @property (strong, nonatomic) NSMutableArray *playlist;
 @property (strong, nonatomic) NSMutableDictionary *users;
 
+- (void)fakeRoomSetup;
+- (void)fakeSongAdd:(NSString *)youtubeSongId;
+- (void)fakeSongRemove;
+
 - (BOOL)isUserMe:(NSString *)userId;
 
 - (void)loadAndCheckUserDetailsWithSuccess:(void (^)(BOOL found, BOOL valid))successBlock error:(void (^)(NSError *error))errorBlock;

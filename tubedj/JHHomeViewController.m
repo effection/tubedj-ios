@@ -96,13 +96,25 @@
 }
 
 - (IBAction)joinButtonPressed:(UIButton *)sender {
-	JHClientViewController *clientViewController = [GeneralUI loadController:[JHClientViewController class]];
-	[self.navigationController pushViewController:clientViewController animated:YES];
-	//[self showQRCodeReader];
+	BOOL coachMarksShown = [[NSUserDefaults standardUserDefaults] boolForKey:@"WSCoachMarksShown_ClientView"];
+    if (coachMarksShown == NO) {
+		JHClientViewController *clientViewController = [GeneralUI loadController:[JHClientViewController class]];
+		[self.navigationController pushViewController:clientViewController animated:YES];
+	} else {
+		[self showQRCodeReader];
+	}
 }
 
 - (IBAction)createButtonPressed:(UIButton *)sender
 {
+
+	BOOL coachMarksShown = [[NSUserDefaults standardUserDefaults] boolForKey:@"WSCoachMarksShown_ServerView"];
+    if (coachMarksShown == NO) {
+		JHServerViewController *serverViewController = [GeneralUI loadController:[JHServerViewController class]];
+		[self.navigationController pushViewController:serverViewController animated:YES];
+
+		return;
+	}
 	[[JHTubeDjManager sharedManager] createRoomWithSuccess:^(NSString *roomId) {
 		NSLog(@"Created room %@", roomId);
 		[[JHTubeDjManager sharedManager] joinRoom:roomId success:^(NSString *roomId, NSString *ownerId, NSDictionary *users, NSArray *playlist) {

@@ -11,9 +11,10 @@
 #import "JHYouTubeSearchViewController.h"
 #import "JHPlaylistViewController.h"
 #import "ZBarSDK.h"
+#import "WSCoachMarksView.h"
 
 #define IS_WIDESCREEN ( fabs( ( double )[ [ UIScreen mainScreen ] bounds ].size.height - ( double )568 ) < DBL_EPSILON )
-@interface JHClientViewController : UIViewController <JHYoutubeSearchViewControllerDelegate, JHPlaylistViewControllerDelegate>
+@interface JHClientViewController : UIViewController <JHYoutubeSearchViewControllerDelegate, JHPlaylistViewControllerDelegate, WSCoachMarksViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (strong, readonly, nonatomic) RESideMenu *sideMenu;
