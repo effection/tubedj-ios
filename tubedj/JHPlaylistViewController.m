@@ -116,10 +116,6 @@ NSString * const PlaylistCellIdentifier = @"JHYoutubeSongCell";
 	if([self.delegate respondsToSelector:@selector(playlist:requestToRemoveItemFromPlaylist:cell:)])
 	{
 		NSIndexPath *indexPath = [(UITableView *)self.tableView indexPathForCell: cell];
-		if(indexPath.row == 0)
-		{
-			//TODO Deleting currently playing song!!!
-		}
 		JHPlaylistItem *song = [JHTubeDjManager sharedManager].playlist[indexPath.row];
 		[self.delegate playlist:self requestToRemoveItemFromPlaylist:song.uid cell:cell];
 	}

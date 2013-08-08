@@ -70,6 +70,7 @@
 	[super prepareForReuse];
 	self.isSwipeable = YES;
 	self.isPlaying = NO;
+	self.isPerformingAction = NO;
 	self.animationDuration = 0.2;
 }
 
