@@ -103,51 +103,6 @@
 	[self.view updateConstraints];
 	[self.view layoutIfNeeded];
 	
-	[[NSNotificationCenter defaultCenter] addObserver:self
-											 selector:@selector(keyboardWillShow:)
-												 name:UIKeyboardWillShowNotification
-											   object:nil];
-	[[NSNotificationCenter defaultCenter] addObserver:self
-											 selector:@selector(keyboardWillHide)
-												 name:UIKeyboardWillHideNotification
-											   object:nil];
-	
-	
-	[[NSNotificationCenter defaultCenter] addObserver:self
-											 selector:@selector(tubedjRequestErrorNotification:)
-												 name:@"tubedj-request-error"
-											   object:nil];
-	
-	[[NSNotificationCenter defaultCenter] addObserver:self
-											 selector:@selector(tubedjPlaylistRefreshed:)
-												 name:@"tubedj-playlist-refresh"
-											   object:nil];
-	
-	[[NSNotificationCenter defaultCenter] addObserver:self
-											 selector:@selector(tubedjPlaylistAddedSong:)
-												 name:@"tubedj-playlist-added-song"
-											   object:nil];
-	
-	[[NSNotificationCenter defaultCenter] addObserver:self
-											 selector:@selector(tubedjPlaylistRemovedSong:)
-												 name:@"tubedj-playlist-removed-song"
-											   object:nil];
-	
-	
-	[[NSNotificationCenter defaultCenter] addObserver:self
-											 selector:@selector(appGoingBackground:)
-												 name:@"tubedj-going-background"
-											   object:nil];
-	[[NSNotificationCenter defaultCenter] addObserver:self
-											 selector:@selector(appGoingForeground:)
-												 name:@"tubedj-going-foreground"
-											   object:nil];
-	[[NSNotificationCenter defaultCenter] addObserver:self
-											 selector:@selector(appPauseSong:)
-												 name:@"tubedj-pause-song"
-											   object:nil];
-	
-	
 	BOOL coachMarksShown = [[NSUserDefaults standardUserDefaults] boolForKey:@"WSCoachMarksShown_ServerView"];
     if (coachMarksShown == NO) {
 		
@@ -192,43 +147,132 @@
 		[coachMarksView start];
 		isCoaching = YES;
 		[[JHTubeDjManager sharedManager] fakeRoomSetup];
-	} else
-	{
-		[[NSNotificationCenter defaultCenter] addObserver:self
-												 selector:@selector(handleNetworkChange:)
-													 name:kReachabilityChangedNotification object:nil];
-		Reachability *reachability = [Reachability reachabilityForInternetConnection];
-		[reachability startNotifier];
-		NetworkStatus status = [reachability currentReachabilityStatus];
-		
-		switch (status)
-		{
-			case NotReachable:
-			{
-				NSLog(@"The internet is down.");
-				break;
-				
-			}
-			case ReachableViaWiFi:
-			{
-				NSLog(@"The internet is working via WIFI.");
-				break;
-				
-			}
-			case ReachableViaWWAN:
-			{
-				NSLog(@"The internet is working via WWAN.");
-				UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Warning" message:@"You are currently not on WiFi. Playing youtube videos will use up your data!" cancelButtonItem:[UIAlertButtonItem itemWithLabel:@"OK" action:^{
-					//Do nothing
-				}] otherButtonItems: nil];
-				
-				[alert show];
-				break;
-				
-			}
-		}
-
 	}
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(keyboardWillShow:)
+												 name:UIKeyboardWillShowNotification
+											   object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(keyboardWillHide)
+												 name:UIKeyboardWillHideNotification
+											   object:nil];
+	
+	
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(tubedjRequestErrorNotification:)
+												 name:@"tubedj-request-error"
+											   object:nil];
+	
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(tubedjPlaylistRefreshed:)
+												 name:@"tubedj-playlist-refresh"
+											   object:nil];
+	
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(tubedjPlaylistAddedSong:)
+												 name:@"tubedj-playlist-added-song"
+											   object:nil];
+	
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(tubedjPlaylistRemovedSong:)
+												 name:@"tubedj-playlist-removed-song"
+											   object:nil];
+	
+	
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(appGoingBackground:)
+												 name:@"tubedj-going-background"
+											   object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(appGoingForeground:)
+												 name:@"tubedj-going-foreground"
+											   object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(appPauseSong:)
+												 name:@"tubedj-pause-song"
+											   object:nil];
+	
+	[self.playlistController viewDidAppear:animated];
+	[self.youtubeSearchController viewDidAppear:animated];
+	
+	if(isCoaching) return;
+	
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(handleNetworkChange:)
+												 name:kReachabilityChangedNotification object:nil];
+	
+	
+	Reachability *reachability = [Reachability reachabilityForInternetConnection];
+	[reachability startNotifier];
+	NetworkStatus status = [reachability currentReachabilityStatus];
+	
+	switch (status)
+	{
+		case NotReachable:
+		{
+			NSLog(@"The internet is down.");
+			break;
+			
+		}
+		case ReachableViaWiFi:
+		{
+			NSLog(@"The internet is working via WIFI.");
+			break;
+			
+		}
+		case ReachableViaWWAN:
+		{
+			NSLog(@"The internet is working via WWAN.");
+			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Warning" message:@"You are currently not on WiFi. Playing youtube videos will use up your data!" cancelButtonItem:[UIAlertButtonItem itemWithLabel:@"OK" action:^{
+				//Do nothing
+			}] otherButtonItems: nil];
+			
+			[alert show];
+			break;
+			
+		}
+	}
+
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+	[self.playlistController viewDidDisappear:animated];
+	[self.youtubeSearchController viewDidDisappear:animated];
+	
+	[[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification
+											   object:nil];
+	[[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification
+											   object:nil];
+	
+	
+	[[NSNotificationCenter defaultCenter] removeObserver:self name:@"tubedj-request-error"
+											   object:nil];
+	
+	[[NSNotificationCenter defaultCenter] removeObserver:self name:@"tubedj-playlist-refresh"
+											   object:nil];
+	
+	[[NSNotificationCenter defaultCenter] removeObserver:self name:@"tubedj-playlist-added-song"
+											   object:nil];
+	
+	[[NSNotificationCenter defaultCenter] removeObserver:self name:@"tubedj-playlist-removed-song"
+											   object:nil];
+	
+	
+	[[NSNotificationCenter defaultCenter] removeObserver:self name:@"tubedj-going-background"
+											   object:nil];
+	[[NSNotificationCenter defaultCenter] removeObserver:self name:@"tubedj-going-foreground"
+											   object:nil];
+	[[NSNotificationCenter defaultCenter] removeObserver:self name:@"tubedj-pause-song"
+											   object:nil];
+	
+	if(isCoaching) return;
+	
+	[[NSNotificationCenter defaultCenter] removeObserver:self name:kReachabilityChangedNotification object:nil];
 }
 
 - (void)handleNetworkChange:(NSNotification *)notice{

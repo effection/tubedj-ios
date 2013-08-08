@@ -101,12 +101,6 @@
 	
 	[self.scrollView setContentOffset:CGPointMake(320, 0)];
 	
-	[[NSNotificationCenter defaultCenter] addObserver:self 
-											  selector:@selector(tubedjRequestErrorNotification:)
-												 name:@"tubedj-request-error"
-											   object:nil];
-	
-	
 	
 	BOOL coachMarksShown = [[NSUserDefaults standardUserDefaults] boolForKey:@"WSCoachMarksShown_ClientView"];
     if (coachMarksShown == NO) {
@@ -151,6 +145,23 @@
 	} else {
 		//Room joined before entering
 	}
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(tubedjRequestErrorNotification:)
+												 name:@"tubedj-request-error"
+											   object:nil];
+	[self.playlistController viewDidAppear:animated];
+	[self.youtubeSearchController viewDidAppear:animated];
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+	[[NSNotificationCenter defaultCenter] removeObserver:self name:@"tubedj-request-error" object:nil];
+	[self.playlistController viewDidDisappear:animated];
+	[self.youtubeSearchController viewDidDisappear:animated];
 }
 
 - (void)didReceiveMemoryWarning

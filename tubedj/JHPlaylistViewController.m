@@ -44,6 +44,11 @@ NSString * const PlaylistCellIdentifier = @"JHYoutubeSongCell";
 	self.tableView.backgroundColor = [UIColor clearColor];
 	
 	
+	
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
 	[[NSNotificationCenter defaultCenter] addObserver:self
 											 selector:@selector(tubedjPlaylistRefreshed:)
 												 name:@"tubedj-playlist-refresh"
@@ -63,6 +68,14 @@ NSString * const PlaylistCellIdentifier = @"JHYoutubeSongCell";
 											 selector:@selector(tubedjPlaylistNextSong:)
 												 name:@"tubedj-next-song"
 											   object:nil];
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+	[[NSNotificationCenter defaultCenter] removeObserver:self name:@"tubedj-playlist-refresh" object:nil];
+	[[NSNotificationCenter defaultCenter] removeObserver:self name:@"tubedj-playlist-added-song" object:nil];
+	[[NSNotificationCenter defaultCenter] removeObserver:self name:@"tubedj-playlist-removed-song" object:nil];
+	[[NSNotificationCenter defaultCenter] removeObserver:self name:@"tubedj-next-song" object:nil];
 }
 
 - (void)didReceiveMemoryWarning
