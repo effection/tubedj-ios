@@ -59,8 +59,12 @@
 	
 	search = [search stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     
+	NSString *countryCode = [[NSLocale currentLocale] objectForKey: NSLocaleCountryCode];
+#if TARGET_IPHONE_SIMULATOR
+	countryCode = @"GB";
+#endif
     //make HTTP call
-    NSString* searchCall = [NSString stringWithFormat:@"http://gdata.youtube.com/feeds/api/videos?q=%@&start-index=%i&max-results=%i&alt=json&v=2&safeSearch=none", search, start, max];//restriction=EN?
+    NSString* searchCall = [NSString stringWithFormat:@"http://gdata.youtube.com/feeds/api/videos?q=%@&start-index=%i&max-results=%i&alt=json&v=2&safeSearch=none&restriction=%@", search, start, max, countryCode];//restriction=EN?
 	
 	NSURL *url = [NSURL URLWithString:searchCall];
 	NSURLRequest *request = [NSURLRequest requestWithURL:url];
@@ -114,7 +118,9 @@
 		
 		isSearching = NO;
 		
-	} failure:nil];//TODO Failure
+	} failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+		NSLog(@"Youtube search error");
+	}];//TODO Failure
 	
 	[operation start];
 }
