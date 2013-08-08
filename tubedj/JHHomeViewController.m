@@ -96,9 +96,9 @@
 }
 
 - (IBAction)joinButtonPressed:(UIButton *)sender {
-	//JHClientViewController *clientViewController = [GeneralUI loadController:[JHClientViewController class]];
-	//[self.navigationController pushViewController:clientViewController animated:YES];
-	[self showQRCodeReader];
+	JHClientViewController *clientViewController = [GeneralUI loadController:[JHClientViewController class]];
+	[self.navigationController pushViewController:clientViewController animated:YES];
+	//[self showQRCodeReader];
 }
 
 - (IBAction)createButtonPressed:(UIButton *)sender
@@ -139,10 +139,10 @@
     }];
 	
 	RESideMenuItem *musicItem = [[RESideMenuItem alloc] initWithTitle:@"music library" prefix:[JHFontAwesome standardIcon:FontAwesome_HDD] ofSize:28.0f ofColour:[UIColor app_offWhite] action:^(RESideMenu *menu, RESideMenuItem *item) {
-        [menu hide];
+        //[menu hide];
     }];
 	RESideMenuItem *youtubeItem = [[RESideMenuItem alloc] initWithTitle:@"youtube" prefix:[JHFontAwesome standardIcon:FontAwesome_FacetimeVideo] ofSize:23.0f ofColour:[UIColor app_green] action:^(RESideMenu *menu, RESideMenuItem *item) {
-        [menu hide];
+        //[menu hide];
     }];
 	
     _sideMenu = [[RESideMenu alloc] initWithJHItems:@[@[ nameItem], @[musicItem, youtubeItem]]];

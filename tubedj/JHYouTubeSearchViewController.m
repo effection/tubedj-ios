@@ -73,6 +73,18 @@ NSString * const CellIdentifier = @"JHYoutubeSongCell";
     [super didReceiveMemoryWarning];
 }
 
+- (void)searchFor:(NSString *)searchText
+{
+	[youtubeClient searchFor:searchText];
+}
+
+- (void)clearSearch
+{
+	[addedItems removeAllObjects];
+	[youtubeClient.searchResults removeAllObjects];
+	[self.tableView reloadData];
+}
+
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
 	NSString *searchText = searchBar.text;

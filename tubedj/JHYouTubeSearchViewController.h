@@ -25,4 +25,7 @@
 
 @property (nonatomic, assign) id<JHYoutubeSearchViewControllerDelegate> delegate;
 
+- (void)searchFor:(NSString *)searchText;
+- (void)clearSearch;
+
 @end

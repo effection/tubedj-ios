@@ -15,8 +15,6 @@
 #import "JHStandardYoutubeViewController.h"
 #import "JHTubeDjManager.h"
 #import "UIAlertView+Blocks.h"
-#import "UIViewController+FakeModal.h"
-
 
 @interface JHServerViewController ()
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *youtubePlayerHeightConstraint;
@@ -29,6 +27,7 @@
 @implementation JHServerViewController {
 	CGRect oldFrame;
 	CGFloat originalYoutubePlayerHeightConstant;
+	BOOL isCoaching;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -132,6 +131,54 @@
 											 selector:@selector(tubedjPlaylistRemovedSong:)
 												 name:@"tubedj-playlist-removed-song"
 											   object:nil];
+	
+	
+	BOOL coachMarksShown = [[NSUserDefaults standardUserDefaults] boolForKey:@"WSCoachMarksShown_ServerView"];
+    if (coachMarksShown == NO) {
+		//[[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"WSCoachMarksShown_ServerView"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+		
+		NSArray *coachMarks = @[
+			@{
+				@"rect": [NSValue valueWithCGRect:(CGRect){{0,20.0f},{50.0f,44.0f}}],
+				@"caption": @"Menu shows list of users"
+			},
+			@{
+				@"rect": [NSValue valueWithCGRect:(CGRect){{320-50,20.0f},{50.0f,44.0f}}],
+				@"caption": @"Show QR Code for friends to scan"
+			},
+			@{
+				@"rect": [NSValue valueWithCGRect:(CGRect){{0.0f,64.0f},{320.0f,200.0f}}],
+				@"caption": @"Current playing song"
+			},
+			@{
+				@"rect": [NSValue valueWithCGRect:(CGRect){{0.0f,264.0f},{320.0f,44.0f}}],
+				@"caption": @"Search youtube for a video to add"
+			},
+			@{
+				@"rect": [NSValue valueWithCGRect:(CGRect){{0.0f,308.0f},{320.0f,80.0f}}],
+				@"caption": @"Swipe right to add song"
+			},
+			@{
+				@"rect": [NSValue valueWithCGRect:(CGRect){{0.0f,264.0f},{320.0f,260.0f}}],
+				@"caption": @"Swipe left to show playlist"
+			},
+			@{
+				@"rect": [NSValue valueWithCGRect:(CGRect){{0.0f,308.0f},{320.0f,80.0f}}],
+				@"caption": @"Swipe left to remove"
+			},
+			@{
+			   @"rect": [NSValue valueWithCGRect:(CGRect){{0.0f,264.0f},{320.0f,260.0f}}],
+				@"caption": @"Swipe right to go back to search"
+			}
+		];
+		
+		WSCoachMarksView *coachMarksView = [[WSCoachMarksView alloc] initWithFrame:self.navigationController.view.bounds coachMarks:coachMarks];
+		coachMarksView.delegate = self;
+		[self.navigationController.view addSubview:coachMarksView];
+		[coachMarksView start];
+		isCoaching = YES;
+	}
 
 	
 }
@@ -140,6 +187,88 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - Coach Marks delegate
+
+- (void)coachMarksView:(WSCoachMarksView*)coachMarksView willNavigateToIndex:(NSInteger)index
+{
+	switch (index) {
+		case 0:
+			
+			[self.youtubeSearchController searchFor:@"calvin harris feel so close nero remix"];
+			
+			break;
+			
+		default:
+			break;
+	}
+}
+
+- (void)coachMarksView:(WSCoachMarksView*)coachMarksView didNavigateToIndex:(NSInteger)index
+{
+	JHYoutubeSongCell *cell0;
+	if(4 == index)
+	{
+		//Swipe right to add song - make it bounce
+		cell0 = (JHYoutubeSongCell *)[self.youtubeSearchController.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+		
+		[[JHTubeDjManager sharedManager] addYoutubeSongToPlaylist:cell0.songId success:^(JHPlaylistItem *song) {
+			
+		} error:^(NSError *error) {
+			
+		}];
+		
+		[cell0 didStartSwiping];
+		[UIView animateWithDuration:0.5
+							  delay:0
+							options:UIViewAnimationOptionCurveEaseIn
+						 animations:^{
+							 cell0.contentView.frame = CGRectOffset(cell0.contentView.bounds, 198, 0);
+						 }
+						 completion:^(BOOL finished) {
+							 [UIView animateWithDuration:0.8
+												   delay:0.1
+												 options:UIViewAnimationOptionCurveEaseOut
+											  animations:^{
+												  cell0.contentView.frame = CGRectOffset(cell0.contentView.bounds, 0, 0);
+											  } completion:nil];
+						 }];
+	}
+	else if(5 == index)
+	{
+			//Swipe left to show playlist - scroll to playlist
+			[self.scrollView setContentOffset:CGPointMake(320, 0) animated:YES];
+	}
+	else if(6 == index)
+	{
+		//Swipe left to remove song - make it bounce
+		cell0 = (JHYoutubeSongCell *)[self.playlistController.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]];
+		
+		
+		[cell0 didStartSwiping];
+		[UIView animateWithDuration:0.5
+							  delay:0
+							options:UIViewAnimationOptionCurveEaseIn
+						 animations:^{
+							 cell0.contentView.frame = CGRectOffset(cell0.contentView.bounds, -198, 0);
+						 }
+						 completion:^(BOOL finished) {
+							 [[JHTubeDjManager sharedManager] removeSongFromPlaylist:1 success:^(int uid) {
+								 
+							 } error:^(NSError *error) {
+								 
+							 }];
+						 }];
+
+	}
+	else if(7 == index)
+	{
+		//Swipe right to show search
+		[self.scrollView setContentOffset:CGPointMake(0, 0) animated:YES];
+		[self.youtubeSearchController clearSearch];
+		isCoaching = NO;
+	}
 }
 
 #pragma mark -Keyboard
@@ -208,6 +337,8 @@
 
 - (void)tubedjPlaylistAddedSong:(NSNotification *) notification
 {
+	if(isCoaching) return;
+	
 	JHPlaylistItem *song = [notification.userInfo objectForKey:@"song"];
 	int index = [[notification.userInfo objectForKey:@"index"] integerValue];
 	if(index == 0) {
@@ -323,6 +454,7 @@
 		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Ooops" message:@"Sorry, we could't add the song to the playlist" cancelButtonItem:[UIAlertButtonItem itemWithLabel:@"OK" action:^{
 			//Do nothing
 		}] otherButtonItems: nil];
+		[alert show];
 	}];
 }
 
@@ -342,6 +474,7 @@
 			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Ooops" message:@"Sorry, we could't remove the song from the playlist" cancelButtonItem:[UIAlertButtonItem itemWithLabel:@"OK" action:^{
 				//Do nothing
 			}] otherButtonItems: nil];
+			[alert show];
 		}];
 	}
 }
@@ -374,13 +507,13 @@
 		}];
 
     }];
-	
+	/*
 	RESideMenuItem *musicItem = [[RESideMenuItem alloc] initWithTitle:@"music library" prefix:[JHFontAwesome standardIcon:FontAwesome_HDD] ofSize:28.0f ofColour:[UIColor app_offWhite] action:^(RESideMenu *menu, RESideMenuItem *item) {
         [menu hide];
     }];
 	RESideMenuItem *youtubeItem = [[RESideMenuItem alloc] initWithTitle:@"youtube" prefix:[JHFontAwesome standardIcon:FontAwesome_FacetimeVideo] ofSize:23.0f ofColour:[UIColor app_green] action:^(RESideMenu *menu, RESideMenuItem *item) {
         [menu hide];
-    }];
+    }];*/
 	
     _sideMenu = [[RESideMenu alloc] initWithJHItems:@[@[stopServerItem], userItems]];
 	UIImage *img = [UIImage imageNamed:@"menu-bg"];

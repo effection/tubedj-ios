@@ -16,6 +16,7 @@
 #import "ZBarSDK.h"
 #import "JHTubeDjManager.h"
 #import "UIAlertView+Blocks.h"
+#import "WSCoachMarksView.h"
 
 @interface JHClientViewController ()
 @property (strong, nonatomic) JHYouTubeSearchViewController *youtubeSearchController;
@@ -103,8 +104,13 @@
 											  selector:@selector(tubedjRequestErrorNotification:)
 												 name:@"tubedj-request-error"
 											   object:nil];
-	//[self showQRCodeReader];
-	//[self loadRoom:@"jTgaKskT"];
+
+	[[JHTubeDjManager sharedManager] joinRoom:@"jTgaKskT" success:^(NSString *roomId, NSString *ownerId, NSDictionary *users, NSArray *playlist) {
+		//TODO Remove for release version
+		
+	} error:^(NSError *error) {
+		
+	}];
 }
 
 - (void)didReceiveMemoryWarning
@@ -175,12 +181,6 @@
 		} error:^(NSError *error) {
 			//Let user stay in until they close app
 		}];
-		
-        /*
-        SecondViewController *secondViewController = [[SecondViewController alloc] init];
-        secondViewController.title = item.title;
-        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:secondViewController];
-        [menu setRootViewController:navigationController];*/
     }];
 	
 	RESideMenuItem *nameItem = [[RESideMenuItem alloc] initWithTitle:[JHTubeDjManager sharedManager].myName prefix:[JHFontAwesome standardIcon:FontAwesome_Pencil] ofSize:28.0f ofColour:[UIColor app_offWhite] action:^(RESideMenu *menu, RESideMenuItem *item) {
@@ -196,19 +196,6 @@
 		}];
 		[userItems addObject:userMenuItem];
 	}
-	
-	
-	
-	
-	RESideMenuItem *startServerItem = [[RESideMenuItem alloc] initWithTitle:@"start server" prefix:[JHFontAwesome standardIcon:FontAwesome_Cloud] ofSize:23.0f ofColour:[UIColor app_offWhite] action:^(RESideMenu *menu, RESideMenuItem *item) {
-        [menu hide];
-    }];
-	RESideMenuItem *musicItem = [[RESideMenuItem alloc] initWithTitle:@"music library" prefix:[JHFontAwesome standardIcon:FontAwesome_HDD] ofSize:28.0f ofColour:[UIColor app_offWhite] action:^(RESideMenu *menu, RESideMenuItem *item) {
-        [menu hide];
-    }];
-	RESideMenuItem *youtubeItem = [[RESideMenuItem alloc] initWithTitle:@"youtube" prefix:[JHFontAwesome standardIcon:FontAwesome_FacetimeVideo] ofSize:23.0f ofColour:[UIColor app_green] action:^(RESideMenu *menu, RESideMenuItem *item) {
-        [menu hide];
-    }];
 	
     _sideMenu = [[RESideMenu alloc] initWithJHItems:@[@[homeItem, nameItem], userItems]];
 	UIImage *img = [UIImage imageNamed:@"menu-bg"];
