@@ -150,14 +150,6 @@
 		[[JHTubeDjManager sharedManager] fakeRoomSetup];
 	} else {
 		//Room joined before entering
-		/*
-		 [[JHTubeDjManager sharedManager] joinRoom:@"jTgaKskT" success:^(NSString *roomId, NSString *ownerId, NSDictionary *users, NSArray *playlist) {
-		 //TODO Remove for release version
-		 
-		 } error:^(NSError *error) {
-		 
-		 }];
-		 */
 	}
 }
 

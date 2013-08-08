@@ -133,6 +133,20 @@
 											   object:nil];
 	
 	
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(appGoingBackground:)
+												 name:@"tubedj-going-background"
+											   object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(appGoingForeground:)
+												 name:@"tubedj-going-foreground"
+											   object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(appPauseSong:)
+												 name:@"tubedj-pause-song"
+											   object:nil];
+	
+	
 	BOOL coachMarksShown = [[NSUserDefaults standardUserDefaults] boolForKey:@"WSCoachMarksShown_ServerView"];
     if (coachMarksShown == NO) {
 		
@@ -303,6 +317,21 @@
 
 #pragma mark -TubeDj
 
+- (void)appGoingBackground:(NSNotification *) notification
+{
+	[self stopCurrentSong];
+}
+
+- (void)appGoingForeground:(NSNotification *) notification
+{
+	[self unpauseSong];
+}
+
+- (void)appPauseSong:(NSNotification *) notification
+{
+	[self stopCurrentSong];
+}
+
 - (void)tubedjRequestErrorNotification:(NSNotification *) notification
 {
 	
@@ -370,6 +399,11 @@
 			}
 	}
 	
+}
+
+- (void)unpauseSong
+{
+	[self.youtubePlayer playYoutubeVideo];
 }
 
 - (void)playSong: (JHPlaylistItem *)song

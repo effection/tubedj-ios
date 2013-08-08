@@ -31,8 +31,26 @@
 	
 	socketIO = [[SocketIO alloc] initWithDelegate:self];
 	
-
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(appGoingBackground:)
+												 name:@"tubedj-going-background"
+											   object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(appGoingForeground:)
+												 name:@"tubedj-going-foreground"
+											   object:nil];
+	
 	return self;
+}
+
+- (void)appGoingBackground:(NSNotification *) notification
+{
+	//[socketIO disconnect];
+}
+
+- (void)appGoingForeground:(NSNotification *) notification
+{
+	
 }
 
 - (BOOL)isUserMe:(NSString *)userId
