@@ -50,6 +50,7 @@
 		7C8918D817B29D6000FCF104 /* JHServerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C8918D617B29D5F00FCF104 /* JHServerViewController.xib */; };
 		7C8918DB17B29FC300FCF104 /* JHYoutubePlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C8918DA17B29FC300FCF104 /* JHYoutubePlayer.m */; };
 		7C8918DD17B2A12A00FCF104 /* YT_Player.html in Resources */ = {isa = PBXBuildFile; fileRef = 7C8918DC17B2A12A00FCF104 /* YT_Player.html */; };
+		7C8918E017B3C15D00FCF104 /* RemorsefulScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C8918DF17B3C15D00FCF104 /* RemorsefulScrollView.m */; };
 		7C90D68A17AFB7990055D876 /* gradient-bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C90D68617AFB7990055D876 /* gradient-bg.png */; };
 		7C90D68B17AFB7990055D876 /* gradient-bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C90D68717AFB7990055D876 /* gradient-bg@2x.png */; };
 		7C90D68C17AFB7990055D876 /* red-divider.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C90D68817AFB7990055D876 /* red-divider.png */; };
@@ -156,6 +157,8 @@
 		7C8918D917B29FC300FCF104 /* JHYoutubePlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHYoutubePlayer.h; sourceTree = "<group>"; };
 		7C8918DA17B29FC300FCF104 /* JHYoutubePlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JHYoutubePlayer.m; sourceTree = "<group>"; };
 		7C8918DC17B2A12A00FCF104 /* YT_Player.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = YT_Player.html; sourceTree = "<group>"; };
+		7C8918DE17B3C15D00FCF104 /* RemorsefulScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RemorsefulScrollView.h; sourceTree = "<group>"; };
+		7C8918DF17B3C15D00FCF104 /* RemorsefulScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RemorsefulScrollView.m; sourceTree = "<group>"; };
 		7C90D68617AFB7990055D876 /* gradient-bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "gradient-bg.png"; path = "Resources/gradient-bg.png"; sourceTree = "<group>"; };
 		7C90D68717AFB7990055D876 /* gradient-bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "gradient-bg@2x.png"; path = "Resources/gradient-bg@2x.png"; sourceTree = "<group>"; };
 		7C90D68817AFB7990055D876 /* red-divider.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "red-divider.png"; path = "Resources/red-divider.png"; sourceTree = "<group>"; };
@@ -346,6 +349,8 @@
 				7CBE53D417AA749000647D68 /* UIColor+AppColours.m */,
 				7CBE53D617AA75E500647D68 /* NSString+UIColor.h */,
 				7CBE53D717AA75E500647D68 /* NSString+UIColor.m */,
+				7C8918DE17B3C15D00FCF104 /* RemorsefulScrollView.h */,
+				7C8918DF17B3C15D00FCF104 /* RemorsefulScrollView.m */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -656,6 +661,7 @@
 				7C90D6B117B12EBC0055D876 /* SocketIOTransportXHR.m in Sources */,
 				7C8918D717B29D6000FCF104 /* JHServerViewController.m in Sources */,
 				7C8918DB17B29FC300FCF104 /* JHYoutubePlayer.m in Sources */,
+				7C8918E017B3C15D00FCF104 /* RemorsefulScrollView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

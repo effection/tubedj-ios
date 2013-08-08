@@ -63,7 +63,6 @@
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
 	NSString *url = [[request URL] absoluteString];
-	NSLog(@"URL %@", url);
     if ([url hasPrefix:@"tubedjapp:"]) {
 		NSString *event = [url substringFromIndex:10];
 		if([event isEqualToString:@"song-ended"])

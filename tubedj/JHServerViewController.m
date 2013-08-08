@@ -17,13 +17,17 @@
 
 
 @interface JHServerViewController ()
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *youtubePlayerHeightConstraint;
 @property (weak, nonatomic) IBOutlet JHYoutubePlayer *youtubePlayer;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (strong, nonatomic) JHYouTubeSearchViewController *youtubeSearchController;
 @property (strong, nonatomic) JHPlaylistViewController *playlistController;
 @end
 
-@implementation JHServerViewController
+@implementation JHServerViewController {
+	CGRect oldFrame;
+	CGFloat originalYoutubePlayerHeightConstant;
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -81,12 +85,25 @@
 	[self.scrollView addSubview:searchView];
 	[self.scrollView addSubview:playlistView];
 	
+	NSNumber *remainingHeight = [NSNumber numberWithFloat:self.view.bounds.size.height-self.youtubePlayer.bounds.size.height];
+	originalYoutubePlayerHeightConstant = self.youtubePlayerHeightConstraint.constant;
+	
 	
 	[self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[searchView(320)][playlistView(320)]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(searchView,playlistView)]];
-	[self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[searchView(460)]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(searchView)]];
-	[self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[playlistView(460)]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(playlistView)]];
+	[self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[searchView(remainingHeight)]|" options:0 metrics:NSDictionaryOfVariableBindings(remainingHeight) views:NSDictionaryOfVariableBindings(searchView)]];
+	[self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[playlistView(remainingHeight)]|" options:0 metrics:NSDictionaryOfVariableBindings(remainingHeight) views:NSDictionaryOfVariableBindings(playlistView)]];
 	[self.view updateConstraints];
 	[self.view layoutIfNeeded];
+	
+	
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(keyboardWillShow:)
+												 name:UIKeyboardWillShowNotification
+											   object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(keyboardWillHide)
+												 name:UIKeyboardWillHideNotification
+											   object:nil];
 	
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self
@@ -116,6 +133,29 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark -Keyboard
+
+-(void)keyboardWillShow:(NSNotification*)notification {
+    //NSDictionary* keyboardInfo = [notification userInfo];
+    //NSValue* keyboardFrameBegin = [keyboardInfo valueForKey:UIKeyboardFrameBeginUserInfoKey];
+    //CGRect keyboardFrameBeginRect = [keyboardFrameBegin CGRectValue];
+
+	self.youtubePlayerHeightConstraint.constant = 0;
+	[UIView animateWithDuration:0.3f animations:^ {
+		[self.view updateConstraints];
+		[self.view layoutIfNeeded];
+    }];
+}
+
+-(void)keyboardWillHide {
+    // Animate the current view back to its original position
+	self.youtubePlayerHeightConstraint.constant = originalYoutubePlayerHeightConstant;
+    [UIView animateWithDuration:0.3f animations:^ {
+		[self.view updateConstraints];
+		[self.view layoutIfNeeded];
+    }];
 }
 
 - (void)tubedjRequestErrorNotification:(NSNotification *) notification
