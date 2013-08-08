@@ -150,7 +150,13 @@ const int INTERSTITIAL_STEPS = 99;
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     _tableView.alpha = 0;
 	[_tableView registerNib:[UINib nibWithNibName:@"RESideMenuPrefixCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"RESideMenuPrefixCell"];
-    [window addSubview:_tableView];
+	[_tableView registerNib:[UINib nibWithNibName:@"RESideMenuEditCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"RESideMenuEditCell"];
+    UITapGestureRecognizer *gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
+	// For selecting cell.
+	gestureRecognizer.cancelsTouchesInView = NO;
+	[self.tableView addGestureRecognizer:gestureRecognizer];
+	
+	[window addSubview:_tableView];
     
     [window addSubview:_screenshotView];
     
@@ -308,11 +314,46 @@ const int INTERSTITIAL_STEPS = 99;
 	return header;
 }
 
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+   	//Editing item finished editing
+	RESideMenuItem *item = nil;
+	if(jhSections > 0) {
+		item = jhItems[0][textField.tag];//TODO Fix for different sections
+	} else {
+		item = [_items objectAtIndex:textField.tag];
+	}
+	
+    if (item.editAction)
+        item.editAction(self, item, textField);
+	
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+	//Editing item finished editing
+	RESideMenuItem *item = nil;
+	if(jhSections > 0) {
+		item = jhItems[0][textField.tag];//TODO Fix for different sections
+	} else {
+		item = [_items objectAtIndex:textField.tag];
+	}
+	
+    if (item.editAction)
+        item.editAction(self, item, textField);
+	return YES;
+
+}
+
+- (void) hideKeyboard {
+	[self.tableView endEditing:YES];
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSString *cellIdentifier = @"RESideMenuCell";
 	NSString *cellIdentifier2 = @"RESideMenuPrefixCell";
-	
+	NSString *cellIdentifier3 = @"RESideMenuEditCell";
 	
 	RESideMenuItem *item = nil;
 	if(jhSections > 1) 
@@ -320,8 +361,28 @@ const int INTERSTITIAL_STEPS = 99;
 	else
 		item = [_items objectAtIndex:indexPath.row];
 
+	if(item.prefixText != nil && item.isEditable) {
+		RESideMenuEditCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier3];
+		cell.backgroundColor = [UIColor clearColor];
+		cell.selectedBackgroundView = [[UIView alloc] init];
+		cell.editField.font = self.font;
+		cell.editField.textColor = self.textColor;
+		cell.editField.text = item.title;
+		cell.editField.delegate = self;
+		cell.editField.tag = indexPath.row;
 		
-	if(item.prefixText != nil) {
+		cell.textLabel.font = self.font;
+		cell.textLabel.textColor = self.textColor;
+		cell.textLabel.highlightedTextColor = self.highlightedTextColor;
+		
+		
+		cell.prefixLabel.text = item.prefixText;
+		cell.prefixLabel.font = [UIFont fontAwesomeWithSize:item.prefixFontSize];
+		cell.prefixLabel.textColor = item.prefixColour;
+		cell.horizontalOffset = self.horizontalOffset;
+		return cell;
+		
+	} else if(item.prefixText != nil) {
 		RESideMenuPrefixCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier2];
 		cell.backgroundColor = [UIColor clearColor];
 		cell.selectedBackgroundView = [[UIView alloc] init];

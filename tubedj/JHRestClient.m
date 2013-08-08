@@ -98,6 +98,8 @@ static NSString * const kAFAPIBaseURLString = @"http://localhost:8081/api/";
 - (void)changeName:(NSString *)newName success:(void (^)(NSString *userId, NSString *name))successBlock error:(void (^)(NSError *error))errorBlock
 {
 	//TODO Implement on server
+	successBlock(@"", newName);
+	//errorBlock([[NSError alloc] init]);
 }
 
 - (void)createRoomOnSuccess:(void (^)(NSString *roomId))successBlock error:(void (^)(NSError *error))errorBlock

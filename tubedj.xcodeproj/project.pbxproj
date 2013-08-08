@@ -60,6 +60,8 @@
 		7C8918F017B3D02A00FCF104 /* JHPlaylistHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C8918EF17B3D02A00FCF104 /* JHPlaylistHeader.m */; };
 		7C8918F217B3D03900FCF104 /* JHPlaylistHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C8918F117B3D03900FCF104 /* JHPlaylistHeader.xib */; };
 		7C8918F517B42CAC00FCF104 /* UIAlertView+Blocks.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C8918F417B42CAC00FCF104 /* UIAlertView+Blocks.m */; };
+		7C8918FB17B4572400FCF104 /* RESideMenuEditCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C8918FA17B4572400FCF104 /* RESideMenuEditCell.m */; };
+		7C8918FD17B4572E00FCF104 /* RESideMenuEditCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C8918FC17B4572E00FCF104 /* RESideMenuEditCell.xib */; };
 		7C90D68A17AFB7990055D876 /* gradient-bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C90D68617AFB7990055D876 /* gradient-bg.png */; };
 		7C90D68B17AFB7990055D876 /* gradient-bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C90D68717AFB7990055D876 /* gradient-bg@2x.png */; };
 		7C90D68C17AFB7990055D876 /* red-divider.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C90D68817AFB7990055D876 /* red-divider.png */; };
@@ -180,6 +182,9 @@
 		7C8918F117B3D03900FCF104 /* JHPlaylistHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JHPlaylistHeader.xib; sourceTree = "<group>"; };
 		7C8918F317B42CAC00FCF104 /* UIAlertView+Blocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertView+Blocks.h"; sourceTree = "<group>"; };
 		7C8918F417B42CAC00FCF104 /* UIAlertView+Blocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertView+Blocks.m"; sourceTree = "<group>"; };
+		7C8918F917B4572400FCF104 /* RESideMenuEditCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RESideMenuEditCell.h; sourceTree = "<group>"; };
+		7C8918FA17B4572400FCF104 /* RESideMenuEditCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RESideMenuEditCell.m; sourceTree = "<group>"; };
+		7C8918FC17B4572E00FCF104 /* RESideMenuEditCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RESideMenuEditCell.xib; sourceTree = "<group>"; };
 		7C90D68617AFB7990055D876 /* gradient-bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "gradient-bg.png"; path = "Resources/gradient-bg.png"; sourceTree = "<group>"; };
 		7C90D68717AFB7990055D876 /* gradient-bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "gradient-bg@2x.png"; path = "Resources/gradient-bg@2x.png"; sourceTree = "<group>"; };
 		7C90D68817AFB7990055D876 /* red-divider.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "red-divider.png"; path = "Resources/red-divider.png"; sourceTree = "<group>"; };
@@ -504,6 +509,9 @@
 				7C800ADB17AB159C00D6251C /* RESideMenuPrefixCell.h */,
 				7C800ADC17AB159C00D6251C /* RESideMenuPrefixCell.m */,
 				7C800ADE17ABD00000D6251C /* RESideMenuPrefixCell.xib */,
+				7C8918F917B4572400FCF104 /* RESideMenuEditCell.h */,
+				7C8918FA17B4572400FCF104 /* RESideMenuEditCell.m */,
+				7C8918FC17B4572E00FCF104 /* RESideMenuEditCell.xib */,
 			);
 			name = RESideMenu;
 			sourceTree = "<group>";
@@ -617,6 +625,7 @@
 				7C8918EC17B3CE5900FCF104 /* search-icon.png in Resources */,
 				7C8918ED17B3CE5900FCF104 /* search-icon@2x.png in Resources */,
 				7C8918F217B3D03900FCF104 /* JHPlaylistHeader.xib in Resources */,
+				7C8918FD17B4572E00FCF104 /* RESideMenuEditCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -704,6 +713,7 @@
 				7C8918E517B3CB6700FCF104 /* JHNoItemsInPlaylistView.m in Sources */,
 				7C8918F017B3D02A00FCF104 /* JHPlaylistHeader.m in Sources */,
 				7C8918F517B42CAC00FCF104 /* UIAlertView+Blocks.m in Sources */,
+				7C8918FB17B4572400FCF104 /* RESideMenuEditCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

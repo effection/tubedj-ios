@@ -35,6 +35,16 @@
 	return [self initWithTitle:title action:action];
 }
 
+- (id)initWithTitle:(NSString *)title isEditable:(BOOL)editable prefix:(NSString *)prefix ofSize:(CGFloat)prefixSize ofColour:(UIColor *)prefixColour action:(void(^)(RESideMenu *menu, RESideMenuItem *item))action editAction:(void(^)(RESideMenu *menu, RESideMenuItem *item, UITextField *textField))editAction
+{
+	self.prefixFontSize = prefixSize;
+	self.prefixColour = prefixColour;
+	self.prefixText = prefix;
+	self.isEditable = editable;
+	self.editAction = editAction;
+	return [self initWithTitle:title action:action];
+}
+
 - (id)initWithTitle:(NSString *)title action:(void(^)(RESideMenu *menu, RESideMenuItem *item))action
 {
     return [self initWithTitle:title image:nil highlightedImage:nil action:action];

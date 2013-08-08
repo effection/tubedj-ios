@@ -29,6 +29,7 @@
 
 @interface RESideMenuItem : NSObject
 
+@property (nonatomic, readwrite) BOOL isEditable;
 @property (copy, readwrite, nonatomic) NSString *title;
 @property (readwrite, nonatomic) CGFloat prefixFontSize;
 @property (strong, readwrite, nonatomic) UIColor *prefixColour;
@@ -38,8 +39,11 @@
 @property (strong, readwrite, nonatomic) UIImage *highlightedImage;
 @property (assign, readwrite, nonatomic) NSInteger tag;
 @property (copy, readwrite, nonatomic) void (^action)(RESideMenu *menu, RESideMenuItem *item);
+@property (copy, readwrite, nonatomic) void (^editAction)(RESideMenu *menu, RESideMenuItem *item, UITextField *textField);
 
 - (id)initWithTitle:(NSString *)title prefix:(NSString *)prefix ofSize:(CGFloat)prefixSize ofColour:(UIColor *)prefixColour action:(void(^)(RESideMenu *menu, RESideMenuItem *item))action;
+
+- (id)initWithTitle:(NSString *)title isEditable:(BOOL)editable prefix:(NSString *)prefix ofSize:(CGFloat)prefixSize ofColour:(UIColor *)prefixColour action:(void(^)(RESideMenu *menu, RESideMenuItem *item))action editAction:(void(^)(RESideMenu *menu, RESideMenuItem *item, UITextField *textField))editAction;
 
 - (id)initWithTitle:(NSString *)title action:(void(^)(RESideMenu *menu, RESideMenuItem *item))action;
 - (id)initWithTitle:(NSString *)title image:(UIImage *)image highlightedImage:(UIImage *)highlightedImage action:(void(^)(RESideMenu *menu, RESideMenuItem *item))action;

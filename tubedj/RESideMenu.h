@@ -30,8 +30,9 @@
 #import "RESideMenuCell.h"
 #import "RESideMenuItem.h"
 #import "RESideMenuPrefixCell.h"
+#import "RESideMenuEditCell.h"
 
-@interface RESideMenu : NSObject <UITableViewDataSource, UITableViewDelegate>
+@interface RESideMenu : NSObject <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 
 @property (strong, readonly, nonatomic) NSArray *items;
 @property (assign, readwrite, nonatomic) CGFloat verticalOffset;
