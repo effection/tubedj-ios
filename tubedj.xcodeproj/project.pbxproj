@@ -62,6 +62,7 @@
 		7C8918F517B42CAC00FCF104 /* UIAlertView+Blocks.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C8918F417B42CAC00FCF104 /* UIAlertView+Blocks.m */; };
 		7C8918FB17B4572400FCF104 /* RESideMenuEditCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C8918FA17B4572400FCF104 /* RESideMenuEditCell.m */; };
 		7C8918FD17B4572E00FCF104 /* RESideMenuEditCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C8918FC17B4572E00FCF104 /* RESideMenuEditCell.xib */; };
+		7C89190017B4638F00FCF104 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C8918FF17B4638F00FCF104 /* Reachability.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		7C90D68A17AFB7990055D876 /* gradient-bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C90D68617AFB7990055D876 /* gradient-bg.png */; };
 		7C90D68B17AFB7990055D876 /* gradient-bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C90D68717AFB7990055D876 /* gradient-bg@2x.png */; };
 		7C90D68C17AFB7990055D876 /* red-divider.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C90D68817AFB7990055D876 /* red-divider.png */; };
@@ -185,6 +186,8 @@
 		7C8918F917B4572400FCF104 /* RESideMenuEditCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RESideMenuEditCell.h; sourceTree = "<group>"; };
 		7C8918FA17B4572400FCF104 /* RESideMenuEditCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RESideMenuEditCell.m; sourceTree = "<group>"; };
 		7C8918FC17B4572E00FCF104 /* RESideMenuEditCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RESideMenuEditCell.xib; sourceTree = "<group>"; };
+		7C8918FE17B4638F00FCF104 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		7C8918FF17B4638F00FCF104 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		7C90D68617AFB7990055D876 /* gradient-bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "gradient-bg.png"; path = "Resources/gradient-bg.png"; sourceTree = "<group>"; };
 		7C90D68717AFB7990055D876 /* gradient-bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "gradient-bg@2x.png"; path = "Resources/gradient-bg@2x.png"; sourceTree = "<group>"; };
 		7C90D68817AFB7990055D876 /* red-divider.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "red-divider.png"; path = "Resources/red-divider.png"; sourceTree = "<group>"; };
@@ -371,6 +374,8 @@
 		7C6465E817A9DED200A4E2A3 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				7C8918FE17B4638F00FCF104 /* Reachability.h */,
+				7C8918FF17B4638F00FCF104 /* Reachability.m */,
 				7CBE53EA17AA933000647D68 /* JHFontAwesome.h */,
 				7CBE53EB17AA933000647D68 /* JHFontAwesome.m */,
 				7CBE53EC17AA933000647D68 /* UIFont+AppFonts.h */,
@@ -714,6 +719,7 @@
 				7C8918F017B3D02A00FCF104 /* JHPlaylistHeader.m in Sources */,
 				7C8918F517B42CAC00FCF104 /* UIAlertView+Blocks.m in Sources */,
 				7C8918FB17B4572400FCF104 /* RESideMenuEditCell.m in Sources */,
+				7C89190017B4638F00FCF104 /* Reachability.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

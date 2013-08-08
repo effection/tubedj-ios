@@ -15,6 +15,7 @@
 #import "JHStandardYoutubeViewController.h"
 #import "JHTubeDjManager.h"
 #import "UIAlertView+Blocks.h"
+#import <Reachability.h>
 
 @interface JHServerViewController ()
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *youtubePlayerHeightConstraint;
@@ -191,8 +192,74 @@
 		[coachMarksView start];
 		isCoaching = YES;
 		[[JHTubeDjManager sharedManager] fakeRoomSetup];
-	}
+	} else
+	{
+		[[NSNotificationCenter defaultCenter] addObserver:self
+												 selector:@selector(handleNetworkChange:)
+													 name:kReachabilityChangedNotification object:nil];
+		Reachability *reachability = [Reachability reachabilityForInternetConnection];
+		[reachability startNotifier];
+		NetworkStatus status = [reachability currentReachabilityStatus];
+		
+		switch (status)
+		{
+			case NotReachable:
+			{
+				NSLog(@"The internet is down.");
+				break;
+				
+			}
+			case ReachableViaWiFi:
+			{
+				NSLog(@"The internet is working via WIFI.");
+				break;
+				
+			}
+			case ReachableViaWWAN:
+			{
+				NSLog(@"The internet is working via WWAN.");
+				UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Warning" message:@"You are currently not on WiFi. Playing youtube videos will use up your data!" cancelButtonItem:[UIAlertButtonItem itemWithLabel:@"OK" action:^{
+					//Do nothing
+				}] otherButtonItems: nil];
+				
+				[alert show];
+				break;
+				
+			}
+		}
 
+	}
+}
+
+- (void)handleNetworkChange:(NSNotification *)notice{
+	Reachability* curReach = [notice object];
+	NetworkStatus status = [curReach currentReachabilityStatus];
+	switch (status)
+    {
+        case NotReachable:
+        {
+            NSLog(@"The internet is down.");
+            break;
+			
+        }
+        case ReachableViaWiFi:
+        {
+            NSLog(@"The internet is working via WIFI.");
+            break;
+			
+        }
+        case ReachableViaWWAN:
+        {
+            NSLog(@"The internet is working via WWAN.");
+			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Warning" message:@"You are currently not on WiFi. Playing youtube videos will use up your data!" cancelButtonItem:[UIAlertButtonItem itemWithLabel:@"OK" action:^{
+				//Do nothing
+			}] otherButtonItems: nil];
+			
+			[alert show];
+            break;
+			
+        }
+    }
 	
 }
 
