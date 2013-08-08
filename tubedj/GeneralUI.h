@@ -11,6 +11,8 @@
 #import	"UIColor+AppColours.h"
 #import	"JHFontAwesome.h"
 
+#define IS_IPHONE5 (([[UIScreen mainScreen] bounds].size.height-568)?NO:YES)
+
 @interface GeneralUI : NSObject
 
 //Loading

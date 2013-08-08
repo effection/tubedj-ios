@@ -85,7 +85,13 @@
 	[self.scrollView addSubview:searchView];
 	[self.scrollView addSubview:playlistView];
 	
-	NSNumber *remainingHeight = [NSNumber numberWithFloat:self.view.bounds.size.height-self.youtubePlayer.bounds.size.height];
+	NSNumber *remainingHeight;
+	
+	if(IS_IPHONE5) {
+		remainingHeight = [NSNumber numberWithFloat:548-self.youtubePlayer.bounds.size.height - 44];
+	} else {
+		remainingHeight = [NSNumber numberWithFloat:460-self.youtubePlayer.bounds.size.height - 44];
+	}
 	originalYoutubePlayerHeightConstant = self.youtubePlayerHeightConstraint.constant;
 	
 	
@@ -173,16 +179,18 @@
 			{
 				//Do nothing
 			} else {
-				//TODO Stop current song and play new song
+				//Stop current song and play new song
+				[self stopCurrentSong];
+				[self playSong:song];
 			}
 		} else {
-			//TODO Stop current song
+			//Stop current song
+			[self stopCurrentSong];
 		}
 		
 	} else {
 		//Do nothing
 	}
-	//[self.tableView reloadData];
 }
 
 - (void)tubedjPlaylistAddedSong:(NSNotification *) notification
@@ -237,13 +245,15 @@
 		JHPlaylistItem *song = [[JHTubeDjManager sharedManager].playlist objectAtIndex:0];
 		if(!song ||!song.isYoutube)
 		{
-			//TODO error
+			//Silently fail - shouldn't happen and nothing we can do about it
 			return;
 		}
 		[self.youtubePlayer loadYoutubeVideo:song.songId];
 		
 	} error:^(NSError *error) {
-		//TODO error
+		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Ooops" message:@"Sorry, we couldn't find the next song to play" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+		
+		[alert show];
 	}];
 }
 
@@ -254,7 +264,7 @@
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-	[self.navigationController popToRootViewControllerAnimated:YES];//TODO Not always leave room
+	//[self.navigationController popToRootViewControllerAnimated:YES];// Not leave room
 }
 
 #pragma mark - JHYoutubePlayerDelegate
@@ -274,7 +284,7 @@
 			 [[JHTubeDjManager sharedManager] removeSongFromPlaylist:song.uid success:^(int uid) {
 				 
 			 } error:^(NSError *error) {
-				 
+				 //Silently fail
 			 }];
 		 }
 	}
@@ -343,7 +353,7 @@
 		[[JHTubeDjManager sharedManager] leaveRoomWithSuccess:^(NSString *roomId) {
 			[self.navigationController popToRootViewControllerAnimated:YES];
 		} error:^(NSError *error) {
-			//TODO
+			//Silently fail
 		}];
 
     }];
@@ -355,7 +365,7 @@
         [menu hide];
     }];
 	
-    _sideMenu = [[RESideMenu alloc] initWithJHItems:@[@[stopServerItem, nameItem, musicItem, youtubeItem], userItems]];
+    _sideMenu = [[RESideMenu alloc] initWithJHItems:@[@[stopServerItem, nameItem], userItems]];
 	UIImage *img = [UIImage imageNamed:@"menu-bg"];
 	_sideMenu.backgroundImage = img;
     _sideMenu.verticalOffset = IS_WIDESCREEN ? 160 : 126;

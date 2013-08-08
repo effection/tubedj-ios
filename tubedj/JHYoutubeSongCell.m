@@ -73,6 +73,14 @@
 	self.isPlaying = NO;
 	self.isPerformingAction = NO;
 	self.animationDuration = 0.2;
+	
+	self.titleLabel.textColor = [UIColor app_offWhite];
+	self.ownerLabel.textColor = [UIColor app_lightGrey];
+	self.ageLabel.textColor = [UIColor app_lightGrey];
+	self.titleLabel.alpha = 1;
+	self.ownerLabel.alpha = 1;
+	self.ageLabel.alpha = 1;
+	self.previewImage.alpha = 1;
 }
 
 -(BOOL)gestureRecognizerShouldBegin:(UIPanGestureRecognizer *)panGestureRecognizer

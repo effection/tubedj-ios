@@ -154,7 +154,6 @@ NSString * const CellIdentifier = @"JHYoutubeSongCell";
 	cell.ownerLabel.text = searchItem.author;
 	cell.ageLabel.text = [[SORelativeDateTransformer registeredTransformer] transformedValue:searchItem.date];
 	cell.actionSuccessful = [addedItems containsObject:searchItem.id];
-	NSLog(@"%i", cell.actionSuccessful);
 	cell.revealDirection = ([addedItems containsObject:searchItem.id]) ? RMSwipeTableViewCellRevealDirectionNone : RMSwipeTableViewCellRevealDirectionLeft;
 	cell.actionDelegate = self;
 	[cell.previewImage setImageWithURL:searchItem.thumbnailUrl];
@@ -162,6 +161,8 @@ NSString * const CellIdentifier = @"JHYoutubeSongCell";
 	if(!searchItem.canPlayOnDevice) {
 		cell.revealDirection = RMSwipeTableViewCellRevealDirectionNone;
 		cell.ageLabel.text = @"Can't play on host device";
+		cell.ageLabel.textColor = [UIColor app_red];
+		cell.ageLabel.alpha = 0.2;
 		cell.titleLabel.alpha = 0.2;
 		cell.previewImage.alpha = 0.2;
 	}

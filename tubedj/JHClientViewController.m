@@ -82,9 +82,18 @@
 	[self.scrollView addSubview:playlistView];
 	
 	
+	NSNumber *remainingHeight;
+	
+	if(IS_IPHONE5) {
+		remainingHeight = [NSNumber numberWithFloat:548 - 44];
+	} else {
+		remainingHeight = [NSNumber numberWithFloat:460 - 44];
+	}
+	
+	
 	[self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[searchView(320)][playlistView(320)]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(searchView,playlistView)]];
-	[self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[searchView(460)]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(searchView)]];
-	[self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[playlistView(460)]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(playlistView)]];
+	[self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[searchView(remainingHeight)]|" options:0 metrics:NSDictionaryOfVariableBindings(remainingHeight) views:NSDictionaryOfVariableBindings(searchView)]];
+	[self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[playlistView(remainingHeight)]|" options:0 metrics:NSDictionaryOfVariableBindings(remainingHeight) views:NSDictionaryOfVariableBindings(playlistView)]];
 	[self.view updateConstraints];
 	[self.view layoutIfNeeded];
 	
@@ -123,8 +132,6 @@
 			
 			
 		} error:^(NSError *error) {
-			
-			//TODO Error
 			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Ooops" message:@"Sorry, we couldn't find that room" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
 			
 			[alert show];
@@ -198,7 +205,7 @@
 		[[JHTubeDjManager sharedManager] leaveRoomWithSuccess:^(NSString *roomId) {
 			[self.navigationController popToRootViewControllerAnimated:YES];
 		} error:^(NSError *error) {
-			//TODO
+			//Let user stay in until they close app
 		}];
 		
         /*
@@ -254,8 +261,7 @@
 	reader.showsZBarControls = NO;
 	reader.wantsFullScreenLayout = NO;
     ZBarImageScanner *scanner = reader.scanner;
-    // TODO: (optional) additional reader configuration here
-	
+
     // EXAMPLE: disable rarely used I2/5 to improve performance
     [scanner setSymbology: ZBAR_I25
 				   config: ZBAR_CFG_ENABLE

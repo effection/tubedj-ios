@@ -86,11 +86,9 @@
 			NSString *published = [results[i] valueForKeyPath:@"published.$t"];
 			searchResultItem.date = [dateFormat dateFromString:published];
 			NSString *thumbnailUrl = [results[i] valueForKeyPath:@"media$group.media$thumbnail.url"][0];
-			
-			BOOL canPlayOnDevice = YES;
-			
+
 			NSString *errorState = [results[i] valueForKeyPath:@"app$control.yt$state"];
-			searchResultItem.canPlayOnDevice = errorState == nil;
+			searchResultItem.canPlayOnDevice = errorState == nil;//TODO If desktops are supported send server's device type so this can accomodate what the server can play
 			
 			NSURL *href = [[NSURL alloc] initWithString:[results[i] valueForKeyPath:@"link.href"][0]];
 			searchResultItem.videoUrl = href;
@@ -120,7 +118,7 @@
 		
 	} failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
 		NSLog(@"Youtube search error");
-	}];//TODO Failure
+	}];//TODO Youtube search Failure
 	
 	[operation start];
 }

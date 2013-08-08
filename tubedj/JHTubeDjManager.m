@@ -110,7 +110,18 @@
 
 - (void)createUser:(NSString *)name success:(void (^)(NSString *userId, NSString *name))successBlock error:(void (^)(NSError *error))errorBlock
 {
-	//TODO Sanatise name
+	if(name.length <3 || name.length > 10)
+	{
+		if(errorBlock) errorBlock([[NSError alloc] init]);
+	}
+	NSMutableCharacterSet* testCharSet = [[NSMutableCharacterSet alloc] init];
+	[testCharSet formUnionWithCharacterSet:[NSCharacterSet alphanumericCharacterSet]];
+	[testCharSet formUnionWithCharacterSet:[NSCharacterSet nonBaseCharacterSet]];
+	[testCharSet formUnionWithCharacterSet:[NSCharacterSet whitespaceCharacterSet]];
+	
+	NSCharacterSet *charactersToRemove = [testCharSet invertedSet];
+	
+	name = [[ name componentsSeparatedByCharactersInSet:charactersToRemove ] componentsJoinedByString:@"" ];
 	
 	[[JHRestClient sharedClient] createUser:name success:^(NSString *userId, NSString *returnedName) {
 		self.myName = returnedName;
@@ -134,7 +145,19 @@
 
 - (void)changeUserName:(NSString *)newName success:(void (^)(NSString *userId, NSString *name))successBlock error:(void (^)(NSError *error))errorBlock
 {
-	//TODO Sanatise name
+	if(newName.length <3 || newName.length > 10)
+	{
+		if(errorBlock) errorBlock([[NSError alloc] init]);
+	}
+	NSMutableCharacterSet* testCharSet = [[NSMutableCharacterSet alloc] init];
+	[testCharSet formUnionWithCharacterSet:[NSCharacterSet alphanumericCharacterSet]];
+	[testCharSet formUnionWithCharacterSet:[NSCharacterSet nonBaseCharacterSet]];
+	[testCharSet formUnionWithCharacterSet:[NSCharacterSet whitespaceCharacterSet]];
+	
+	NSCharacterSet *charactersToRemove = [testCharSet invertedSet];
+	
+	newName = [[ newName componentsSeparatedByCharactersInSet:charactersToRemove ] componentsJoinedByString:@"" ];
+	
 	[[JHRestClient sharedClient] changeName:newName success:^(NSString *userId, NSString *name) {
 		self.myName = name;
 		
@@ -176,7 +199,11 @@
 
 - (void)joinRoom:(NSString *)roomId success:(void (^)(NSString *roomId, NSString *ownerId, NSDictionary *users, NSArray *playlist))successBlock error:(void (^)(NSError *error))errorBlock
 {
-	//TODO Sanatise roomId
+	NSMutableCharacterSet* testCharSet = [[NSMutableCharacterSet alloc] init];
+	[testCharSet formUnionWithCharacterSet:[NSCharacterSet alphanumericCharacterSet]];
+	
+	NSCharacterSet *charactersToRemove = [testCharSet invertedSet];
+	roomId = [[ roomId componentsSeparatedByCharactersInSet:charactersToRemove ] componentsJoinedByString:@"" ];
 	
 	[[JHRestClient sharedClient] joinRoom:roomId success:^(NSString *roomId, NSString *ownerId, NSArray *users, NSArray *playlist) {
 		
@@ -190,6 +217,11 @@
 			JHPlaylistItem *item = [JHPlaylistItem fromJSON:playlist[i]];
 			[self.playlist addObject:item];
 		}
+		
+		JHUserItem *me = [[JHUserItem alloc] init];
+		me.userId = self.myUserId;
+		me.name = self.myName;
+		[self.users setObject:me forKey:me.userId];
 		
 		for(int i = 0; i < users.count; i++)
 		{
