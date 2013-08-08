@@ -10,9 +10,10 @@
 #import "RESideMenu.h"
 #import "JHYouTubeSearchViewController.h"
 #import "JHPlaylistViewController.h"
+#import "JHYoutubePlayer.h"
 
 #define IS_WIDESCREEN ( fabs( ( double )[ [ UIScreen mainScreen ] bounds ].size.height - ( double )568 ) < DBL_EPSILON )
-@interface JHServerViewController : UIViewController <JHYoutubeSearchViewControllerDelegate, JHPlaylistViewControllerDelegate>
+@interface JHServerViewController : UIViewController <JHYoutubeSearchViewControllerDelegate, JHPlaylistViewControllerDelegate, JHYoutubePlayerDelegate>
 @property (strong, readonly, nonatomic) RESideMenu *sideMenu;
 
 @property (nonatomic, readwrite) BOOL isPlaying;

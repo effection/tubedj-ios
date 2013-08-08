@@ -8,8 +8,22 @@
 
 #import <UIKit/UIKit.h>
 
-@interface JHYoutubePlayer : UIWebView
+@class JHYoutubePlayer;
+
+@protocol JHYoutubePlayerDelegate <NSObject>
+
+@optional
+
+- (void)youtubePlayer:(JHYoutubePlayer *)player songEnded:(NSString *)videoId;
+
+@end
+
+@interface JHYoutubePlayer : UIWebView <UIWebViewDelegate>
+
+@property (nonatomic, readonly) NSString *videoId;
+@property (nonatomic, assign) id<JHYoutubePlayerDelegate> playerDelegate;
 
 - (void)loadYoutubeVideo:(NSString *)videoId;
+- (void)playYoutubeVideo;
 - (void)pauseYoutubeVideo;
 @end

@@ -14,7 +14,7 @@
 #import "JHQRCodeViewController.h"
 #import "JHStandardYoutubeViewController.h"
 #import "JHTubeDjManager.h"
-#import "JHYoutubePlayer.h"
+
 
 @interface JHServerViewController ()
 @property (weak, nonatomic) IBOutlet JHYoutubePlayer *youtubePlayer;
@@ -68,7 +68,7 @@
 	self.view.backgroundColor = [UIColor app_darkGrey];
 	
 	self.scrollView.backgroundColor = [UIColor clearColor];
-	
+	self.youtubePlayer.playerDelegate = self;
 	self.youtubeSearchController = [GeneralUI loadController:[JHYouTubeSearchViewController class]];
 	self.youtubeSearchController.delegate = self;
 	self.playlistController = [GeneralUI loadController:[JHPlaylistViewController class]];
@@ -218,6 +218,16 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
 	[self.navigationController popToRootViewControllerAnimated:YES];//TODO Not always leave room
+}
+
+#pragma mark - JHYoutubePlayerDelegate
+
+- (void)youtubePlayer:(JHYoutubePlayer *)player songEnded:(NSString *)videoId
+{
+	if([JHTubeDjManager sharedManager].playlist.count > 1)
+		[self playNextSong];
+	else
+		NSLog(@"No more songs in playlist");
 }
 
 #pragma mark - JHYoutubeSearchViewControllerDelegate

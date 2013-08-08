@@ -33,19 +33,48 @@
 
 - (void)commonInit
 {
+	self.delegate = self;
 	self.backgroundColor = [UIColor app_darkGrey];
 	self.scrollView.bounces = NO;
 	self.mediaPlaybackRequiresUserAction = NO;
 	self.allowsInlineMediaPlayback = YES;
+	
+	[self loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"YT_Player" ofType:@"html"] isDirectory:NO]]];
 }
 
 - (void)loadYoutubeVideo:(NSString *)videoId
 {
-	[self loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"YT_Player" ofType:@"html"] isDirectory:NO]]];
+	_videoId = videoId;
+	NSLog(@"%@",[self stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"APP_loadVideoById('%@');", videoId]]);
+}
+
+- (void)playYoutubeVideo
+{
+	[self stringByEvaluatingJavaScriptFromString:@"APP_playVideo();"];
 }
 
 - (void)pauseYoutubeVideo
 {
+	[self stringByEvaluatingJavaScriptFromString:@"APP_pauseVideo();"];
+}
+
+
+
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
+{
+	NSString *url = [[request URL] absoluteString];
+	NSLog(@"URL %@", url);
+    if ([url hasPrefix:@"tubedjapp:"]) {
+		NSString *event = [url substringFromIndex:10];
+		if([event isEqualToString:@"song-ended"])
+		{
+			if([self.playerDelegate respondsToSelector:@selector(youtubePlayer:songEnded:)])
+			   [self.playerDelegate youtubePlayer:self songEnded:self.videoId];
+		}
+		
+        return NO;
+    }
+    return YES;
 	
 }
 

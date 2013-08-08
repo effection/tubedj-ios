@@ -13,12 +13,13 @@
     </body>
     <script>
         var ytPlayer = null;
+		var xmlhttp=new XMLHttpRequest();
         
         function onYouTubePlayerAPIReady() {
             ytPlayer = new YT.Player('media_area', {
 										 height: '200',
 										 width: '320',
-										 videoId: 'SbPFDcspRBA',
+										 videoId: '',
 										 playerVars: {
 											playsinline: 1,
 											autoplay: 1
@@ -39,33 +40,38 @@
             var state = e.data;
 			switch(state) {
 				case YT.PlayerState.PLAYING:
+					window.location = "tubedjapp:song-playing";
 				break;
 				case YT.PlayerState.PAUSED:
+					window.location = "tubedjapp:song-paused";
 				break;
 				case YT.PlayerState.BUFFERING:
+					window.location = "tubedjapp:song-buffering";
 				break;
 				case YT.PlayerState.CUED:
+					window.location = "tubedjapp:song-cued";
 				break;
 				case YT.PlayerState.ENDED:
-					
+					window.location = "tubedjapp:song-ended";
 				break;
 			};
         }
 		
-		function APP_loadVideoById(videoid) {
-			player.loadVideoById(videoId, 0, 'large');
+		function APP_loadVideoById(videoId) {
+			ytPlayer.loadVideoById(videoId, 0, 'large');
+			console.log('loaded');
 		}
 		
 		function APP_playVideo() {
-			player.playVideo();
+			ytPlayer.playVideo();
 		}
 		
 		function APP_pauseVideo() {
-			player.pauseVideo();
+			ytPlayer.pauseVideo();
 		}
 		
 		function APP_stopVideo() {
-			player.stopVideo();
+			ytPlayer.stopVideo();
 		}
 		
         </script>
