@@ -158,7 +158,7 @@
 		//Song request successful. WebSocket should make table update
 		
 	} error:^(NSError *error) {
-		cell.isSwipeable = YES;
+		cell.actionSuccessful = NO;
 		cell.isPerformingAction = NO;
 	}];
 }
@@ -168,13 +168,13 @@
 	NSIndexPath *indexPath = [self.playlistController.tableView indexPathForCell:cell];
 	if(indexPath.row == 0) {
 		//Can't remove currently playing song
-		cell.isSwipeable = YES;
+		cell.actionSuccessful = NO;
 		cell.isPerformingAction = NO;
 	} else {
 		[[JHTubeDjManager sharedManager] removeSongFromPlaylist:uid success:^(int uid) {
 			
 		} error:^(NSError *error) {
-			cell.isSwipeable = YES;
+			cell.actionSuccessful = NO;
 			cell.isPerformingAction = NO;
 		}];
 	}

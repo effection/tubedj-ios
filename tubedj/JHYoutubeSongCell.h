@@ -28,7 +28,7 @@
 
 @property (nonatomic, readwrite) BOOL canDelete;
 
-@property (nonatomic, readwrite) BOOL isSwipeable;
+@property (nonatomic, readwrite) BOOL actionSuccessful;
 
 @property (nonatomic, readwrite) BOOL isPlaying;
 

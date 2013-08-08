@@ -14,6 +14,7 @@
     <script>
         var ytPlayer = null;
 		var xmlhttp=new XMLHttpRequest();
+		var buffering = false;
         
         function onYouTubePlayerAPIReady() {
             ytPlayer = new YT.Player('media_area', {
@@ -38,6 +39,7 @@
 		
 		function onPlayerStateChange(e) {
             var state = e.data;
+			console.log(state);
 			switch(state) {
 				case YT.PlayerState.PLAYING:
 					window.location = "tubedjapp:song-playing";
@@ -46,6 +48,7 @@
 					window.location = "tubedjapp:song-paused";
 				break;
 				case YT.PlayerState.BUFFERING:
+					buffering = true;
 					window.location = "tubedjapp:song-buffering";
 				break;
 				case YT.PlayerState.CUED:
@@ -53,6 +56,9 @@
 				break;
 				case YT.PlayerState.ENDED:
 					window.location = "tubedjapp:song-ended";
+				case -1:
+					console.log(buffering);
+					if(buffering) window.location = "tubedjapp:song-ended";
 				break;
 			};
         }

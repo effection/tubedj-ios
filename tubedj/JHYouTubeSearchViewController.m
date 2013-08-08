@@ -153,10 +153,21 @@ NSString * const CellIdentifier = @"JHYoutubeSongCell";
 	cell.titleLabel.text = searchItem.title;
 	cell.ownerLabel.text = searchItem.author;
 	cell.ageLabel.text = [[SORelativeDateTransformer registeredTransformer] transformedValue:searchItem.date];
-	cell.isSwipeable = ![addedItems containsObject:searchItem.id];
+	cell.actionSuccessful = [addedItems containsObject:searchItem.id];
+	NSLog(@"%i", cell.actionSuccessful);
+	cell.revealDirection = ([addedItems containsObject:searchItem.id]) ? RMSwipeTableViewCellRevealDirectionNone : RMSwipeTableViewCellRevealDirectionLeft;
 	cell.actionDelegate = self;
 	[cell.previewImage setImageWithURL:searchItem.thumbnailUrl];
 	
+	if(!searchItem.canPlayOnDevice) {
+		cell.revealDirection = RMSwipeTableViewCellRevealDirectionNone;
+		cell.ageLabel.text = @"Can't play on host device";
+		cell.titleLabel.alpha = 0.2;
+		cell.previewImage.alpha = 0.2;
+	}
+	
+	[cell.ageLabel sizeToFit];
+	[cell.ownerLabel sizeToFit];
 	
 	if(indexPath.row >= youtubeClient.searchResults.count -1)
 	{

@@ -19,4 +19,6 @@
 @property (strong, nonatomic) NSURL *videoUrl;
 @property (strong, nonatomic) NSURL *thumbnailUrl;
 
+@property (nonatomic, readwrite) BOOL canPlayOnDevice;
+
 @end

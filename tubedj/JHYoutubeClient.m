@@ -60,7 +60,7 @@
 	search = [search stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     
     //make HTTP call
-    NSString* searchCall = [NSString stringWithFormat:@"http://gdata.youtube.com/feeds/api/videos?q=%@&start-index=%i&max-results=%i&alt=json&v=2&safeSearch=none", search, start, max];
+    NSString* searchCall = [NSString stringWithFormat:@"http://gdata.youtube.com/feeds/api/videos?q=%@&start-index=%i&max-results=%i&alt=json&v=2&safeSearch=none", search, start, max];//restriction=EN?
 	
 	NSURL *url = [NSURL URLWithString:searchCall];
 	NSURLRequest *request = [NSURLRequest requestWithURL:url];
@@ -83,6 +83,10 @@
 			searchResultItem.date = [dateFormat dateFromString:published];
 			NSString *thumbnailUrl = [results[i] valueForKeyPath:@"media$group.media$thumbnail.url"][0];
 			
+			BOOL canPlayOnDevice = YES;
+			
+			NSString *errorState = [results[i] valueForKeyPath:@"app$control.yt$state"];
+			searchResultItem.canPlayOnDevice = errorState == nil;
 			
 			NSURL *href = [[NSURL alloc] initWithString:[results[i] valueForKeyPath:@"link.href"][0]];
 			searchResultItem.videoUrl = href;

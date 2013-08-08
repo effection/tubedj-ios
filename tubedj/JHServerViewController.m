@@ -262,9 +262,22 @@
 - (void)youtubePlayer:(JHYoutubePlayer *)player songEnded:(NSString *)videoId
 {
 	if([JHTubeDjManager sharedManager].playlist.count > 1)
+	{
 		[self playNextSong];
+	}
 	else
-		NSLog(@"No more songs in playlist");
+	{
+		 NSLog(@"No more songs in playlist");
+		 if([JHTubeDjManager sharedManager].playlist.count == 1)
+		 {
+			 JHPlaylistItem *song = [JHTubeDjManager sharedManager].playlist[0];
+			 [[JHTubeDjManager sharedManager] removeSongFromPlaylist:song.uid success:^(int uid) {
+				 
+			 } error:^(NSError *error) {
+				 
+			 }];
+		 }
+	}
 }
 
 #pragma mark - JHYoutubeSearchViewControllerDelegate
@@ -284,7 +297,7 @@
 		//Song request successful. WebSocket should make table update
 		
 	} error:^(NSError *error) {
-		cell.isSwipeable = YES;
+		cell.actionSuccessful = NO;
 		cell.isPerformingAction = NO;
 	}];
 }
@@ -299,7 +312,7 @@
 		[[JHTubeDjManager sharedManager] removeSongFromPlaylist:uid success:^(int uid) {
 			
 		} error:^(NSError *error) {
-			cell.isSwipeable = YES;
+			cell.actionSuccessful = NO;
 			cell.isPerformingAction = NO;
 		}];
 	}

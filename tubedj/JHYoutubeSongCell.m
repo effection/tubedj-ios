@@ -53,7 +53,7 @@
 	self.backView = self.addBackground = [GeneralUI loadViewFromNib:[JHYoutubeSongCellBackgroundView class]];
 	
 	self.revealDirection = RMSwipeTableViewCellRevealDirectionLeft;
-	self.isSwipeable = YES;
+	self.actionSuccessful = NO;
 	
 	self.playIndicator = [[UIImageView alloc] initWithFrame:CGRectMake(273, 35, 47, 47)];
 	self.playIndicator.image = [UIImage imageNamed:@"play-indicator"];
@@ -62,13 +62,14 @@
 	self.playIndicator.clipsToBounds = YES;
 	[self.contentView addSubview:self.playIndicator];
 	self.playIndicator.hidden = YES;
+	self.canDelete = NO;
 	
 }
 
 - (void)prepareForReuse
 {
 	[super prepareForReuse];
-	self.isSwipeable = YES;
+	self.actionSuccessful = NO;
 	self.isPlaying = NO;
 	self.isPerformingAction = NO;
 	self.animationDuration = 0.2;
@@ -76,7 +77,7 @@
 
 -(BOOL)gestureRecognizerShouldBegin:(UIPanGestureRecognizer *)panGestureRecognizer
 {
-	if(!self.isSwipeable) return NO;
+	if(self.actionSuccessful) return NO;
 	
 	return [super gestureRecognizerShouldBegin:panGestureRecognizer];
 }
@@ -93,7 +94,7 @@
 		if(alpha < 1)
 			self.addBackground.addButton.titleLabel.textColor = [UIColor app_lightGrey];
 		else {
-			self.isSwipeable = NO;
+			self.actionSuccessful = YES;
 			
 			self.addBackground.addButton.titleLabel.textColor = [UIColor app_red];
 			self.animationDuration = 0.6;
@@ -109,7 +110,7 @@
 		if(alpha < 1)
 			self.addBackground.addButton.titleLabel.textColor = [UIColor app_lightGrey];
 		else {
-			self.isSwipeable = NO;
+			self.actionSuccessful = YES;
 			
 			self.addBackground.addButton.titleLabel.textColor = [UIColor app_green];
 			self.animationDuration = 0.6;
@@ -141,24 +142,24 @@
 	self.addBackground.canDelete = canDelete;
 }
 
-- (void)setIsSwipeable:(BOOL)isSwipeable
-{
-	_isSwipeable = isSwipeable;
-	[UIView animateWithDuration:0.3f
-					 animations:^{
-						 float alpha = (isSwipeable ? 1.0f : 0.4f);
-						 self.previewImage.alpha = alpha;
-						 self.titleLabel.alpha = alpha;
-						 self.ownerLabel.alpha = alpha;
-						 self.ageLabel.alpha = alpha;
-						 self.titleLabel.textColor = (isSwipeable ? [UIColor app_offWhite] : (self.canDelete ? [UIColor app_red] : [UIColor app_green]));
-					 }];
-}
-
 - (void)setIsPlaying:(BOOL)isPlaying
 {
 	_isPlaying = isPlaying;
 	self.playIndicator.hidden = !_isPlaying;
+}
+
+- (void)setActionSuccessful:(BOOL)actionSuccessful
+{
+	_actionSuccessful = actionSuccessful;
+	[UIView animateWithDuration:0.3f
+					 animations:^{
+						 float alpha = (!actionSuccessful ? 1.0f : 0.4f);
+						 self.previewImage.alpha = alpha;
+						 self.titleLabel.alpha = alpha;
+						 self.ownerLabel.alpha = alpha;
+						 self.ageLabel.alpha = alpha;
+						 self.titleLabel.textColor = (!actionSuccessful ? [UIColor app_offWhite] : (self.canDelete ? [UIColor app_red] : [UIColor app_green]));
+					 }];
 }
 
 
