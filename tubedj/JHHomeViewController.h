@@ -8,8 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "ZBarSDK.h"
+#import "RESideMenu.h"
 
 @interface JHHomeViewController : UIViewController <ZBarReaderDelegate>
+
+@property (strong, readonly, nonatomic) RESideMenu *sideMenu;
+
 - (IBAction)createButtonPressed:(UIButton *)sender;
 - (IBAction)joinButtonPressed:(UIButton *)sender;
 

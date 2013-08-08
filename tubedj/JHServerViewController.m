@@ -15,6 +15,7 @@
 #import "JHStandardYoutubeViewController.h"
 #import "JHTubeDjManager.h"
 #import "UIAlertView+Blocks.h"
+#import "UIViewController+FakeModal.h"
 
 
 @interface JHServerViewController ()
@@ -164,6 +165,17 @@
     }];
 }
 
+- (void)showQRCode
+{
+	JHQRCodeViewController *qrViewController = [GeneralUI loadController:[JHQRCodeViewController class]];
+	UINavigationController *extraNavController = [[UINavigationController alloc] initWithRootViewController:qrViewController];
+	[self.navigationController presentViewController:extraNavController animated:YES completion:nil];
+	[qrViewController setCode:[JHTubeDjManager sharedManager].roomId];
+}
+
+
+#pragma mark -TubeDj
+
 - (void)tubedjRequestErrorNotification:(NSNotification *) notification
 {
 	
@@ -265,11 +277,6 @@
 	[self.youtubePlayer pauseYoutubeVideo];
 }
 
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-	//[self.navigationController popToRootViewControllerAnimated:YES];// Not leave room
-}
-
 #pragma mark - JHYoutubePlayerDelegate
 
 - (void)youtubePlayer:(JHYoutubePlayer *)player songEnded:(NSString *)videoId
@@ -343,9 +350,6 @@
 {
 	[self.view endEditing:YES];
 	
-	RESideMenuItem *nameItem = [[RESideMenuItem alloc] initWithTitle:[JHTubeDjManager sharedManager].myName prefix:[JHFontAwesome standardIcon:FontAwesome_Pencil] ofSize:28.0f ofColour:[UIColor app_offWhite] action:^(RESideMenu *menu, RESideMenuItem *item) {
-        [menu hide];
-    }];
 	
 	NSMutableArray *userItems = [[NSMutableArray alloc] initWithCapacity:[JHTubeDjManager sharedManager].users.count];
 	
@@ -360,6 +364,8 @@
 	
 	RESideMenuItem *stopServerItem = [[RESideMenuItem alloc] initWithTitle:@"stop server" prefix:[JHFontAwesome standardIcon:FontAwesome_Cloud] ofSize:23.0f ofColour:[UIColor app_red] action:^(RESideMenu *menu, RESideMenuItem *item) {
         [menu hide];
+		[self stopCurrentSong];
+		self.youtubePlayer = nil;
 		
 		[[JHTubeDjManager sharedManager] leaveRoomWithSuccess:^(NSString *roomId) {
 			[self.navigationController popToRootViewControllerAnimated:YES];
@@ -376,7 +382,7 @@
         [menu hide];
     }];
 	
-    _sideMenu = [[RESideMenu alloc] initWithJHItems:@[@[stopServerItem, nameItem], userItems]];
+    _sideMenu = [[RESideMenu alloc] initWithJHItems:@[@[stopServerItem], userItems]];
 	UIImage *img = [UIImage imageNamed:@"menu-bg"];
 	_sideMenu.backgroundImage = img;
     _sideMenu.verticalOffset = IS_WIDESCREEN ? 160 : 126;

@@ -53,6 +53,19 @@
 	[self.joinRoomButton setTitleColor:[UIColor app_offWhite] forState:UIControlStateSelected];
 	[self.joinRoomButton setTitleColor:[UIColor app_offWhite] forState:UIControlStateSelected | UIControlStateHighlighted];
 	
+	//Navigation items
+	
+	UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 40, 50)];
+	[button setTitle:[JHFontAwesome standardIcon:FontAwesome_Reorder] forState:UIControlStateNormal];
+	[button setTitleColor:[UIColor app_blue] forState:UIControlStateNormal];
+	button.titleLabel.font = [UIFont fontAwesomeWithSize:28.0];
+	[button addTarget:self action:@selector(showMenu) forControlEvents:UIControlEventTouchUpInside];
+	
+	UIBarButtonItem *customItem = [[UIBarButtonItem alloc] initWithCustomView:button];
+	self.navigationController.visibleViewController.navigationItem.leftBarButtonItem = customItem;
+	self.navigationItem.hidesBackButton = YES;
+	
+	
 	[[JHTubeDjManager sharedManager] loadAndCheckUserDetailsWithSuccess:^(BOOL found, BOOL valid) {
 		if(!found || !valid) {
 			
@@ -117,6 +130,32 @@
 	}];
 }
 
+- (void)showMenu
+{
+	[self.view endEditing:YES];
+	
+	RESideMenuItem *nameItem = [[RESideMenuItem alloc] initWithTitle:[JHTubeDjManager sharedManager].myName prefix:[JHFontAwesome standardIcon:FontAwesome_Pencil] ofSize:28.0f ofColour:[UIColor app_offWhite] action:^(RESideMenu *menu, RESideMenuItem *item) {
+        [menu hide];
+    }];
+	
+	RESideMenuItem *musicItem = [[RESideMenuItem alloc] initWithTitle:@"music library" prefix:[JHFontAwesome standardIcon:FontAwesome_HDD] ofSize:28.0f ofColour:[UIColor app_offWhite] action:^(RESideMenu *menu, RESideMenuItem *item) {
+        [menu hide];
+    }];
+	RESideMenuItem *youtubeItem = [[RESideMenuItem alloc] initWithTitle:@"youtube" prefix:[JHFontAwesome standardIcon:FontAwesome_FacetimeVideo] ofSize:23.0f ofColour:[UIColor app_green] action:^(RESideMenu *menu, RESideMenuItem *item) {
+        [menu hide];
+    }];
+	
+    _sideMenu = [[RESideMenu alloc] initWithJHItems:@[@[ nameItem], @[musicItem, youtubeItem]]];
+	UIImage *img = [UIImage imageNamed:@"menu-bg"];
+	_sideMenu.backgroundImage = img;
+    _sideMenu.verticalOffset = IS_WIDESCREEN ? 160 : 126;
+	_sideMenu.itemHeight = 40.0;
+	_sideMenu.font = [UIFont helveticaNeueRegularWithSize:22.0];
+	_sideMenu.textColor = [UIColor app_offWhite];
+    //_sideMenu.hideStatusBarArea = [[[UIApplication sharedApplication] delegate] OSVersion] < 7;
+    [_sideMenu show];
+}
+
 - (void)showQRCodeReader
 {
 	ZBarReaderViewController *reader = [ZBarReaderViewController new];
@@ -152,6 +191,8 @@
     id<NSFastEnumeration> results = [info objectForKey: ZBarReaderControllerResults];
 
     for(ZBarSymbol *symbol in results) {
+		if(symbol.data.length < 7 || symbol.data.length > 12)
+			break;
 		
 		[[JHTubeDjManager sharedManager] joinRoom:symbol.data success:^(NSString *roomId, NSString *ownerId, NSDictionary *users, NSArray *playlist) {
 			JHClientViewController *clientViewController = [GeneralUI loadController:[JHClientViewController class]];

@@ -104,7 +104,7 @@
 												 name:@"tubedj-request-error"
 											   object:nil];
 	//[self showQRCodeReader];
-	[self loadRoom:@"jTgaKskT"];
+	//[self loadRoom:@"jTgaKskT"];
 }
 
 - (void)didReceiveMemoryWarning
@@ -115,40 +115,6 @@
 - (void)tubedjRequestErrorNotification:(NSNotification *) notification
 {
 
-}
-
-
-- (BOOL)loadRoom:(NSString *)roomid
-{
-	//Sanatise
-	
-	if(roomid.length > 7 && roomid.length < 15) {
-		[[JHTubeDjManager sharedManager] joinRoom:roomid success:^(NSString *roomId, NSString *ownerId, NSDictionary *users, NSArray *playlist) {
-			
-			//Populate playlist controller
-			//self.playlistController
-			
-			//Populate users menu
-			
-			
-		} error:^(NSError *error) {
-			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Ooops" message:@"Sorry, we could't find that room" cancelButtonItem:[UIAlertButtonItem itemWithLabel:@"OK" action:^{
-					[self.navigationController popToRootViewControllerAnimated:YES];
-			}] otherButtonItems: nil];
-				
-			[alert show];
-
-			
-		}];
-		return YES;
-	}
-	
-	return NO;
-}
-
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-	//TODO Not always leave room
 }
 
 #pragma mark - JHYoutubeSearchViewControllerDelegate

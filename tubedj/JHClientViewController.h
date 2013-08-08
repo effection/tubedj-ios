@@ -18,6 +18,4 @@
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (strong, readonly, nonatomic) RESideMenu *sideMenu;
 
-- (void)showQRCodeReader;
-
 @end
