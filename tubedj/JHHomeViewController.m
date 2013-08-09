@@ -101,13 +101,13 @@
 		JHClientViewController *clientViewController = [GeneralUI loadController:[JHClientViewController class]];
 		[self.navigationController pushViewController:clientViewController animated:YES];
 	} else {
-		//[self showQRCodeReader];
-		[[JHTubeDjManager sharedManager] joinRoom:@"iLzxtazT" success:^(NSString *roomId, NSString *ownerId, NSDictionary *users, NSArray *playlist) {
+		[self showQRCodeReader];
+		/*[[JHTubeDjManager sharedManager] joinRoom:@"iLzxtazT" success:^(NSString *roomId, NSString *ownerId, NSDictionary *users, NSArray *playlist) {
 			JHClientViewController *clientViewController = [GeneralUI loadController:[JHClientViewController class]];
 			[self.navigationController pushViewController:clientViewController animated:YES];
 		} error:^(NSError *error) {
 			
-		}];
+		}];*/
 	}
 }
 
@@ -151,12 +151,11 @@
 - (void)showMenu
 {
 	[self.view endEditing:YES];
-	NSString *currentName = [NSString stringWithString:[JHTubeDjManager sharedManager].myName];
-	
+
 	RESideMenuItem *nameItem = [[RESideMenuItem alloc] initWithTitle:[JHTubeDjManager sharedManager].myName isEditable:YES prefix:[JHFontAwesome standardIcon:FontAwesome_Pencil] ofSize:28.0f ofColour:[UIColor app_offWhite] action:nil editAction:^(RESideMenu *menu, RESideMenuItem *item, UITextField *textField) {
 		
 		NSString *newName = textField.text;
-		if(newName.length < 3 || newName.length > 10) return;
+		if(newName.length < USERNAME_MIN_LENGTH || newName.length > USERNAME_MAX_LENGTH) return;
 		
 		[[JHTubeDjManager sharedManager] changeUserName:newName success:^(NSString *userId, NSString *name) {
 			[menu hide];

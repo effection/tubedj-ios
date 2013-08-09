@@ -39,12 +39,14 @@
     // Dispose of any resources that can be recreated.
 }
 
+
+
 - (IBAction)doneButtonPressed:(UIButton *)sender {
 	NSString *name = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
 	
 	[[JHTubeDjManager sharedManager] createUser:name success:^(NSString *userId, NSString *name) {
 		
-		if(!userId || !name || name.length < 3) return;
+		if(!userId || !name || name.length < USERNAME_MIN_LENGTH || name.length > USERNAME_MAX_LENGTH) return;
 		
 		[[JHTubeDjManager sharedManager] saveDetails];
 		[[NSUserDefaults standardUserDefaults] setObject:@(NO) forKey:@"firstRun"];

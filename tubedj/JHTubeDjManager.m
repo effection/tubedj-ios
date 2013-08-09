@@ -173,10 +173,15 @@
 
 - (void)createUser:(NSString *)name success:(void (^)(NSString *userId, NSString *name))successBlock error:(void (^)(NSError *error))errorBlock
 {
-	if(name.length <3 || name.length > 10)
+	successBlock(self.myUserId, self.myName);
+	return;
+	
+	if(name.length < USERNAME_MIN_LENGTH || name.length > USERNAME_MAX_LENGTH)
 	{
 		if(errorBlock) errorBlock([[NSError alloc] init]);
+		return;
 	}
+	
 	NSMutableCharacterSet* testCharSet = [[NSMutableCharacterSet alloc] init];
 	[testCharSet formUnionWithCharacterSet:[NSCharacterSet alphanumericCharacterSet]];
 	[testCharSet formUnionWithCharacterSet:[NSCharacterSet nonBaseCharacterSet]];
@@ -208,9 +213,10 @@
 
 - (void)changeUserName:(NSString *)newName success:(void (^)(NSString *userId, NSString *name))successBlock error:(void (^)(NSError *error))errorBlock
 {
-	if(newName.length <3 || newName.length > 10)
+	if(newName.length < USERNAME_MIN_LENGTH || newName.length > USERNAME_MAX_LENGTH)
 	{
 		if(errorBlock) errorBlock([[NSError alloc] init]);
+		return;
 	}
 	NSMutableCharacterSet* testCharSet = [[NSMutableCharacterSet alloc] init];
 	[testCharSet formUnionWithCharacterSet:[NSCharacterSet alphanumericCharacterSet]];

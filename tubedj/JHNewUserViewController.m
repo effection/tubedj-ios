@@ -7,10 +7,13 @@
 //
 
 #import "JHNewUserViewController.h"
+#import "JHIntroGraphicViewController.h"
 #import "JHDiscalimerViewController.h"
 
 @interface JHNewUserViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *nameTextField;
+@property (weak, nonatomic) IBOutlet UIButton *letsGetStartedButton;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *topHeightConstraint;
 
 @end
 
@@ -36,12 +39,31 @@
 	// For selecting cell.
 	gestureRecognizer.cancelsTouchesInView = NO;
 	[self.view addGestureRecognizer:gestureRecognizer];
+	
+	//Incoming animation
+	self.letsGetStartedButton.transform = CGAffineTransformMakeScale(0.5, 0.5);
+	self.letsGetStartedButton.alpha = 0.0;
+	
+	self.topHeightConstraint.constant = 0;
+	[self.view updateConstraints];
+	[self.view layoutIfNeeded];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+	self.topHeightConstraint.constant = 126;
+	[UIView animateWithDuration:0.6 animations:^{
+		self.letsGetStartedButton.transform = CGAffineTransformMakeScale(1.0, 1.0);
+		self.letsGetStartedButton.alpha = 1.0;
+		[self.view updateConstraints];
+		[self.view layoutIfNeeded];
+	}];
 }
 
 - (void) hideKeyboard {
@@ -54,10 +76,11 @@
     return YES;
 }
 - (IBAction)letsGetStartedTouched:(UIButton *)sender {
-	if(self.nameTextField.text.length > 3)
+	if(self.nameTextField.text.length >= USERNAME_MIN_LENGTH && self.nameTextField.text.length <= USERNAME_MAX_LENGTH)
 	{
 		[[NSUserDefaults standardUserDefaults] setObject:self.nameTextField.text forKey:@"username"];
-		JHDiscalimerViewController *nextPage = [GeneralUI loadController:[JHDiscalimerViewController class]];
+		//JHDiscalimerViewController *nextPage = [GeneralUI loadController:[JHDiscalimerViewController class]];
+		JHIntroGraphicViewController *nextPage = [GeneralUI loadController:[JHIntroGraphicViewController class]];
 		[self.navigationController pushViewController:nextPage animated:YES];
 	}
 }

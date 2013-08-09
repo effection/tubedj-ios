@@ -63,6 +63,16 @@
 		7C8918FB17B4572400FCF104 /* RESideMenuEditCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C8918FA17B4572400FCF104 /* RESideMenuEditCell.m */; };
 		7C8918FD17B4572E00FCF104 /* RESideMenuEditCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C8918FC17B4572E00FCF104 /* RESideMenuEditCell.xib */; };
 		7C89190017B4638F00FCF104 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C8918FF17B4638F00FCF104 /* Reachability.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		7C89190417B551A300FCF104 /* JHIntroGraphicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C89190217B551A200FCF104 /* JHIntroGraphicViewController.m */; };
+		7C89190517B551A300FCF104 /* JHIntroGraphicViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C89190317B551A200FCF104 /* JHIntroGraphicViewController.xib */; };
+		7C89195117B5539100FCF104 /* startup-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C89194917B5539100FCF104 /* startup-1.png */; };
+		7C89195217B5539100FCF104 /* startup-1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C89194A17B5539100FCF104 /* startup-1@2x.png */; };
+		7C89195317B5539100FCF104 /* startup-2.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C89194B17B5539100FCF104 /* startup-2.png */; };
+		7C89195417B5539100FCF104 /* startup-2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C89194C17B5539100FCF104 /* startup-2@2x.png */; };
+		7C89195517B5539100FCF104 /* startup-3.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C89194D17B5539100FCF104 /* startup-3.png */; };
+		7C89195617B5539100FCF104 /* startup-3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C89194E17B5539100FCF104 /* startup-3@2x.png */; };
+		7C89195717B5539100FCF104 /* startup-4.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C89194F17B5539100FCF104 /* startup-4.png */; };
+		7C89195817B5539100FCF104 /* startup-4@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C89195017B5539100FCF104 /* startup-4@2x.png */; };
 		7C90D68A17AFB7990055D876 /* gradient-bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C90D68617AFB7990055D876 /* gradient-bg.png */; };
 		7C90D68B17AFB7990055D876 /* gradient-bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C90D68717AFB7990055D876 /* gradient-bg@2x.png */; };
 		7C90D68C17AFB7990055D876 /* red-divider.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C90D68817AFB7990055D876 /* red-divider.png */; };
@@ -188,6 +198,17 @@
 		7C8918FC17B4572E00FCF104 /* RESideMenuEditCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RESideMenuEditCell.xib; sourceTree = "<group>"; };
 		7C8918FE17B4638F00FCF104 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		7C8918FF17B4638F00FCF104 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		7C89190117B551A200FCF104 /* JHIntroGraphicViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHIntroGraphicViewController.h; sourceTree = "<group>"; };
+		7C89190217B551A200FCF104 /* JHIntroGraphicViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JHIntroGraphicViewController.m; sourceTree = "<group>"; };
+		7C89190317B551A200FCF104 /* JHIntroGraphicViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JHIntroGraphicViewController.xib; sourceTree = "<group>"; };
+		7C89194917B5539100FCF104 /* startup-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "startup-1.png"; path = "Resources/startup-1.png"; sourceTree = "<group>"; };
+		7C89194A17B5539100FCF104 /* startup-1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "startup-1@2x.png"; path = "Resources/startup-1@2x.png"; sourceTree = "<group>"; };
+		7C89194B17B5539100FCF104 /* startup-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "startup-2.png"; path = "Resources/startup-2.png"; sourceTree = "<group>"; };
+		7C89194C17B5539100FCF104 /* startup-2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "startup-2@2x.png"; path = "Resources/startup-2@2x.png"; sourceTree = "<group>"; };
+		7C89194D17B5539100FCF104 /* startup-3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "startup-3.png"; path = "Resources/startup-3.png"; sourceTree = "<group>"; };
+		7C89194E17B5539100FCF104 /* startup-3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "startup-3@2x.png"; path = "Resources/startup-3@2x.png"; sourceTree = "<group>"; };
+		7C89194F17B5539100FCF104 /* startup-4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "startup-4.png"; path = "Resources/startup-4.png"; sourceTree = "<group>"; };
+		7C89195017B5539100FCF104 /* startup-4@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "startup-4@2x.png"; path = "Resources/startup-4@2x.png"; sourceTree = "<group>"; };
 		7C90D68617AFB7990055D876 /* gradient-bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "gradient-bg.png"; path = "Resources/gradient-bg.png"; sourceTree = "<group>"; };
 		7C90D68717AFB7990055D876 /* gradient-bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "gradient-bg@2x.png"; path = "Resources/gradient-bg@2x.png"; sourceTree = "<group>"; };
 		7C90D68817AFB7990055D876 /* red-divider.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "red-divider.png"; path = "Resources/red-divider.png"; sourceTree = "<group>"; };
@@ -436,6 +457,9 @@
 				7C800B0F17AEBA2800D6251C /* JHNewUserViewController.h */,
 				7C800B1017AEBA2900D6251C /* JHNewUserViewController.m */,
 				7C800B1117AEBA2B00D6251C /* JHNewUserViewController.xib */,
+				7C89190117B551A200FCF104 /* JHIntroGraphicViewController.h */,
+				7C89190217B551A200FCF104 /* JHIntroGraphicViewController.m */,
+				7C89190317B551A200FCF104 /* JHIntroGraphicViewController.xib */,
 				7C90D68E17AFC22B0055D876 /* JHDiscalimerViewController.h */,
 				7C90D68F17AFC22B0055D876 /* JHDiscalimerViewController.m */,
 				7C90D69017AFC22B0055D876 /* JHDiscalimerViewController.xib */,
@@ -471,6 +495,14 @@
 		7CBE53D917AA7A8800647D68 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				7C89194917B5539100FCF104 /* startup-1.png */,
+				7C89194A17B5539100FCF104 /* startup-1@2x.png */,
+				7C89194B17B5539100FCF104 /* startup-2.png */,
+				7C89194C17B5539100FCF104 /* startup-2@2x.png */,
+				7C89194D17B5539100FCF104 /* startup-3.png */,
+				7C89194E17B5539100FCF104 /* startup-3@2x.png */,
+				7C89194F17B5539100FCF104 /* startup-4.png */,
+				7C89195017B5539100FCF104 /* startup-4@2x.png */,
 				7C8918EA17B3CE5900FCF104 /* search-icon.png */,
 				7C8918EB17B3CE5900FCF104 /* search-icon@2x.png */,
 				7C8918E617B3CCF100FCF104 /* search-background.png */,
@@ -631,6 +663,15 @@
 				7C8918ED17B3CE5900FCF104 /* search-icon@2x.png in Resources */,
 				7C8918F217B3D03900FCF104 /* JHPlaylistHeader.xib in Resources */,
 				7C8918FD17B4572E00FCF104 /* RESideMenuEditCell.xib in Resources */,
+				7C89190517B551A300FCF104 /* JHIntroGraphicViewController.xib in Resources */,
+				7C89195117B5539100FCF104 /* startup-1.png in Resources */,
+				7C89195217B5539100FCF104 /* startup-1@2x.png in Resources */,
+				7C89195317B5539100FCF104 /* startup-2.png in Resources */,
+				7C89195417B5539100FCF104 /* startup-2@2x.png in Resources */,
+				7C89195517B5539100FCF104 /* startup-3.png in Resources */,
+				7C89195617B5539100FCF104 /* startup-3@2x.png in Resources */,
+				7C89195717B5539100FCF104 /* startup-4.png in Resources */,
+				7C89195817B5539100FCF104 /* startup-4@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -720,6 +761,7 @@
 				7C8918F517B42CAC00FCF104 /* UIAlertView+Blocks.m in Sources */,
 				7C8918FB17B4572400FCF104 /* RESideMenuEditCell.m in Sources */,
 				7C89190017B4638F00FCF104 /* Reachability.m in Sources */,
+				7C89190417B551A300FCF104 /* JHIntroGraphicViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
