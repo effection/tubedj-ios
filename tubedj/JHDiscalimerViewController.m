@@ -12,6 +12,8 @@
 #import "UIAlertView+Blocks.h"
 
 @interface JHDiscalimerViewController ()
+@property (weak, nonatomic) IBOutlet UILabel *text1;
+@property (weak, nonatomic) IBOutlet UILabel *text2;
 
 @end
 
@@ -31,6 +33,11 @@
     [super viewDidLoad];
 	self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"gradient-bg"]];
 	self.navigationItem.hidesBackButton = YES;
+	
+	self.text1.textColor = [UIColor app_offWhite];
+	self.text1.alpha = 0.65;
+	self.text2.textColor = [UIColor app_offWhite];
+	self.text2.alpha = 0.65;
 }
 
 - (void)didReceiveMemoryWarning

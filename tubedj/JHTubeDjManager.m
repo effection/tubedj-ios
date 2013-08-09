@@ -173,8 +173,8 @@
 
 - (void)createUser:(NSString *)name success:(void (^)(NSString *userId, NSString *name))successBlock error:(void (^)(NSError *error))errorBlock
 {
-	successBlock(self.myUserId, self.myName);
-	return;
+	//successBlock(self.myUserId, self.myName);
+	//return;
 	
 	if(name.length < USERNAME_MIN_LENGTH || name.length > USERNAME_MAX_LENGTH)
 	{

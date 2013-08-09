@@ -7,6 +7,7 @@
 //
 
 #import "JHIntroGraphicViewController.h"
+#import "JHDiscalimerViewController.h"
 
 @interface JHIntroGraphicViewController ()
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
@@ -16,6 +17,7 @@
 
 @implementation JHIntroGraphicViewController {
 	BOOL _pageControlUsed;
+	UIBarButtonItem *doneBarButton;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -33,6 +35,13 @@
 	self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"gradient-bg"]];
 	self.navigationItem.hidesBackButton = YES;
 	self.scrollView.delegate = self;
+	
+	UIButton *doneButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 60, 44)];
+	[doneButton setTitle:@"done" forState:UIControlStateNormal];
+	[doneButton setTitleColor:[UIColor app_blue] forState:UIControlStateNormal];
+	[doneButton addTarget:self action:@selector(doneButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+	
+	doneBarButton = [[UIBarButtonItem alloc] initWithCustomView:doneButton];
 	
 	NSNumber *remainingHeight;
 	
@@ -75,6 +84,12 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)doneButtonPressed:(id)sender
+{
+	JHDiscalimerViewController *nextPage = [GeneralUI loadController:[JHDiscalimerViewController class]];
+	[self.navigationController pushViewController:nextPage animated:YES];
+}
+
 - (IBAction)changePage:(id)sender {
     _pageControlUsed = YES;
     CGFloat pageWidth = _scrollView.contentSize.width /_pageControl.numberOfPages;
@@ -87,8 +102,16 @@
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+	
+	int page = lround(_scrollView.contentOffset.x /
+					  (_scrollView.contentSize.width / _pageControl.numberOfPages));
+	
+	if(page == 3) {
+		self.navigationController.visibleViewController.navigationItem.rightBarButtonItem = doneBarButton;
+	} else
+		self.navigationController.visibleViewController.navigationItem.rightBarButtonItem = nil;
+	
     if (!_pageControlUsed)
-		_pageControl.currentPage = lround(_scrollView.contentOffset.x /
-										  (_scrollView.contentSize.width / _pageControl.numberOfPages));
+		_pageControl.currentPage = page;
 }
 @end

@@ -34,7 +34,7 @@
 	
 	UIViewController *viewController = nil;
 	
-	if(!isFirstRun)
+	if(isFirstRun)
 		viewController = [GeneralUI loadController:[JHNewUserViewController class]];
 	else
 		viewController = [GeneralUI loadController:[JHHomeViewController class]];
