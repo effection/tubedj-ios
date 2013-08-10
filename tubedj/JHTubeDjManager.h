@@ -27,6 +27,7 @@
  *  tubedj-playlist-refresh {playlist}
  *  tubedj-playlist-added-song {song, index}
  *  tubedj-playlist-removed-song {uid, index}
+ *  tubedj-room-closed {}
  */
 @interface JHTubeDjManager : NSObject <SocketIODelegate>
 
@@ -51,6 +52,8 @@
 
 - (void)loadAndCheckUserDetailsWithSuccess:(void (^)(BOOL found, BOOL valid))successBlock error:(void (^)(NSError *error))errorBlock;
 - (void)saveDetails;
+
+- (void)resetUserWithSuccess:(void (^)(BOOL shouldGoToCreateUserScreen, NSString *userId, NSString *name))successBlock error:(void (^)(NSError *error))errorBlock;
 
 - (void)createUser:(NSString *)name success:(void (^)(NSString *userId, NSString *name))successBlock error:(void (^)(NSError *error))errorBlock;
 - (void)changeUserName:(NSString *)newName success:(void (^)(NSString *userId, NSString *name))successBlock error:(void (^)(NSError *error))errorBlock;

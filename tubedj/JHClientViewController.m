@@ -178,7 +178,11 @@
 											 selector:@selector(tubedjRequestErrorNotification:)
 												 name:@"tubedj-request-error"
 											   object:nil];
-
+	
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(tubedjRoomClosed:)
+												 name:@"tubedj-room-closed"
+											   object:nil];
 	
 	[self.playlistController addNotificationObservers];
 }
@@ -275,6 +279,25 @@
 	[[NSUserDefaults standardUserDefaults] synchronize];
 	[self.navigationController popToRootViewControllerAnimated:YES];
 }
+
+- (void)tubedjRoomClosed:(NSNotification *) notification
+{
+	/**
+	 should have already left as the sever closes the websocket
+	 
+	[[JHTubeDjManager sharedManager] leaveRoomWithSuccess:^(NSString *roomId) {
+		[self.navigationController popToRootViewControllerAnimated:YES];
+	} error:^(NSError *error) {
+		//Let user stay in until they close app... will have to reset acount
+	}];
+	*/
+	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Bye" message:@"The host has now closed this room" cancelButtonItem:[UIAlertButtonItem itemWithLabel:@"OK" action:^{
+		[self.navigationController popToRootViewControllerAnimated:YES];
+	}] otherButtonItems: nil];
+	
+	[alert show];
+}
+
 
 - (void)tubedjRequestErrorNotification:(NSNotification *) notification
 {

@@ -176,6 +176,30 @@
     [defaults synchronize];
 }
 
+- (void)resetUserWithSuccess:(void (^)(BOOL shouldGoToCreateUserScreen, NSString *userId, NSString *name))successBlock error:(void (^)(NSError *))errorBlock
+{
+	//We have say to the server to delete us and clear the cookies.
+	[[JHRestClient sharedClient] deleteMeWithSuccess:^{
+		//Upon success we have to create a new user provided that there is a valid self.myName value
+		
+		self.myUserId = nil;
+		
+		if(self.myName.length >= USERNAME_MIN_LENGTH && self.myName.length <= USERNAME_MAX_LENGTH)
+		{
+			[self createUser:self.myName success:^(NSString *userId, NSString *name) {
+				
+				if(successBlock) successBlock(NO, userId, name);
+				
+			} error:errorBlock];
+		} else
+		{
+			if(successBlock) successBlock(YES, nil, nil);
+		}
+		
+		//Upon success return
+	} error:errorBlock];
+}
+
 - (void)createUser:(NSString *)name success:(void (^)(NSString *userId, NSString *name))successBlock error:(void (^)(NSError *error))errorBlock
 {
 	//successBlock(self.myUserId, self.myName);
@@ -529,6 +553,11 @@
 		[[NSNotificationCenter defaultCenter] postNotificationName:@"tubedj-user-joined"
 															object:nil
 														  userInfo:@{@"id" : userId}];
+	} else if([packet.name isEqualToString:@"room:closed"])
+	{
+		[[NSNotificationCenter defaultCenter] postNotificationName:@"tubedj-room-closed"
+															object:nil
+														  userInfo:nil];
 	}
 }
 

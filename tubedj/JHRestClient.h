@@ -17,6 +17,10 @@
 - (NSData *)getCookies;
 - (void)setCookies:(NSArray *)cookies;
 
+- (void)deleteMeWithSuccess:(void (^)())successBlock error:(void (^)(NSError *error))errorBlock;
+
+- (void)createUser:(NSString *)name shouldRetry:(BOOL)shouldRetry success:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, id JSON))successBlock error:(void (^)(NSError *))errorBlock;
+
 - (void)createUser:(NSString *)name success:(void (^)(NSString *userId, NSString *name))successBlock error:(void (^)(NSError *error))errorBlock;
 
 - (void)doesUserExist:(NSString *)userId success:(void (^)(BOOL exists, NSString *userId, NSString *name))successBlock error:(void (^)(NSError *error))errorBlock;

@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface JHAboutViewController : UIViewController
+@property (weak, nonatomic) IBOutlet UIButton *resetApp;
 
 @end

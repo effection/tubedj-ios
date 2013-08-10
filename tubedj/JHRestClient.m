@@ -55,23 +55,55 @@ static NSString * const kAFAPIBaseURLString = @"http://192.168.0.6:8081/api/";
     }
 }
 
-- (void)createUser:(NSString *)name success:(void (^)(NSString *userId, NSString *name))successBlock error:(void (^)(NSError *error))errorBlock
+- (void)deleteMeWithSuccess:(void (^)())successBlock error:(void (^)(NSError *))errorBlock
 {
-	NSMutableURLRequest *request = [self requestWithMethod:@"POST" path:@"users" parameters:@{@"name": name}];
+	NSMutableURLRequest *request = [self requestWithMethod:@"DELETE" path:@"users/me" parameters:nil];
 	
 	AFJSONRequestOperation *requestOperation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request
-	   success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON)
+																							   success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON)
 		{
-			if(successBlock) successBlock([JSON valueForKey:@"id"], [JSON valueForKey:@"name"]);
+			if(successBlock) successBlock();
 		}
-	   failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON)
+		failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON)
 		{
 			if(errorBlock) errorBlock(error);
 		}
 	];
 	
 	[self enqueueHTTPRequestOperation:requestOperation];
+	
+}
 
+- (void)createUser:(NSString *)name success:(void (^)(NSString *userId, NSString *name))successBlock error:(void (^)(NSError *error))errorBlock
+{
+	[self createUser:name shouldRetry:YES success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+		if(successBlock) successBlock([JSON valueForKey:@"id"], [JSON valueForKey:@"name"]);
+	} error:^(NSError *error) {
+		if(errorBlock) errorBlock(error);
+	}];
+
+}
+
+- (void)createUser:(NSString *)name shouldRetry:(BOOL)shouldRetry success:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, id JSON))successBlock error:(void (^)(NSError *))errorBlock
+{
+	NSMutableURLRequest *request = [self requestWithMethod:@"POST" path:@"users" parameters:@{@"name": name}];
+	
+	AFJSONRequestOperation *requestOperation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request
+		success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON)
+		{
+			if(successBlock) successBlock(request, response, JSON);
+		}
+		failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON)
+		{
+			if(response.statusCode == 300 && shouldRetry) {
+				[self createUser:name shouldRetry:NO success:successBlock error:errorBlock];
+				return;
+		}
+			if(errorBlock) errorBlock(error); //if response is 300 msg: Please retry...retry it!
+		}
+	];
+
+	[self enqueueHTTPRequestOperation:requestOperation];
 }
 
 - (void)doesUserExist:(NSString *)userId success:(void (^)(BOOL exists, NSString *userId, NSString *name))successBlock error:(void (^)(NSError *error))errorBlock
@@ -82,8 +114,8 @@ static NSString * const kAFAPIBaseURLString = @"http://192.168.0.6:8081/api/";
 		success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON)
 		{
 			//Grab room id from JSON.id
-			id v = [JSON valueForKey:@"exists"];
-			BOOL exists = (BOOL)v;
+			BOOL exists = [[JSON valueForKey:@"exists"] boolValue];
+			//BOOL exists = (BOOL)v;
 			if(successBlock) successBlock(exists, [JSON valueForKey:@"id"], [JSON valueForKey:@"name"]);
 		}
 		failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON)
@@ -97,9 +129,20 @@ static NSString * const kAFAPIBaseURLString = @"http://192.168.0.6:8081/api/";
 
 - (void)changeName:(NSString *)newName success:(void (^)(NSString *userId, NSString *name))successBlock error:(void (^)(NSError *error))errorBlock
 {
-	//TODO Implement on server
-	successBlock(@"", newName);
-	//errorBlock([[NSError alloc] init]);
+	NSMutableURLRequest *request = [self requestWithMethod:@"POST" path:@"users/me" parameters:@{@"newName" : newName}];
+	
+	AFJSONRequestOperation *requestOperation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request
+		success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON)
+		{
+			if(successBlock) successBlock([JSON valueForKey:@"id"], [JSON valueForKey:@"name"]);
+		}
+		failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON)
+		{
+			if(errorBlock) errorBlock(error);
+		}
+	];
+	
+	[self enqueueHTTPRequestOperation:requestOperation];
 }
 
 - (void)createRoomOnSuccess:(void (^)(NSString *roomId))successBlock error:(void (^)(NSError *error))errorBlock

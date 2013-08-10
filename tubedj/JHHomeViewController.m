@@ -10,6 +10,7 @@
 #import "JHNewUserViewController.h"
 #import "JHClientViewController.h"
 #import "JHServerViewController.h"
+#import "JHAboutViewController.h"
 #import	"JHTubeDjManager.h"
 #import "UIAlertView+Blocks.h"
 
@@ -124,7 +125,7 @@
 		[self.navigationController pushViewController:clientViewController animated:YES];
 	} else {
 		//[self showQRCodeReader];
-		[[JHTubeDjManager sharedManager] joinRoom:@"c5BqtgLi" success:^(NSString *roomId, NSString *ownerId, NSDictionary *users, NSArray *playlist) {
+		[[JHTubeDjManager sharedManager] joinRoom:@"jTgaKskT" success:^(NSString *roomId, NSString *ownerId, NSDictionary *users, NSArray *playlist) {
 			JHClientViewController *clientViewController = [GeneralUI loadController:[JHClientViewController class]];
 			[self.navigationController pushViewController:clientViewController animated:YES];
 		} error:^(NSError *error) {
@@ -192,16 +193,17 @@
 		}];
 		
 	}];
-	
+	/*
 	RESideMenuItem *musicItem = [[RESideMenuItem alloc] initWithTitle:@"music library" prefix:[JHFontAwesome standardIcon:FontAwesome_HDD] ofSize:28.0f ofColour:[UIColor app_offWhite] action:^(RESideMenu *menu, RESideMenuItem *item) {
         //[menu hide];
     }];
 	RESideMenuItem *youtubeItem = [[RESideMenuItem alloc] initWithTitle:@"youtube" prefix:[JHFontAwesome standardIcon:FontAwesome_FacetimeVideo] ofSize:23.0f ofColour:[UIColor app_green] action:^(RESideMenu *menu, RESideMenuItem *item) {
         //[menu hide];
-    }];
+    }];*/
 	
 	RESideMenuItem *aboutItem = [[RESideMenuItem alloc] initWithTitle:@"about" prefix:[JHFontAwesome standardIcon:FontAwesome_Info] ofSize:28.0f ofColour:[UIColor app_offWhite] action:^(RESideMenu *menu, RESideMenuItem *item) {
-        //[menu hide];
+        [menu hide];
+		[self.navigationController pushViewController:[GeneralUI loadController:[JHAboutViewController class]] animated:YES];
     }];
 	
     _sideMenu = [[RESideMenu alloc] initWithJHItems:@[@[ nameItem], @[aboutItem]]];

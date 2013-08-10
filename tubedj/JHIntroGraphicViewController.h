@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface JHIntroGraphicViewController : UIViewController
+@interface JHIntroGraphicViewController : UIViewController <UIScrollViewDelegate>
 
 @end
