@@ -85,14 +85,32 @@
 		}] otherButtonItems: nil];
 		
 		[alert show];
-
 	}];
+	
+	
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+	CGAffineTransform transform = CGAffineTransformRotate(CGAffineTransformIdentity, -10.0/180*M_PI);
+	transform = CGAffineTransformScale(transform, 0.9, 0.9);
+	self.createRoomButton.transform = transform;
+	self.joinRoomButton.transform = transform;
+	self.createRoomButton.alpha = 0;
+	self.joinRoomButton.alpha = 0;
+	
+	[UIView animateWithDuration:0.4 animations:^{
+		self.createRoomButton.alpha = 0.4;
+		self.joinRoomButton.alpha = 0.4;
+		self.joinRoomButton.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1, 1);
+		self.createRoomButton.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1, 1);
+	}];
 }
 
 - (IBAction)joinButtonPressed:(UIButton *)sender {
