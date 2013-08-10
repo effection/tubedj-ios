@@ -96,16 +96,19 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)viewDidAppear:(BOOL)animated
+- (void)viewWillAppear:(BOOL)animated
 {
 	CGAffineTransform transform = CGAffineTransformRotate(CGAffineTransformIdentity, -10.0/180*M_PI);
-	transform = CGAffineTransformScale(transform, 0.9, 0.9);
+	transform = CGAffineTransformScale(transform, 0.8, 0.8);
 	self.createRoomButton.transform = transform;
 	self.joinRoomButton.transform = transform;
 	self.createRoomButton.alpha = 0;
 	self.joinRoomButton.alpha = 0;
-	
-	[UIView animateWithDuration:0.4 animations:^{
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+	[UIView animateWithDuration:0.3 animations:^{
 		self.createRoomButton.alpha = 0.4;
 		self.joinRoomButton.alpha = 0.4;
 		self.joinRoomButton.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1, 1);

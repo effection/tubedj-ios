@@ -215,14 +215,6 @@ NSString * const PlaylistCellIdentifier = @"JHYoutubeSongCell";
     return cell;
 }
 
-
-//TODO
-// * Check all error routines 
-// * sanitise all room id's going to manager/in manager so web end doesnt barf.
-// * test all initial start up error paths
-
-
-
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
