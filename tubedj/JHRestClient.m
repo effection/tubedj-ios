@@ -8,7 +8,7 @@
 
 #import "JHRestClient.h"
 
-static NSString * const kAFAPIBaseURLString = @"http://localhost:8081/api/";
+static NSString * const kAFAPIBaseURLString = @"http://192.168.0.6:8081/api/";
 
 @implementation JHRestClient
 

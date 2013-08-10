@@ -43,11 +43,10 @@ NSString * const PlaylistCellIdentifier = @"JHYoutubeSongCell";
 	self.view.backgroundColor = [UIColor clearColor];
 	self.tableView.backgroundColor = [UIColor clearColor];
 	
-	
-	
+	[self addNotificationObservers];
 }
 
-- (void)viewDidAppear:(BOOL)animated
+- (void)addNotificationObservers
 {
 	[[NSNotificationCenter defaultCenter] addObserver:self
 											 selector:@selector(tubedjPlaylistRefreshed:)
@@ -68,14 +67,23 @@ NSString * const PlaylistCellIdentifier = @"JHYoutubeSongCell";
 											 selector:@selector(tubedjPlaylistNextSong:)
 												 name:@"tubedj-next-song"
 											   object:nil];
+
 }
 
-- (void)viewDidDisappear:(BOOL)animated
+- (void)removeNotificationObservers
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:@"tubedj-playlist-refresh" object:nil];
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:@"tubedj-playlist-added-song" object:nil];
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:@"tubedj-playlist-removed-song" object:nil];
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:@"tubedj-next-song" object:nil];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
 }
 
 - (void)didReceiveMemoryWarning
@@ -105,6 +113,7 @@ NSString * const PlaylistCellIdentifier = @"JHYoutubeSongCell";
 	if(song) {
 		[self.tableView beginUpdates];
 		NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[[notification.userInfo objectForKey:@"index"] integerValue] inSection:1];
+		NSLog(@"adding song at %i playlist.count = %i", indexPath.row, [JHTubeDjManager sharedManager].playlist.count);
 		[self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
 		[self.tableView endUpdates];
 	}
@@ -189,7 +198,7 @@ NSString * const PlaylistCellIdentifier = @"JHYoutubeSongCell";
     JHYoutubeSongCell *cell = [tableView dequeueReusableCellWithIdentifier:PlaylistCellIdentifier];
 	JHPlaylistItem *song = [JHTubeDjManager sharedManager].playlist[indexPath.row];
 	
-	cell.canDelete = [[JHTubeDjManager sharedManager] isUserMe:song.ownerId];
+	cell.canDelete = [[JHTubeDjManager sharedManager] isUserMe:song.ownerId] || [[JHTubeDjManager sharedManager] isRoomOwner];
 	cell.actionDelegate = self;
 	cell.ageLabel.text = ((JHUserItem *)[[JHTubeDjManager sharedManager].users objectForKey:song.ownerId]).name;
 	cell.isPlaying = 0 == indexPath.row;

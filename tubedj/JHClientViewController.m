@@ -315,11 +315,7 @@
 			//Let user stay in until they close app
 		}];
     }];
-	
-	RESideMenuItem *nameItem = [[RESideMenuItem alloc] initWithTitle:[JHTubeDjManager sharedManager].myName prefix:[JHFontAwesome standardIcon:FontAwesome_Pencil] ofSize:28.0f ofColour:[UIColor app_offWhite] action:^(RESideMenu *menu, RESideMenuItem *item) {
-        [menu hide];
-    }];
-	
+
 	NSMutableArray *userItems = [[NSMutableArray alloc] initWithCapacity:[JHTubeDjManager sharedManager].users.count];
 	
 	for (NSString* key in [JHTubeDjManager sharedManager].users) {
@@ -330,14 +326,14 @@
 		[userItems addObject:userMenuItem];
 	}
 	
-    _sideMenu = [[RESideMenu alloc] initWithJHItems:@[@[homeItem, nameItem], userItems]];
+    _sideMenu = [[RESideMenu alloc] initWithJHItems:@[@[homeItem], userItems]];
 	UIImage *img = [UIImage imageNamed:@"menu-bg"];
 	_sideMenu.backgroundImage = img;
     _sideMenu.verticalOffset = IS_WIDESCREEN ? 160 : 126;
 	_sideMenu.itemHeight = 40.0;
 	_sideMenu.font = [UIFont helveticaNeueRegularWithSize:22.0];
 	_sideMenu.textColor = [UIColor app_offWhite];
-    //_sideMenu.hideStatusBarArea = [[[UIApplication sharedApplication] delegate] OSVersion] < 7;
+    _sideMenu.hideStatusBarArea = NO;//[[[UIApplication sharedApplication] delegate] OSVersion] < 7;
     [_sideMenu show];
 }
 

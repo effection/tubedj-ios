@@ -50,6 +50,8 @@
 	[[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"navbar-background"] forBarMetrics:UIBarMetricsDefault];
 	UIImage *shadow = [[UIImage alloc] init];
 	[[UINavigationBar appearance] setShadowImage:shadow];
+	[[UITextField appearanceWhenContainedIn:[UISearchBar class], nil] setFont:[UIFont systemFontOfSize:18]];
+	[[UITextField appearanceWhenContainedIn:[UISearchBar class], nil] setTextColor:[UIColor app_offWhite]];
 	 return YES;
 }
 

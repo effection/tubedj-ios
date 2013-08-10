@@ -240,7 +240,7 @@
 }
 
 - (void)viewDidDisappear:(BOOL)animated
-{
+{/*
 	[self.playlistController viewDidDisappear:animated];
 	[self.youtubeSearchController viewDidDisappear:animated];
 	
@@ -269,7 +269,7 @@
 											   object:nil];
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:@"tubedj-pause-song"
 											   object:nil];
-	
+	*/
 	if(isCoaching) return;
 	
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:kReachabilityChangedNotification object:nil];
@@ -313,86 +313,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - Coach Marks delegate
 
-- (void)coachMarksView:(WSCoachMarksView*)coachMarksView willNavigateToIndex:(NSInteger)index
-{
-	switch (index) {
-		case 0:
-			
-			[self.youtubeSearchController searchFor:@"calvin harris feel so close nero remix"];
-			
-			break;
-			
-		default:
-			break;
-	}
-}
-
-- (void)coachMarksView:(WSCoachMarksView*)coachMarksView didNavigateToIndex:(NSInteger)index
-{
-	JHYoutubeSongCell *cell0;
-	if(4 == index)
-	{
-		//Swipe right to add song - make it bounce
-		cell0 = (JHYoutubeSongCell *)[self.youtubeSearchController.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
-		
-		[[JHTubeDjManager sharedManager] fakeSongAdd:cell0.songId];
-		
-		[cell0 didStartSwiping];
-		[UIView animateWithDuration:0.5
-							  delay:0
-							options:UIViewAnimationOptionCurveEaseIn
-						 animations:^{
-							 cell0.contentView.frame = CGRectOffset(cell0.contentView.bounds, 198, 0);
-						 }
-						 completion:^(BOOL finished) {
-							 [UIView animateWithDuration:0.8
-												   delay:0.1
-												 options:UIViewAnimationOptionCurveEaseOut
-											  animations:^{
-												  cell0.contentView.frame = CGRectOffset(cell0.contentView.bounds, 0, 0);
-											  } completion:nil];
-						 }];
-	}
-	else if(5 == index)
-	{
-			//Swipe left to show playlist - scroll to playlist
-			[self.scrollView setContentOffset:CGPointMake(320, 0) animated:YES];
-	}
-	else if(6 == index)
-	{
-		//Swipe left to remove song - make it bounce
-		cell0 = (JHYoutubeSongCell *)[self.playlistController.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]];
-		
-		
-		[cell0 didStartSwiping];
-		[UIView animateWithDuration:0.5
-							  delay:0
-							options:UIViewAnimationOptionCurveEaseIn
-						 animations:^{
-							 cell0.contentView.frame = CGRectOffset(cell0.contentView.bounds, -198, 0);
-						 }
-						 completion:^(BOOL finished) {
-							 [[JHTubeDjManager sharedManager] fakeSongRemove];
-						 }];
-
-	}
-	else if(7 == index)
-	{
-		//Swipe right to show search
-		[self.scrollView setContentOffset:CGPointMake(0, 0) animated:YES];
-		[self.youtubeSearchController clearSearch];
-	}
-}
-
-- (void)coachMarksViewWillCleanup:(WSCoachMarksView *)coachMarksView
-{
-	isCoaching = NO;
-	[[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"WSCoachMarksShown_ServerView"];
-	[[NSUserDefaults standardUserDefaults] synchronize];
-	[self.navigationController popToRootViewControllerAnimated:YES];
-}
 
 #pragma mark -Keyboard
 
@@ -524,6 +445,7 @@
 
 - (void)playNextSong
 {
+	NSLog(@"CALLED");
 	[[JHTubeDjManager sharedManager] nextSongWithSuccess:^{
 		if([JHTubeDjManager sharedManager].playlist.count == 0) {
 			return;//Shouldn't ever happen
@@ -571,6 +493,14 @@
 				 //Silently fail
 			 }];
 		 }
+	}
+}
+
+- (void)youtubePlayer:(JHYoutubePlayer *)player nextSong:(NSString *)currentVideoId
+{
+	if([JHTubeDjManager sharedManager].playlist.count > 1)
+	{
+		[self playNextSong];
 	}
 }
 
@@ -665,9 +595,89 @@
 	_sideMenu.itemHeight = 40.0;
 	_sideMenu.font = [UIFont helveticaNeueRegularWithSize:22.0];
 	_sideMenu.textColor = [UIColor app_offWhite];
+	_sideMenu.hideStatusBarArea = NO;
     //_sideMenu.hideStatusBarArea = [[[UIApplication sharedApplication] delegate] OSVersion] < 7;
     [_sideMenu show];
 }
+#pragma mark - Coach Marks delegate
 
+- (void)coachMarksView:(WSCoachMarksView*)coachMarksView willNavigateToIndex:(NSInteger)index
+{
+	switch (index) {
+		case 0:
+			
+			[self.youtubeSearchController searchFor:@"calvin harris feel so close nero remix"];
+			
+			break;
+			
+		default:
+			break;
+	}
+}
+
+- (void)coachMarksView:(WSCoachMarksView*)coachMarksView didNavigateToIndex:(NSInteger)index
+{
+	JHYoutubeSongCell *cell0;
+	if(4 == index)
+	{
+		//Swipe right to add song - make it bounce
+		cell0 = (JHYoutubeSongCell *)[self.youtubeSearchController.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+		
+		[[JHTubeDjManager sharedManager] fakeSongAdd:cell0.songId];
+		
+		[cell0 didStartSwiping];
+		[UIView animateWithDuration:0.5
+							  delay:0
+							options:UIViewAnimationOptionCurveEaseIn
+						 animations:^{
+							 cell0.contentView.frame = CGRectOffset(cell0.contentView.bounds, 198, 0);
+						 }
+						 completion:^(BOOL finished) {
+							 [UIView animateWithDuration:0.8
+												   delay:0.1
+												 options:UIViewAnimationOptionCurveEaseOut
+											  animations:^{
+												  cell0.contentView.frame = CGRectOffset(cell0.contentView.bounds, 0, 0);
+											  } completion:nil];
+						 }];
+	}
+	else if(5 == index)
+	{
+		//Swipe left to show playlist - scroll to playlist
+		[self.scrollView setContentOffset:CGPointMake(320, 0) animated:YES];
+	}
+	else if(6 == index)
+	{
+		//Swipe left to remove song - make it bounce
+		cell0 = (JHYoutubeSongCell *)[self.playlistController.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]];
+		
+		
+		[cell0 didStartSwiping];
+		[UIView animateWithDuration:0.5
+							  delay:0
+							options:UIViewAnimationOptionCurveEaseIn
+						 animations:^{
+							 cell0.contentView.frame = CGRectOffset(cell0.contentView.bounds, -198, 0);
+						 }
+						 completion:^(BOOL finished) {
+							 [[JHTubeDjManager sharedManager] fakeSongRemove];
+						 }];
+		
+	}
+	else if(7 == index)
+	{
+		//Swipe right to show search
+		[self.scrollView setContentOffset:CGPointMake(0, 0) animated:YES];
+		[self.youtubeSearchController clearSearch];
+	}
+}
+
+- (void)coachMarksViewWillCleanup:(WSCoachMarksView *)coachMarksView
+{
+	isCoaching = NO;
+	[[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"WSCoachMarksShown_ServerView"];
+	[[NSUserDefaults standardUserDefaults] synchronize];
+	[self.navigationController popToRootViewControllerAnimated:YES];
+}
 
 @end

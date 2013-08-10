@@ -96,18 +96,19 @@
 }
 
 - (IBAction)joinButtonPressed:(UIButton *)sender {
+	clientJoiningRoom = NO;
 	BOOL coachMarksShown = [[NSUserDefaults standardUserDefaults] boolForKey:@"WSCoachMarksShown_ClientView"];
     if (coachMarksShown == NO) {
 		JHClientViewController *clientViewController = [GeneralUI loadController:[JHClientViewController class]];
 		[self.navigationController pushViewController:clientViewController animated:YES];
 	} else {
-		[self showQRCodeReader];
-		/*[[JHTubeDjManager sharedManager] joinRoom:@"iLzxtazT" success:^(NSString *roomId, NSString *ownerId, NSDictionary *users, NSArray *playlist) {
+		//[self showQRCodeReader];
+		[[JHTubeDjManager sharedManager] joinRoom:@"c5BqtgLi" success:^(NSString *roomId, NSString *ownerId, NSDictionary *users, NSArray *playlist) {
 			JHClientViewController *clientViewController = [GeneralUI loadController:[JHClientViewController class]];
 			[self.navigationController pushViewController:clientViewController animated:YES];
 		} error:^(NSError *error) {
 			
-		}];*/
+		}];
 	}
 }
 
@@ -183,6 +184,7 @@
 	_sideMenu.itemHeight = 40.0;
 	_sideMenu.font = [UIFont helveticaNeueRegularWithSize:22.0];
 	_sideMenu.textColor = [UIColor app_offWhite];
+	_sideMenu.hideStatusBarArea = NO;
     //_sideMenu.hideStatusBarArea = [[[UIApplication sharedApplication] delegate] OSVersion] < 7;
     [_sideMenu show];
 }
@@ -215,20 +217,24 @@
 
 #pragma mark - ZBar QR Code delegate
 
+BOOL clientJoiningRoom = NO;
+
 - (void) imagePickerController: (UIImagePickerController*) reader
  didFinishPickingMediaWithInfo: (NSDictionary*) info
 {
     // ADD: get the decode results
     id<NSFastEnumeration> results = [info objectForKey: ZBarReaderControllerResults];
-
+	
     for(ZBarSymbol *symbol in results) {
-		if(symbol.data.length < 7 || symbol.data.length > 12)
+		if(symbol.data.length < 7 || symbol.data.length > 12 || clientJoiningRoom)
 			break;
-		
+		clientJoiningRoom = YES;
 		[[JHTubeDjManager sharedManager] joinRoom:symbol.data success:^(NSString *roomId, NSString *ownerId, NSDictionary *users, NSArray *playlist) {
+			
 			JHClientViewController *clientViewController = [GeneralUI loadController:[JHClientViewController class]];
 			[reader dismissViewControllerAnimated:YES completion:^{
 				[self.navigationController pushViewController:clientViewController animated:YES];
+				clientJoiningRoom = NO;
 			}];
 			
 		} error:^(NSError *error) {
@@ -237,6 +243,7 @@
 			}] otherButtonItems: nil];
 			
 			[alert show];
+			clientJoiningRoom = NO;
 
 		}];
 		

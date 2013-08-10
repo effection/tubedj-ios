@@ -15,10 +15,11 @@
 @optional
 
 - (void)youtubePlayer:(JHYoutubePlayer *)player songEnded:(NSString *)videoId;
+- (void)youtubePlayer:(JHYoutubePlayer *)player nextSong:(NSString *)currentVideoId;
 
 @end
 
-@interface JHYoutubePlayer : UIWebView <UIWebViewDelegate>
+@interface JHYoutubePlayer : UIWebView <UIWebViewDelegate, UIGestureRecognizerDelegate>
 
 @property (nonatomic, readonly) NSString *videoId;
 @property (nonatomic, assign) id<JHYoutubePlayerDelegate> playerDelegate;

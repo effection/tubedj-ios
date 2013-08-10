@@ -59,7 +59,7 @@ const int INTERSTITIAL_STEPS = 99;
     self.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:21];
     self.textColor = [UIColor whiteColor];
     self.highlightedTextColor = [UIColor lightGrayColor];
-    self.hideStatusBarArea = YES;
+    self.hideStatusBarArea = NO;
 	
     return self;
 }
@@ -89,12 +89,13 @@ const int INTERSTITIAL_STEPS = 99;
 
 - (void)show
 {
-    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationFade];
+    //[[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationFade];
     [self performSelector:@selector(showAfterDelay) withObject:nil afterDelay:0.1];
 }
 
 - (void)hide
 {
+	//[[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade];
     [self restoreFromRect:_screenshotView.frame];
 }
 

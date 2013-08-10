@@ -49,8 +49,6 @@ NSString * const CellIdentifier = @"JHYoutubeSongCell";
 	searchBar.placeholder = @"search youtube";
 	[searchBar setSearchFieldBackgroundImage:[UIImage imageNamed:@"search-background"] forState:UIControlStateNormal];
 	[searchBar setImage:[UIImage imageNamed:@"search-icon"] forSearchBarIcon:UISearchBarIconSearch state:UIControlStateNormal];
-	[[UITextField appearanceWhenContainedIn:[UISearchBar class], nil] setFont:[UIFont systemFontOfSize:18]];
-	[[UITextField appearanceWhenContainedIn:[UISearchBar class], nil] setTextColor:[UIColor app_offWhite]];
 	
 	self.tableView.tableHeaderView = searchBar;
 	self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 80, 0);

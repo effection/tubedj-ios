@@ -29,7 +29,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	self.view.backgroundColor = [UIColor app_darkGrey];
+	self.view.backgroundColor = [UIColor whiteColor];
 	
 	UIButton *doneButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 60, 44)];
 	[doneButton setTitle:@"done" forState:UIControlStateNormal];

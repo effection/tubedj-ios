@@ -46,6 +46,7 @@
 - (void)fakeSongAdd:(NSString *)youtubeSongId;
 - (void)fakeSongRemove;
 
+- (BOOL)isRoomOwner;
 - (BOOL)isUserMe:(NSString *)userId;
 
 - (void)loadAndCheckUserDetailsWithSuccess:(void (^)(BOOL found, BOOL valid))successBlock error:(void (^)(NSError *error))errorBlock;

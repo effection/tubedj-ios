@@ -53,6 +53,11 @@
 	
 }
 
+- (BOOL)isRoomOwner
+{
+	return [self.myUserId isEqualToString:self.roomOwnerId];
+}
+
 - (BOOL)isUserMe:(NSString *)userId
 {
 	return [self.myUserId isEqualToString:userId];
@@ -464,10 +469,11 @@
 
 - (void) socketIO:(SocketIO *)socket didReceiveEvent:(SocketIOPacket *)packet
 {
-	NSLog(@"SocketIO: Received Event");
+	NSLog(@"SocketIO: Received Event %@", packet.name);
 
 	if ([packet.name isEqualToString:@"playlist:song-added"])
 	{
+		NSLog(@"Song added");
 		JHPlaylistItem *song = [JHPlaylistItem fromJSON:[packet.args[0] valueForKeyPath:@"song"]];
 		
 		[self.playlist addObject:song];
@@ -505,7 +511,7 @@
 
 	} else if ([packet.name isEqualToString:@"user:disconnected"])
 	{
-		NSString *userId = [packet.args valueForKey:@"user"];
+		NSString *userId = [packet.args valueForKey:@"user"][0];
 		[self.users removeObjectForKey:userId];
 		
 		[[NSNotificationCenter defaultCenter] postNotificationName:@"tubedj-user-disconnected"
