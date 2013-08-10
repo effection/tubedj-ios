@@ -93,6 +93,9 @@
 	
 	[self addSubview:self.screenshot];
 	
+	if([self.playerDelegate respondsToSelector:@selector(youtubePlayerCanSwipeToNextSong:)])
+		return [self.playerDelegate youtubePlayerCanSwipeToNextSong:self];
+	
 	return YES;
 }
 

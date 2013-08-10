@@ -29,6 +29,7 @@
 	CGRect oldFrame;
 	CGFloat originalYoutubePlayerHeightConstant;
 	BOOL isCoaching;
+	BOOL _notificationObserversAdded;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -150,8 +151,25 @@
 	}
 }
 
-- (void)viewDidAppear:(BOOL)animated
+- (void)viewWillAppear:(BOOL)animated
 {
+	[self addNotificationObservers];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+	NSArray *viewControllers = self.navigationController.viewControllers;
+	if (viewControllers.count > 1 && [viewControllers objectAtIndex:viewControllers.count-2] == self) {
+		//NSLog(@"New view controller was pushed");
+	} else if ([viewControllers indexOfObject:self] == NSNotFound) {
+		[self removeNotificationObservers];
+	}
+}
+
+- (void)addNotificationObservers
+{
+	if(_notificationObserversAdded) return;
+	_notificationObserversAdded = YES;
+	
 	[[NSNotificationCenter defaultCenter] addObserver:self
 											 selector:@selector(keyboardWillShow:)
 												 name:UIKeyboardWillShowNotification
@@ -196,8 +214,7 @@
 												 name:@"tubedj-pause-song"
 											   object:nil];
 	
-	[self.playlistController viewDidAppear:animated];
-	[self.youtubeSearchController viewDidAppear:animated];
+	[self.playlistController addNotificationObservers];
 	
 	if(isCoaching) return;
 	
@@ -236,43 +253,54 @@
 			
 		}
 	}
-
 }
 
-- (void)viewDidDisappear:(BOOL)animated
-{/*
-	[self.playlistController viewDidDisappear:animated];
-	[self.youtubeSearchController viewDidDisappear:animated];
+- (void)removeNotificationObservers
+{
+	if(!_notificationObserversAdded) return;
+	_notificationObserversAdded = NO;
+	
+	[self.playlistController removeNotificationObservers];
 	
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification
-											   object:nil];
+												  object:nil];
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification
-											   object:nil];
+												  object:nil];
 	
 	
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:@"tubedj-request-error"
-											   object:nil];
+												  object:nil];
 	
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:@"tubedj-playlist-refresh"
-											   object:nil];
+												  object:nil];
 	
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:@"tubedj-playlist-added-song"
-											   object:nil];
+												  object:nil];
 	
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:@"tubedj-playlist-removed-song"
-											   object:nil];
+												  object:nil];
 	
 	
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:@"tubedj-going-background"
-											   object:nil];
+												  object:nil];
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:@"tubedj-going-foreground"
-											   object:nil];
+												  object:nil];
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:@"tubedj-pause-song"
-											   object:nil];
-	*/
+												  object:nil];
+
 	if(isCoaching) return;
 	
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:kReachabilityChangedNotification object:nil];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+	
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+	
 }
 
 - (void)handleNetworkChange:(NSNotification *)notice{
@@ -445,7 +473,6 @@
 
 - (void)playNextSong
 {
-	NSLog(@"CALLED");
 	[[JHTubeDjManager sharedManager] nextSongWithSuccess:^{
 		if([JHTubeDjManager sharedManager].playlist.count == 0) {
 			return;//Shouldn't ever happen
@@ -494,6 +521,11 @@
 			 }];
 		 }
 	}
+}
+
+- (BOOL)youtubePlayerCanSwipeToNextSong:(JHYoutubePlayer *)player
+{
+	return [JHTubeDjManager sharedManager].playlist.count > 1;
 }
 
 - (void)youtubePlayer:(JHYoutubePlayer *)player nextSong:(NSString *)currentVideoId

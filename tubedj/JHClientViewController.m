@@ -25,6 +25,7 @@
 
 @implementation JHClientViewController {
 	BOOL isCoaching;
+	BOOL _notificationObserversAdded;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -145,28 +146,52 @@
 	} else {
 		//Room joined before entering
 	}
+	[self addNotificationObservers];
 }
 
-- (void)viewDidAppear:(BOOL)animated
+- (void)viewWillAppear:(BOOL)animated
 {
-	[[NSNotificationCenter defaultCenter] addObserver:self
-											 selector:@selector(tubedjRequestErrorNotification:)
-												 name:@"tubedj-request-error"
-											   object:nil];
-	[self.playlistController viewDidAppear:animated];
-	[self.youtubeSearchController viewDidAppear:animated];
+	[self addNotificationObservers];
 }
 
-- (void)viewDidDisappear:(BOOL)animated
-{
-	[[NSNotificationCenter defaultCenter] removeObserver:self name:@"tubedj-request-error" object:nil];
-	[self.playlistController viewDidDisappear:animated];
-	[self.youtubeSearchController viewDidDisappear:animated];
+- (void)viewWillDisappear:(BOOL)animated {
+	NSArray *viewControllers = self.navigationController.viewControllers;
+	if (viewControllers.count > 1 && [viewControllers objectAtIndex:viewControllers.count-2] == self) {
+		//NSLog(@"New view controller was pushed");
+	} else if ([viewControllers indexOfObject:self] == NSNotFound) {
+		[self removeNotificationObservers];
+	}
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
+}
+
+
+- (void)addNotificationObservers
+{
+	if(_notificationObserversAdded) return;
+	_notificationObserversAdded = YES;
+	
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(tubedjRequestErrorNotification:)
+												 name:@"tubedj-request-error"
+											   object:nil];
+
+	
+	[self.playlistController addNotificationObservers];
+}
+
+- (void)removeNotificationObservers
+{
+	if(!_notificationObserversAdded) return;
+	_notificationObserversAdded = NO;
+	
+	[[NSNotificationCenter defaultCenter] removeObserver:self name:@"tubedj-request-error" object:nil];
+	
+	[self.playlistController removeNotificationObservers];
+	
 }
 
 #pragma mark - Coach Marks delegate

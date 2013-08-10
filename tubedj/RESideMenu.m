@@ -300,7 +300,7 @@ const int INTERSTITIAL_STEPS = 99;
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
 	if(section == 0) return 0;
-	return 40;
+	return 30;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath

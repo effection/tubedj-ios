@@ -42,8 +42,6 @@ NSString * const PlaylistCellIdentifier = @"JHYoutubeSongCell";
 	
 	self.view.backgroundColor = [UIColor clearColor];
 	self.tableView.backgroundColor = [UIColor clearColor];
-	
-	[self addNotificationObservers];
 }
 
 - (void)addNotificationObservers

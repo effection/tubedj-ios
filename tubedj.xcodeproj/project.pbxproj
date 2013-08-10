@@ -80,6 +80,8 @@
 		7C89196217B5845C00FCF104 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C89196117B5845B00FCF104 /* Default.png */; };
 		7C89196417B5846B00FCF104 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C89196317B5846A00FCF104 /* Default@2x.png */; };
 		7C89196617B5848400FCF104 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C89196517B5848300FCF104 /* Default-568h@2x.png */; };
+		7C89196A17B67FD700FCF104 /* JHAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C89196817B67FCF00FCF104 /* JHAboutViewController.m */; };
+		7C89196B17B67FD700FCF104 /* JHAboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7C89196917B67FD200FCF104 /* JHAboutViewController.xib */; };
 		7C90D68A17AFB7990055D876 /* gradient-bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C90D68617AFB7990055D876 /* gradient-bg.png */; };
 		7C90D68B17AFB7990055D876 /* gradient-bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C90D68717AFB7990055D876 /* gradient-bg@2x.png */; };
 		7C90D68C17AFB7990055D876 /* red-divider.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C90D68817AFB7990055D876 /* red-divider.png */; };
@@ -223,6 +225,9 @@
 		7C89196117B5845B00FCF104 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		7C89196317B5846A00FCF104 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		7C89196517B5848300FCF104 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		7C89196717B67FCC00FCF104 /* JHAboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHAboutViewController.h; sourceTree = "<group>"; };
+		7C89196817B67FCF00FCF104 /* JHAboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JHAboutViewController.m; sourceTree = "<group>"; };
+		7C89196917B67FD200FCF104 /* JHAboutViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JHAboutViewController.xib; sourceTree = "<group>"; };
 		7C90D68617AFB7990055D876 /* gradient-bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "gradient-bg.png"; path = "Resources/gradient-bg.png"; sourceTree = "<group>"; };
 		7C90D68717AFB7990055D876 /* gradient-bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "gradient-bg@2x.png"; path = "Resources/gradient-bg@2x.png"; sourceTree = "<group>"; };
 		7C90D68817AFB7990055D876 /* red-divider.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "red-divider.png"; path = "Resources/red-divider.png"; sourceTree = "<group>"; };
@@ -364,6 +369,9 @@
 				7C8918D917B29FC300FCF104 /* JHYoutubePlayer.h */,
 				7C8918DA17B29FC300FCF104 /* JHYoutubePlayer.m */,
 				7C8918DC17B2A12A00FCF104 /* YT_Player.html */,
+				7C89196717B67FCC00FCF104 /* JHAboutViewController.h */,
+				7C89196817B67FCF00FCF104 /* JHAboutViewController.m */,
+				7C89196917B67FD200FCF104 /* JHAboutViewController.xib */,
 			);
 			path = tubedj;
 			sourceTree = "<group>";
@@ -700,6 +708,7 @@
 				7C89196217B5845C00FCF104 /* Default.png in Resources */,
 				7C89196417B5846B00FCF104 /* Default@2x.png in Resources */,
 				7C89196617B5848400FCF104 /* Default-568h@2x.png in Resources */,
+				7C89196B17B67FD700FCF104 /* JHAboutViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -790,6 +799,7 @@
 				7C8918FB17B4572400FCF104 /* RESideMenuEditCell.m in Sources */,
 				7C89190017B4638F00FCF104 /* Reachability.m in Sources */,
 				7C89190417B551A300FCF104 /* JHIntroGraphicViewController.m in Sources */,
+				7C89196A17B67FD700FCF104 /* JHAboutViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

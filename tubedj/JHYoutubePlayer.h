@@ -15,6 +15,7 @@
 @optional
 
 - (void)youtubePlayer:(JHYoutubePlayer *)player songEnded:(NSString *)videoId;
+- (BOOL)youtubePlayerCanSwipeToNextSong:(JHYoutubePlayer *)player;
 - (void)youtubePlayer:(JHYoutubePlayer *)player nextSong:(NSString *)currentVideoId;
 
 @end

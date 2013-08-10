@@ -23,4 +23,7 @@
 
 @property (nonatomic, assign) id<JHPlaylistViewControllerDelegate> delegate;
 
+- (void)addNotificationObservers;
+- (void)removeNotificationObservers;
+
 @end

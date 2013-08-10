@@ -170,17 +170,19 @@
 - (void)showMenu
 {
 	[self.view endEditing:YES];
-
+	NSString *currentName = [NSString stringWithString:[JHTubeDjManager sharedManager].myName];
+	
 	RESideMenuItem *nameItem = [[RESideMenuItem alloc] initWithTitle:[JHTubeDjManager sharedManager].myName isEditable:YES prefix:[JHFontAwesome standardIcon:FontAwesome_Pencil] ofSize:28.0f ofColour:[UIColor app_offWhite] action:nil editAction:^(RESideMenu *menu, RESideMenuItem *item, UITextField *textField) {
 		
 		NSString *newName = textField.text;
 		if(newName.length < USERNAME_MIN_LENGTH || newName.length > USERNAME_MAX_LENGTH) return;
 		
 		[[JHTubeDjManager sharedManager] changeUserName:newName success:^(NSString *userId, NSString *name) {
-			[menu hide];
+			//[menu hide];
 		} error:^(NSError *error) {
 			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Ooops" message:@"Sorry, something happened while trying to change your name" cancelButtonItem:[UIAlertButtonItem itemWithLabel:@"OK" action:^{
 				//Do nothing
+				textField.text = currentName;
 			}] otherButtonItems: nil];
 			
 			[alert show];
@@ -195,7 +197,11 @@
         //[menu hide];
     }];
 	
-    _sideMenu = [[RESideMenu alloc] initWithJHItems:@[@[ nameItem], @[musicItem, youtubeItem]]];
+	RESideMenuItem *aboutItem = [[RESideMenuItem alloc] initWithTitle:@"about" prefix:[JHFontAwesome standardIcon:FontAwesome_Info] ofSize:28.0f ofColour:[UIColor app_offWhite] action:^(RESideMenu *menu, RESideMenuItem *item) {
+        //[menu hide];
+    }];
+	
+    _sideMenu = [[RESideMenu alloc] initWithJHItems:@[@[ nameItem], @[aboutItem]]];
 	UIImage *img = [UIImage imageNamed:@"menu-bg"];
 	_sideMenu.backgroundImage = img;
     _sideMenu.verticalOffset = IS_WIDESCREEN ? 160 : 126;
