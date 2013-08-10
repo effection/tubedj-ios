@@ -60,7 +60,7 @@ static NSString * const kAFAPIBaseURLString = @"http://192.168.0.6:8081/api/";
 	NSMutableURLRequest *request = [self requestWithMethod:@"DELETE" path:@"users/me" parameters:nil];
 	
 	AFJSONRequestOperation *requestOperation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request
-																							   success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON)
+	   success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON)
 		{
 			if(successBlock) successBlock();
 		}

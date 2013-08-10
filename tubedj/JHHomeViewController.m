@@ -125,7 +125,7 @@
 		[self.navigationController pushViewController:clientViewController animated:YES];
 	} else {
 		//[self showQRCodeReader];
-		[[JHTubeDjManager sharedManager] joinRoom:@"jTgaKskT" success:^(NSString *roomId, NSString *ownerId, NSDictionary *users, NSArray *playlist) {
+		[[JHTubeDjManager sharedManager] joinRoom:@"ycbeKfyc" success:^(NSString *roomId, NSString *ownerId, NSDictionary *users, NSArray *playlist) {
 			JHClientViewController *clientViewController = [GeneralUI loadController:[JHClientViewController class]];
 			[self.navigationController pushViewController:clientViewController animated:YES];
 		} error:^(NSError *error) {

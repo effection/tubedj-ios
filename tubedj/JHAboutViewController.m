@@ -89,6 +89,7 @@
 				UIViewController *viewController = [GeneralUI loadController:[JHNewUserViewController class]];
 				self.navigationController.viewControllers = @[viewController];
 			} else {
+				[[JHTubeDjManager sharedManager] saveDetails];
 				[self.navigationController popViewControllerAnimated:YES];
 			}
 			
