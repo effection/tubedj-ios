@@ -14,6 +14,10 @@
 
 @property (strong, readonly, nonatomic) RESideMenu *sideMenu;
 
+- (void)queueJoinRoom:(NSString *)roomId;
+
+- (void)openJoinScreenOverrideCoachMarks:(BOOL)overrideShowingCoachMarks showQRCodeReader:(BOOL)showQRCodeReader;
+
 - (IBAction)createButtonPressed:(UIButton *)sender;
 - (IBAction)joinButtonPressed:(UIButton *)sender;
 

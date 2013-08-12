@@ -9,6 +9,13 @@
 #import "JHTubeDjManager.h"
 #import "SocketIOPacket.h"
 
+#if TARGET_IPHONE_SIMULATOR
+static NSString * const kSocketIoHost = @"192.168.0.6";
+#else
+static NSString * const kSocketIoHost = @"ihateyouloveme.no-ip.org";
+#endif
+
+
 @implementation JHTubeDjManager {
 	SocketIO *socketIO;
 }
@@ -295,8 +302,14 @@
 	}];
 }
 
-- (void)joinRoom:(NSString *)roomId success:(void (^)(NSString *roomId, NSString *ownerId, NSDictionary *users, NSArray *playlist))successBlock error:(void (^)(NSError *error))errorBlock
+- (BOOL)joinRoom:(NSString *)roomId success:(void (^)(NSString *roomId, NSString *ownerId, NSDictionary *users, NSArray *playlist))successBlock error:(void (^)(NSError *error))errorBlock
 {
+	if(self.roomId.length > 0) {
+		
+		if(errorBlock) errorBlock([[NSError alloc] init]);
+		return NO;
+	}
+	
 	NSMutableCharacterSet* testCharSet = [[NSMutableCharacterSet alloc] init];
 	[testCharSet formUnionWithCharacterSet:[NSCharacterSet alphanumericCharacterSet]];
 	
@@ -336,7 +349,7 @@
 //														  userInfo:@{@"roomId" : roomId, @"roomOwnerId" : ownerId, @"users" : self.users, @"playlist" : self.playlist}];
 		if(socketIO.isConnected || socketIO.isConnecting)
 			[socketIO disconnect];
-		[socketIO connectToHost:@"192.168.0.6" onPort:8081];
+		[socketIO connectToHost:kSocketIoHost onPort:8081];
 		
 		
 		if(successBlock) successBlock(self.roomId, self.roomOwnerId, self.users, self.playlist);
@@ -349,6 +362,8 @@
 		
 		if(errorBlock) errorBlock(error);
 	}];
+	
+	return YES;
 }
 
 - (void)leaveRoomWithSuccess:(void (^)(NSString *roomId))successBlock error:(void (^)(NSError *error))errorBlock

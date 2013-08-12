@@ -12,8 +12,12 @@
 #import "JHClientViewController.h"
 #import "JHHomeViewController.h"
 #import "JHNewUserViewController.h"
+#import "UIAlertView+Blocks.h"
+#import "JHTubeDjManager.h"
 
-@implementation JHAppDelegate
+@implementation JHAppDelegate {
+	UINavigationController *navController;
+}
 
 - (int)OSVersion
 {
@@ -25,36 +29,80 @@
     return _deviceSystemMajorVersion;
 }
 
+- (void)customiseUI
+{
+	//UI Customisation
+	[[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"navbar-background"] forBarMetrics:UIBarMetricsDefault];
+	UIImage *shadow = [[UIImage alloc] init];
+	[[UINavigationBar appearance] setShadowImage:shadow];
+	
+	
+	[[UITextField appearanceWhenContainedIn:[UISearchBar class], nil] setFont:[UIFont systemFontOfSize:18]];
+	[[UITextField appearanceWhenContainedIn:[UISearchBar class], nil] setTextColor:[UIColor app_offWhite]];
+}
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+	navController = [[UINavigationController alloc] init];
+	self.window.rootViewController = navController;
+    [self.window makeKeyAndVisible];
+	[self.window setBackgroundColor:[UIColor app_darkGrey]];
+	
+	[self customiseUI];
 	
 	[[NSUserDefaults standardUserDefaults] registerDefaults:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:YES],@"firstRun",nil]];
 	BOOL isFirstRun = [[NSUserDefaults standardUserDefaults] boolForKey:@"firstRun"];
 	
 	UIViewController *viewController = nil;
 	
-	if(isFirstRun)
+    if(isFirstRun)
+	{
 		viewController = [GeneralUI loadController:[JHNewUserViewController class]];
+    }
+	else if ([launchOptions objectForKey:UIApplicationLaunchOptionsURLKey])
+	{
+		NSURL *url = [launchOptions objectForKey:UIApplicationLaunchOptionsURLKey];
+		NSString *method = [[url host] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+		if([method isEqualToString:@"join"])
+		{
+			NSString *roomId = url.query;
+			
+			if(roomId.length < 7 || roomId.length > 12) return NO;
+			
+			JHHomeViewController *viewController = [GeneralUI loadController:[JHHomeViewController class]];
+			navController.viewControllers = @[viewController];
+			[viewController queueJoinRoom:roomId];
+			return YES;
+		}
+	}
 	else
+	{
 		viewController = [GeneralUI loadController:[JHHomeViewController class]];
+	}
 	
-	UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:viewController];
+	
+	navController.viewControllers = @[viewController];
+	
+	return YES;
+}
 
-	self.window.rootViewController = navController;
-    [self.window makeKeyAndVisible];
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
+    NSString *method = [[url host] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 	
-	[self.window setBackgroundColor:[UIColor app_darkGrey]];
+	if([method isEqualToString:@"join"])
+	{
+		NSString *roomId = url.query;
+		
+		if(roomId.length < 7 || roomId.length > 12) return NO;
+		
+		JHHomeViewController *viewController = [GeneralUI loadController:[JHHomeViewController class]];
+		navController.viewControllers = @[viewController];
+		[viewController queueJoinRoom:roomId];
+		return YES;
+	}
 	
-	
-	[[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"navbar-background"] forBarMetrics:UIBarMetricsDefault];
-	UIImage *shadow = [[UIImage alloc] init];
-	[[UINavigationBar appearance] setShadowImage:shadow];
-
-	
-	[[UITextField appearanceWhenContainedIn:[UISearchBar class], nil] setFont:[UIFont systemFontOfSize:18]];
-	[[UITextField appearanceWhenContainedIn:[UISearchBar class], nil] setTextColor:[UIColor app_offWhite]];
-	 return YES;
+    return NO;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

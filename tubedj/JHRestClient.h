@@ -14,6 +14,8 @@
 
 + (JHRestClient *)sharedClient;
 
+@property (strong, nonatomic) NSString *userSecret;
+
 - (NSData *)getCookies;
 - (void)setCookies:(NSArray *)cookies;
 

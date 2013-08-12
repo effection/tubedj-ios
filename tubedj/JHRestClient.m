@@ -7,8 +7,15 @@
 //
 
 #import "JHRestClient.h"
+#import <CommonCrypto/CommonHMAC.h>
+#import "NSData+Base64.h"
 
-static NSString * const kAFAPIBaseURLString = @"http://192.168.0.6:8081/api/";
+#if TARGET_IPHONE_SIMULATOR
+static NSString * const kAFAPIBaseURLString = @"http://localhost:8081/api/";
+#else
+static NSString * const kAFAPIBaseURLString = @"http://ihateyouloveme.no-ip.org:8081/api/";
+#endif
+
 
 @implementation JHRestClient
 
@@ -21,6 +28,53 @@ static NSString * const kAFAPIBaseURLString = @"http://192.168.0.6:8081/api/";
     });
 	
     return _sharedClient;
+}
+
+- (NSString *)hmacForMethod:(NSString*)method url:(NSString *)url body:(NSString*)body
+{
+	
+	NSString * parameters = [NSString stringWithFormat:@"%@%@%@", method, url, body];
+	NSString *salt = [@"JordanSaltsalt234" stringByAppendingString:self.userSecret==nil? @"" : self.userSecret];
+	NSData *saltData = [salt dataUsingEncoding:NSUTF8StringEncoding];
+	NSData *paramData = [parameters dataUsingEncoding:NSUTF8StringEncoding];
+	NSMutableData* hash = [NSMutableData dataWithLength:CC_SHA256_DIGEST_LENGTH ];
+	CCHmac(kCCHmacAlgSHA256, saltData.bytes, saltData.length, paramData.bytes, paramData.length, hash.mutableBytes);
+	NSString *base64Hash = [hash base64EncodedString];
+
+	base64Hash = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(NULL, (CFStringRef)base64Hash, NULL, (CFStringRef)@"!*'();:@&=+$,/?%#[]", kCFStringEncodingUTF8));
+	
+	return base64Hash;
+}
+
+- (NSMutableURLRequest *)addHMACToRequest:(NSMutableURLRequest*)request
+{
+	NSString *method = request.HTTPMethod;
+	NSString *path = [request.URL absoluteString];
+	
+	if ([method isEqualToString:@"GET"] || [method isEqualToString:@"HEAD"] || [method isEqualToString:@"DELETE"])
+	{
+		//HMAC the full url
+		NSString *hmac = [self hmacForMethod:method url:path body:@""];
+		//Append to the url
+		NSURL *url = [NSURL URLWithString:
+					  [
+					   [request.URL absoluteString]
+					   stringByAppendingFormat:([path rangeOfString:@"?"].location == NSNotFound ? @"?%@" : @"&%@"), [NSString stringWithFormat:@"signed=%@", hmac]]];
+		
+		[request setURL:url];
+	} else
+	{
+		//TODO HMAC the body
+		NSString *hmac = [self hmacForMethod:method url:path body:@""];
+		//request.HTTPBody
+		NSURL *url = [NSURL URLWithString:
+					  [
+					   [request.URL absoluteString]
+					   stringByAppendingFormat:([path rangeOfString:@"?"].location == NSNotFound ? @"?%@" : @"&%@"), [NSString stringWithFormat:@"signed=%@", hmac]]];
+		
+		[request setURL:url];
+	}
+	return request;
 }
 
 - (id)initWithBaseURL:(NSURL *)url
@@ -58,6 +112,7 @@ static NSString * const kAFAPIBaseURLString = @"http://192.168.0.6:8081/api/";
 - (void)deleteMeWithSuccess:(void (^)())successBlock error:(void (^)(NSError *))errorBlock
 {
 	NSMutableURLRequest *request = [self requestWithMethod:@"DELETE" path:@"users/me" parameters:nil];
+	request = [self addHMACToRequest:request];
 	
 	AFJSONRequestOperation *requestOperation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request
 	   success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON)
@@ -87,6 +142,7 @@ static NSString * const kAFAPIBaseURLString = @"http://192.168.0.6:8081/api/";
 - (void)createUser:(NSString *)name shouldRetry:(BOOL)shouldRetry success:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, id JSON))successBlock error:(void (^)(NSError *))errorBlock
 {
 	NSMutableURLRequest *request = [self requestWithMethod:@"POST" path:@"users" parameters:@{@"name": name}];
+	request = [self addHMACToRequest:request];
 	
 	AFJSONRequestOperation *requestOperation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request
 		success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON)
@@ -109,7 +165,7 @@ static NSString * const kAFAPIBaseURLString = @"http://192.168.0.6:8081/api/";
 - (void)doesUserExist:(NSString *)userId success:(void (^)(BOOL exists, NSString *userId, NSString *name))successBlock error:(void (^)(NSError *error))errorBlock
 {
 	NSMutableURLRequest *request = [self requestWithMethod:@"GET" path:[NSString stringWithFormat:@"users/%@", userId] parameters:nil];
-	
+	request = [self addHMACToRequest:request];
 	AFJSONRequestOperation *requestOperation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request
 		success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON)
 		{
@@ -130,6 +186,7 @@ static NSString * const kAFAPIBaseURLString = @"http://192.168.0.6:8081/api/";
 - (void)changeName:(NSString *)newName success:(void (^)(NSString *userId, NSString *name))successBlock error:(void (^)(NSError *error))errorBlock
 {
 	NSMutableURLRequest *request = [self requestWithMethod:@"POST" path:@"users/me" parameters:@{@"newName" : newName}];
+	request = [self addHMACToRequest:request];
 	
 	AFJSONRequestOperation *requestOperation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request
 		success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON)
@@ -148,6 +205,7 @@ static NSString * const kAFAPIBaseURLString = @"http://192.168.0.6:8081/api/";
 - (void)createRoomOnSuccess:(void (^)(NSString *roomId))successBlock error:(void (^)(NSError *error))errorBlock
 {
 	NSMutableURLRequest *request = [self requestWithMethod:@"POST" path:@"rooms" parameters:nil];
+	request = [self addHMACToRequest:request];
 	
 	AFJSONRequestOperation *requestOperation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request
 	   success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON)
@@ -169,6 +227,7 @@ static NSString * const kAFAPIBaseURLString = @"http://192.168.0.6:8081/api/";
 	//Escape roomId!!!!!
 	
 	NSMutableURLRequest *request = [self requestWithMethod:@"GET" path:[NSString stringWithFormat:@"rooms/%@", roomId] parameters:nil];
+	request = [self addHMACToRequest:request];
 	
 	AFJSONRequestOperation *requestOperation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request
 		success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON)
@@ -188,6 +247,7 @@ static NSString * const kAFAPIBaseURLString = @"http://192.168.0.6:8081/api/";
 - (void)leaveRoom:(NSString *)roomId success:(void (^)())successBlock error:(void (^)(NSError *error))errorBlock
 {
 	NSMutableURLRequest *request = [self requestWithMethod:@"POST" path:[NSString stringWithFormat:@"rooms/%@/leave", roomId] parameters:nil];
+	request = [self addHMACToRequest:request];
 	
 	AFJSONRequestOperation *requestOperation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request
 		success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON)
@@ -206,6 +266,7 @@ static NSString * const kAFAPIBaseURLString = @"http://192.168.0.6:8081/api/";
 - (void)nextSongForRoom:(NSString *)roomId success:(void (^)())successBlock error:(void (^)(NSError *error))errorBlock
 {
 	NSMutableURLRequest *request = [self requestWithMethod:@"POST" path:[NSString stringWithFormat:@"rooms/%@/next-song", roomId] parameters:nil];
+	request = [self addHMACToRequest:request];
 	
 	AFJSONRequestOperation *requestOperation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request
 		success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON)
@@ -224,6 +285,7 @@ static NSString * const kAFAPIBaseURLString = @"http://192.168.0.6:8081/api/";
 - (void)getPlaylistForRoom:(NSString *)roomId success:(void (^)(NSArray *playlist))successBlock error:(void (^)(NSError *error))errorBlock
 {
 	NSMutableURLRequest *request = [self requestWithMethod:@"GET" path:[NSString stringWithFormat:@"rooms/%@/playlist", roomId] parameters:nil];
+	request = [self addHMACToRequest:request];
 	
 	AFJSONRequestOperation *requestOperation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request
 		success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON)
@@ -244,6 +306,7 @@ static NSString * const kAFAPIBaseURLString = @"http://192.168.0.6:8081/api/";
 {
 	NSDictionary *parameters = @{@"song" : @{@"yt" : songId}};
 	NSMutableURLRequest *request = [self requestWithMethod:@"POST" path:[NSString stringWithFormat:@"rooms/%@/playlist", roomId] parameters:parameters];
+	request = [self addHMACToRequest:request];
 	
 	AFJSONRequestOperation *requestOperation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request
 		success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON)
@@ -263,6 +326,7 @@ static NSString * const kAFAPIBaseURLString = @"http://192.168.0.6:8081/api/";
 - (void)removeYoutubeSongFromPlaylist:(int)songId forRoom:(NSString *)roomId success:(void (^)(int uniqueSongId))successBlock error:(void (^)(NSError *error))errorBlock
 {
 	NSMutableURLRequest *request = [self requestWithMethod:@"DELETE" path:[NSString stringWithFormat:@"rooms/%@/playlist/%i", roomId,songId] parameters:nil];
+	request = [self addHMACToRequest:request];
 	
 	AFJSONRequestOperation *requestOperation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request
 		success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON)

@@ -86,6 +86,7 @@
 		7C89196F17B6910000FCF104 /* reset-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C89196D17B6910000FCF104 /* reset-icon@2x.png */; };
 		7C89197217B6923B00FCF104 /* reset-icon-pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C89197017B6923B00FCF104 /* reset-icon-pressed.png */; };
 		7C89197317B6923B00FCF104 /* reset-icon-pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C89197117B6923B00FCF104 /* reset-icon-pressed@2x.png */; };
+		7C89197617B6D05000FCF104 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C89197517B6D05000FCF104 /* NSData+Base64.m */; };
 		7C90D68A17AFB7990055D876 /* gradient-bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C90D68617AFB7990055D876 /* gradient-bg.png */; };
 		7C90D68B17AFB7990055D876 /* gradient-bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C90D68717AFB7990055D876 /* gradient-bg@2x.png */; };
 		7C90D68C17AFB7990055D876 /* red-divider.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C90D68817AFB7990055D876 /* red-divider.png */; };
@@ -236,6 +237,8 @@
 		7C89196D17B6910000FCF104 /* reset-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "reset-icon@2x.png"; path = "Resources/reset-icon@2x.png"; sourceTree = "<group>"; };
 		7C89197017B6923B00FCF104 /* reset-icon-pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "reset-icon-pressed.png"; path = "Resources/reset-icon-pressed.png"; sourceTree = "<group>"; };
 		7C89197117B6923B00FCF104 /* reset-icon-pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "reset-icon-pressed@2x.png"; path = "Resources/reset-icon-pressed@2x.png"; sourceTree = "<group>"; };
+		7C89197417B6D04F00FCF104 /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Base64.h"; sourceTree = "<group>"; };
+		7C89197517B6D05000FCF104 /* NSData+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Base64.m"; sourceTree = "<group>"; };
 		7C90D68617AFB7990055D876 /* gradient-bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "gradient-bg.png"; path = "Resources/gradient-bg.png"; sourceTree = "<group>"; };
 		7C90D68717AFB7990055D876 /* gradient-bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "gradient-bg@2x.png"; path = "Resources/gradient-bg@2x.png"; sourceTree = "<group>"; };
 		7C90D68817AFB7990055D876 /* red-divider.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "red-divider.png"; path = "Resources/red-divider.png"; sourceTree = "<group>"; };
@@ -448,6 +451,8 @@
 				7C8918DF17B3C15D00FCF104 /* RemorsefulScrollView.m */,
 				7C8918F317B42CAC00FCF104 /* UIAlertView+Blocks.h */,
 				7C8918F417B42CAC00FCF104 /* UIAlertView+Blocks.m */,
+				7C89197417B6D04F00FCF104 /* NSData+Base64.h */,
+				7C89197517B6D05000FCF104 /* NSData+Base64.m */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -816,6 +821,7 @@
 				7C89190017B4638F00FCF104 /* Reachability.m in Sources */,
 				7C89190417B551A300FCF104 /* JHIntroGraphicViewController.m in Sources */,
 				7C89196A17B67FD700FCF104 /* JHAboutViewController.m in Sources */,
+				7C89197617B6D05000FCF104 /* NSData+Base64.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

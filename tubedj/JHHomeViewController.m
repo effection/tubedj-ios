@@ -20,7 +20,10 @@
 
 @end
 
-@implementation JHHomeViewController
+@implementation JHHomeViewController {
+	NSString *queuedRoomId;
+	BOOL loaded;
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -66,7 +69,7 @@
 	self.navigationController.visibleViewController.navigationItem.leftBarButtonItem = customItem;
 	self.navigationItem.hidesBackButton = YES;
 	
-	
+	loaded = NO;
 	[[JHTubeDjManager sharedManager] loadAndCheckUserDetailsWithSuccess:^(BOOL found, BOOL valid) {
 		if(!found || !valid) {
 			
@@ -77,6 +80,25 @@
 			[alert show];
 		} else {
 			NSLog(@"User ok");
+			[JHRestClient sharedClient].userSecret = [JHTubeDjManager sharedManager].myUserId;
+			loaded = YES;
+			
+			if(queuedRoomId.length > 0) {
+				//Join room
+				
+				[[JHTubeDjManager sharedManager] joinRoom:queuedRoomId success:^(NSString *roomId, NSString *ownerId, NSDictionary *users, NSArray *playlist) {
+					JHClientViewController *clientViewController = [GeneralUI loadController:[JHClientViewController class]];
+					[self.navigationController pushViewController:clientViewController animated:YES];
+					queuedRoomId = nil;
+				} error:^(NSError *error) {
+					UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Ooops" message:@"Sorry, we couldn't join that room" cancelButtonItem:[UIAlertButtonItem itemWithLabel:@"OK" action:^{
+						
+					}] otherButtonItems: nil];
+					
+					queuedRoomId = nil;
+					[alert show];
+				}];
+			}
 		}
 		
 	} error:^(NSError *error) {
@@ -117,21 +139,60 @@
 	}];
 }
 
-- (IBAction)joinButtonPressed:(UIButton *)sender {
+- (void)queueJoinRoom:(NSString *)roomId
+{
+	if(loaded) {
+		//Join room
+		
+		[[JHTubeDjManager sharedManager] joinRoom:queuedRoomId success:^(NSString *roomId, NSString *ownerId, NSDictionary *users, NSArray *playlist) {
+			JHClientViewController *clientViewController = [GeneralUI loadController:[JHClientViewController class]];
+			[self.navigationController pushViewController:clientViewController animated:YES];
+		} error:^(NSError *error) {
+			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Ooops" message:@"Sorry, we couldn't join that room" cancelButtonItem:[UIAlertButtonItem itemWithLabel:@"OK" action:^{
+				
+			}] otherButtonItems: nil];
+			
+			[alert show];
+		}];
+	} else {
+		queuedRoomId = roomId;
+	}
+}
+
+- (void)openJoinScreenOverrideCoachMarks:(BOOL)overrideShowingCoachMarks showQRCodeReader:(BOOL)showQRCodeReader
+{
 	clientJoiningRoom = NO;
 	BOOL coachMarksShown = [[NSUserDefaults standardUserDefaults] boolForKey:@"WSCoachMarksShown_ClientView"];
-    if (coachMarksShown == NO) {
+    if (coachMarksShown == NO && !overrideShowingCoachMarks)
+	{
 		JHClientViewController *clientViewController = [GeneralUI loadController:[JHClientViewController class]];
 		[self.navigationController pushViewController:clientViewController animated:YES];
-	} else {
-		//[self showQRCodeReader];
-		[[JHTubeDjManager sharedManager] joinRoom:@"ycbeKfyc" success:^(NSString *roomId, NSString *ownerId, NSDictionary *users, NSArray *playlist) {
+	}
+	else
+	{
+		if(showQRCodeReader)
+		{
+			[self showQRCodeReader];
+		}
+		else
+		{
+			JHClientViewController *clientViewController = [GeneralUI loadController:[JHClientViewController class]];
+			[self.navigationController pushViewController:clientViewController animated:YES];
+		}
+		
+		/*[[JHTubeDjManager sharedManager] joinRoom:@"zcKzxsLc" success:^(NSString *roomId, NSString *ownerId, NSDictionary *users, NSArray *playlist) {
 			JHClientViewController *clientViewController = [GeneralUI loadController:[JHClientViewController class]];
 			[self.navigationController pushViewController:clientViewController animated:YES];
 		} error:^(NSError *error) {
 			
-		}];
+		}];*/
 	}
+
+}
+
+- (IBAction)joinButtonPressed:(UIButton *)sender
+{
+	[self openJoinScreenOverrideCoachMarks:NO showQRCodeReader:YES];
 }
 
 - (IBAction)createButtonPressed:(UIButton *)sender
