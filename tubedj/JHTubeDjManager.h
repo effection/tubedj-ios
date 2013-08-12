@@ -33,6 +33,9 @@
 
 + (JHTubeDjManager *)sharedManager;
 
++ (NSString *)encryptRoomId:(NSString*)roomId;
++ (NSString *)decryptUrlRoomId:(NSString*)urlId;
+
 @property (strong, nonatomic) NSString *myName;
 @property (strong, nonatomic) NSString *myUserId;
 

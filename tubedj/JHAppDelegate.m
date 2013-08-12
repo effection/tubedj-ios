@@ -67,6 +67,7 @@
 		if([method isEqualToString:@"join"])
 		{
 			NSString *roomId = url.query;
+			roomId = [JHTubeDjManager decryptUrlRoomId:roomId];
 			
 			if(roomId.length < 7 || roomId.length > 12) return NO;
 			
@@ -93,6 +94,7 @@
 	if([method isEqualToString:@"join"])
 	{
 		NSString *roomId = url.query;
+		roomId = [JHTubeDjManager decryptUrlRoomId:roomId];
 		
 		if(roomId.length < 7 || roomId.length > 12) return NO;
 		

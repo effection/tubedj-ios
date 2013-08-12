@@ -31,6 +31,16 @@ static NSString * const kSocketIoHost = @"ihateyouloveme.no-ip.org";
     return _sharedManager;
 }
 
++ (NSString *)encryptRoomId:(NSString*)roomId
+{
+	return roomId;
+}
+
++ (NSString *)decryptUrlRoomId:(NSString*)urlId
+{
+	return urlId;
+}
+
 - (id)init
 {
 	self = [super init];
@@ -121,9 +131,6 @@ static NSString * const kSocketIoHost = @"ihateyouloveme.no-ip.org";
 	self.myName = [[NSUserDefaults standardUserDefaults] objectForKey:@"username"];
 	if(!self.myName || self.myName.length == 0)
 	{
-//		[[NSNotificationCenter defaultCenter] postNotificationName:@"tubedj-user-doesnt-exist"
-//															object:nil
-//														  userInfo:nil];
 		if(successBlock) successBlock(NO, NO);
 		
 		return;
@@ -144,10 +151,7 @@ static NSString * const kSocketIoHost = @"ihateyouloveme.no-ip.org";
 		}
 	} else
 	{
-//		[[NSNotificationCenter defaultCenter] postNotificationName:@"tubedj-user-doesnt-exist"
-//															object:nil
-//														  userInfo:nil];
-		
+
 		if(successBlock) successBlock(NO, NO);
 		return;
 	}
@@ -155,17 +159,10 @@ static NSString * const kSocketIoHost = @"ihateyouloveme.no-ip.org";
 	[[JHRestClient sharedClient] doesUserExist:self.myUserId success:^(BOOL exists, NSString *userId, NSString *name) {
 		if(!exists)
 		{
-//			[[NSNotificationCenter defaultCenter] postNotificationName:@"tubedj-user-doesnt-exist"
-//																object:nil
-//															  userInfo:nil];
-			
 			if(successBlock) successBlock(NO, NO);
 		} else
 		{
-//			[[NSNotificationCenter defaultCenter] postNotificationName:@"tubedj-user-is-valid"
-//																object:nil
-//															  userInfo:nil];
-			
+			self.myName = name;
 			if(successBlock) successBlock(YES, YES);
 		}
 	} error:^(NSError *error) {
@@ -195,6 +192,7 @@ static NSString * const kSocketIoHost = @"ihateyouloveme.no-ip.org";
 		{
 			[self createUser:self.myName success:^(NSString *userId, NSString *name) {
 				
+				[self saveDetails];
 				if(successBlock) successBlock(NO, userId, name);
 				
 			} error:errorBlock];
@@ -266,9 +264,7 @@ static NSString * const kSocketIoHost = @"ihateyouloveme.no-ip.org";
 	[[JHRestClient sharedClient] changeName:newName success:^(NSString *userId, NSString *name) {
 		self.myName = name;
 		
-//		[[NSNotificationCenter defaultCenter] postNotificationName:@"tubedj-user-changed-name"
-//															object:nil
-//														  userInfo:@{@"id" : userId, @"name" : name}];
+		[self saveDetails];
 		
 		if(successBlock) successBlock(userId, name);
 		
@@ -369,10 +365,6 @@ static NSString * const kSocketIoHost = @"ihateyouloveme.no-ip.org";
 - (void)leaveRoomWithSuccess:(void (^)(NSString *roomId))successBlock error:(void (^)(NSError *error))errorBlock
 {
 	[[JHRestClient sharedClient] leaveRoom:self.roomId success:^{
-		
-//		[[NSNotificationCenter defaultCenter] postNotificationName:@"tubedj-left-room"
-//															object:nil
-//														  userInfo:@{@"id" : self.roomId}];
 		
 		if(successBlock) successBlock(self.roomId);
 		[socketIO disconnect];

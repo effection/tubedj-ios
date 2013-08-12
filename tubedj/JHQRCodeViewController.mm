@@ -8,14 +8,15 @@
 
 #import "JHQRCodeViewController.h"
 #import "QREncoder.h"
-
+#import "JHTubeDjManager.h"
+#import "JBWhatsAppActivity.h"
 
 @interface JHQRCodeViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *qrImageView;
-
+@property (copy, nonatomic) NSString *roomId;
 @end
 
-@implementation JHQRCodeViewController
+@implementation JHQRCodeViewController 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -29,7 +30,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	self.view.backgroundColor = [UIColor whiteColor];
+	self.view.backgroundColor = [UIColor app_darkGrey];
 	
 	UIButton *doneButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 60, 44)];
 	[doneButton setTitle:@"done" forState:UIControlStateNormal];
@@ -38,6 +39,16 @@
 	
 	UIBarButtonItem *doneBarButton = [[UIBarButtonItem alloc] initWithCustomView:doneButton];
 	self.navigationController.visibleViewController.navigationItem.rightBarButtonItem = doneBarButton;
+	
+	UIButton *shareButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 60, 44)];
+	shareButton.titleLabel.font = [UIFont fontAwesomeWithSize:24.0];
+	[shareButton setTitle:[JHFontAwesome standardIcon:FontAwesome_Share] forState:UIControlStateNormal];
+	[shareButton setTitleColor:[UIColor app_blue] forState:UIControlStateNormal];
+	[shareButton addTarget:self action:@selector(shareButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+	
+	UIBarButtonItem *shareBarButton = [[UIBarButtonItem alloc] initWithCustomView:shareButton];
+	self.navigationController.visibleViewController.navigationItem.leftBarButtonItem = shareBarButton;
+
 	
     
 }
@@ -50,9 +61,31 @@
 
 - (void)setCode:(NSString *)code
 {
-	DataMatrix *dm = [QREncoder encodeWithECLevel:QR_ECLEVEL_AUTO version:QR_VERSION_AUTO string:code];
+	self.roomId = code;
+	DataMatrix *dm = [QREncoder encodeWithECLevel:QR_ECLEVEL_AUTO version:QR_VERSION_AUTO string:self.roomId];
 	UIImage *qrCode = [QREncoder renderDataMatrix:dm imageDimension:320];
 	self.qrImageView.image = qrCode;
+}
+
+- (void)shareButtonPressed:(id)sender
+{
+	WhatsAppMessage *whatsappMsg = [[WhatsAppMessage alloc]initWithMessage: [NSString stringWithFormat:@"Join my tubedj room: tubedj://join?%@", [JHTubeDjManager encryptRoomId:self.roomId]] forABID:nil];
+	
+	NSArray *items = [NSArray arrayWithObjects:whatsappMsg.text, whatsappMsg, nil];
+
+	UIActivityViewController *activityVC =
+	[[UIActivityViewController alloc] initWithActivityItems:items
+									  applicationActivities:@[[[JBWhatsAppActivity alloc] init]]];
+	
+	activityVC.excludedActivityTypes = @[UIActivityTypePostToWeibo, UIActivityTypePostToFacebook, UIActivityTypePostToTwitter, UIActivityTypeAssignToContact, UIActivityTypeSaveToCameraRoll];
+	
+	activityVC.completionHandler = ^(NSString *activityType, BOOL completed)
+	{
+        NSLog(@" activityType: %@", activityType);
+        NSLog(@" completed: %i", completed);
+	};
+	
+	[self presentViewController:activityVC animated:YES completion:nil];
 }
 
 - (void)doneButtonPressed:(id)sender
