@@ -14,6 +14,7 @@
 @interface JHDiscalimerViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *text1;
 @property (weak, nonatomic) IBOutlet UILabel *text2;
+@property (weak, nonatomic) IBOutlet UISwitch *alwaysLeaveRoomSwitch;
 
 @end
 
@@ -56,9 +57,12 @@
 		if(!userId || !name || name.length < USERNAME_MIN_LENGTH || name.length > USERNAME_MAX_LENGTH) return;
 		
 		[[JHTubeDjManager sharedManager] saveDetails];
+		
+		BOOL alwaysLeaveRoom = self.alwaysLeaveRoomSwitch.on;
+		
 		[[NSUserDefaults standardUserDefaults] setObject:@(NO) forKey:@"firstRun"];
 		[[NSUserDefaults standardUserDefaults] setObject:@(YES) forKey:@"termsAgreed"];
-		[[NSUserDefaults standardUserDefaults] setObject:@(YES) forKey:@"shouldDisconnectOnBackground"];
+		[[NSUserDefaults standardUserDefaults] setObject:@(alwaysLeaveRoom) forKey:@"shouldDisconnectOnBackground"];
 		[[NSNotificationCenter defaultCenter] removeObserver:self];
 		
 		self.navigationController.viewControllers = [[NSArray alloc] initWithObjects:[GeneralUI loadController:[JHHomeViewController class]], nil];
