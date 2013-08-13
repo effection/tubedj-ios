@@ -12,8 +12,10 @@
 #import "JBWhatsAppActivity.h"
 
 @interface JHQRCodeViewController ()
+
 @property (weak, nonatomic) IBOutlet UIImageView *qrImageView;
-@property (copy, nonatomic) NSString *roomId;
+@property (strong, nonatomic) UIButton *shareButton;
+
 @end
 
 @implementation JHQRCodeViewController 
@@ -40,13 +42,14 @@
 	UIBarButtonItem *doneBarButton = [[UIBarButtonItem alloc] initWithCustomView:doneButton];
 	self.navigationController.visibleViewController.navigationItem.rightBarButtonItem = doneBarButton;
 	
-	UIButton *shareButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 60, 44)];
-	shareButton.titleLabel.font = [UIFont fontAwesomeWithSize:24.0];
-	[shareButton setTitle:[JHFontAwesome standardIcon:FontAwesome_Share] forState:UIControlStateNormal];
-	[shareButton setTitleColor:[UIColor app_blue] forState:UIControlStateNormal];
-	[shareButton addTarget:self action:@selector(shareButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+	self.shareButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 60, 44)];
+	self.shareButton.titleLabel.font = [UIFont fontAwesomeWithSize:24.0];
+	[self.shareButton setTitle:[JHFontAwesome standardIcon:FontAwesome_Share] forState:UIControlStateNormal];
+	[self.shareButton setTitleColor:[UIColor app_blue] forState:UIControlStateNormal];
+	[self.shareButton addTarget:self action:@selector(shareButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+	self.showsShareButton = NO;
 	
-	UIBarButtonItem *shareBarButton = [[UIBarButtonItem alloc] initWithCustomView:shareButton];
+	UIBarButtonItem *shareBarButton = [[UIBarButtonItem alloc] initWithCustomView:self.shareButton];
 	self.navigationController.visibleViewController.navigationItem.leftBarButtonItem = shareBarButton;
 
 	
@@ -59,12 +62,18 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)setCode:(NSString *)code
+- (void)setRoomId:(NSString *)roomId
 {
-	self.roomId = code;
+	_roomId = roomId;
 	DataMatrix *dm = [QREncoder encodeWithECLevel:QR_ECLEVEL_AUTO version:QR_VERSION_AUTO string:self.roomId];
 	UIImage *qrCode = [QREncoder renderDataMatrix:dm imageDimension:320];
 	self.qrImageView.image = qrCode;
+}
+
+- (void)setShowsShareButton:(BOOL)showsShareButton
+{
+	_showsShareButton = showsShareButton;
+	self.shareButton.hidden = !showsShareButton;
 }
 
 - (void)shareButtonPressed:(id)sender

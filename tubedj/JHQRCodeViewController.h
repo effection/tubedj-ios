@@ -10,6 +10,7 @@
 
 @interface JHQRCodeViewController : UIViewController
 
-- (void)setCode:(NSString *)code;
+@property (nonatomic, readwrite) BOOL showsShareButton;
+@property (copy, nonatomic) NSString *roomId;
 
 @end

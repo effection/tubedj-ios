@@ -362,6 +362,12 @@ static NSString * const kSocketIoHost = @"ihateyouloveme.no-ip.org";
 	return YES;
 }
 
+- (void)socketIODisconnect
+{
+	[socketIO disconnectForced];
+	self.roomId = nil;
+}
+
 - (void)leaveRoomWithSuccess:(void (^)(NSString *roomId))successBlock error:(void (^)(NSError *error))errorBlock
 {
 	[[JHRestClient sharedClient] leaveRoom:self.roomId success:^{

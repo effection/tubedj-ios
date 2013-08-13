@@ -58,6 +58,7 @@
 		[[JHTubeDjManager sharedManager] saveDetails];
 		[[NSUserDefaults standardUserDefaults] setObject:@(NO) forKey:@"firstRun"];
 		[[NSUserDefaults standardUserDefaults] setObject:@(YES) forKey:@"termsAgreed"];
+		[[NSUserDefaults standardUserDefaults] setObject:@(YES) forKey:@"shouldDisconnectOnBackground"];
 		[[NSNotificationCenter defaultCenter] removeObserver:self];
 		
 		self.navigationController.viewControllers = [[NSArray alloc] initWithObjects:[GeneralUI loadController:[JHHomeViewController class]], nil];

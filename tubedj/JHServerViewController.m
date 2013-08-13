@@ -369,9 +369,10 @@
 - (void)showQRCode
 {
 	JHQRCodeViewController *qrViewController = [GeneralUI loadController:[JHQRCodeViewController class]];
+	qrViewController.showsShareButton = YES;
 	UINavigationController *extraNavController = [[UINavigationController alloc] initWithRootViewController:qrViewController];
 	[self.navigationController presentViewController:extraNavController animated:YES completion:nil];
-	[qrViewController setCode:[JHTubeDjManager sharedManager].roomId];
+	qrViewController.roomId = [JHTubeDjManager sharedManager].roomId;
 }
 
 

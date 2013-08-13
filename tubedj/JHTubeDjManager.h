@@ -70,6 +70,7 @@
 - (void)addYoutubeSongToPlaylist:(NSString *)songId success:(void (^)(JHPlaylistItem *song))successBlock error:(void (^)(NSError *error))errorBlock;
 - (void)removeSongFromPlaylist:(int)songId success:(void (^)(int uid))successBlock error:(void (^)(NSError *error))errorBlock;
 
+- (void)socketIODisconnect;
 
 
 @end

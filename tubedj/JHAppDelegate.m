@@ -51,7 +51,7 @@
 	
 	[self customiseUI];
 	
-	[[NSUserDefaults standardUserDefaults] registerDefaults:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:YES],@"firstRun",nil]];
+	[[NSUserDefaults standardUserDefaults] registerDefaults:@{@"firstRun" : @(YES), @"shouldDisconnectOnBackground" : @(YES), @"WSCoachMarksShown_ClientView" : @(NO), @"WSCoachMarksShown_ServerView" : @(NO)}];
 	BOOL isFirstRun = [[NSUserDefaults standardUserDefaults] boolForKey:@"firstRun"];
 	
 	UIViewController *viewController = nil;
@@ -123,6 +123,20 @@
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"tubedj-going-background"
 														object:nil
 													  userInfo:nil];
+	
+	BOOL shouldDisconnect = [[NSUserDefaults standardUserDefaults] boolForKey:@"shouldDisconnectOnBackground"];
+	if(shouldDisconnect)
+	{
+		if([JHTubeDjManager sharedManager].roomId.length > 0) {
+			//Save room id to defaults
+			
+			if(![[JHTubeDjManager sharedManager] isRoomOwner])
+				[[NSUserDefaults standardUserDefaults] setValue:[JHTubeDjManager sharedManager].roomId forKey:@"restoreRoomId"];
+			
+			//Leave room
+			[[JHTubeDjManager sharedManager] socketIODisconnect];
+		}
+	} 
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
@@ -131,6 +145,25 @@
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"tubedj-going-foreground"
 														object:nil
 													  userInfo:nil];
+	BOOL shouldTryToReloadRoom = [[NSUserDefaults standardUserDefaults] boolForKey:@"shouldDisconnectOnBackground"];
+	if(shouldTryToReloadRoom)
+	{
+		//Check NSUserDefalts for stored roomId
+		NSString *restoreRoomId = [[NSUserDefaults standardUserDefaults] stringForKey:@"restoreRoomId"];
+		
+		if(restoreRoomId.length > 0)
+		{
+			//Try to join room again and set stored roomId to nil
+			[[NSUserDefaults standardUserDefaults] removeObjectForKey:@"restoreRoomId"];
+			JHHomeViewController *viewController = [GeneralUI loadController:[JHHomeViewController class]];
+			navController.viewControllers = @[viewController];
+			[viewController queueJoinRoom:restoreRoomId];
+		} else {
+			//Tried to reload room but no room id so probably was Sever
+			JHHomeViewController *viewController = [GeneralUI loadController:[JHHomeViewController class]];
+			navController.viewControllers = @[viewController];
+		}
+	}
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
@@ -139,6 +172,8 @@
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"tubedj-going-foreground"
 														object:nil
 													  userInfo:nil];
+	
+	
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application

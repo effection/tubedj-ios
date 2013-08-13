@@ -44,7 +44,6 @@
 						<string key="NSFrame">{{122, 446}, {77, 38}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -107,7 +106,7 @@
 								<int key="IBUIContentMode">7</int>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-								<string type="base64-UTF8" key="IBUIText">dHViZWRqIHdpbGwgYXV0b3BsYXkgWW91VHViZSB2aWRlb3MgaW4gdGhlIHBsYXlsaXN0Lg1pdCBpcyBh
+								<string type="base64-UTF8" key="IBUIText">dHViZWRqIHdpbGwgYXV0b3BsYXkgWW91VHViZSB2aWRlb3MgaW4gdGhlIHBsYXlsaXN0Lg1JdCBpcyBh
 ZHZpc2VkIHRoYXQgeW91IHNob3VsZCBiZSBjb25uZWN0ZWQgdG8gV2lGaS4</string>
 								<object class="NSColor" key="IBUITextColor">
 									<int key="NSColorSpace">1</int>
@@ -898,8 +897,8 @@ bGUgZm9yIGFueSBjaGFyZ2VzIGluY3VycmVkIGZyb20gdXNpbmcgDXRoaXMgYXBwA</string>
 				<string key="45.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="51.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<array key="51.IBViewMetadataConstraints">
-					<reference ref="965283843"/>
 					<reference ref="249697808"/>
+					<reference ref="965283843"/>
 				</array>
 				<boolean value="NO" key="51.IBViewMetadataTranslatesAutoresizingMaskIntoConstraints"/>
 				<string key="52.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
