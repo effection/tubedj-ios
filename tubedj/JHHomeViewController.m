@@ -256,6 +256,15 @@
 		}];
 		
 	}];
+	
+	NSString *icon = [[NSUserDefaults standardUserDefaults] boolForKey:@"shouldDisconnectOnBackground"] ? [JHFontAwesome standardIcon:FontAwesome_Check] : [JHFontAwesome standardIcon:FontAwesome_CheckEmpty];
+	
+	RESideMenuItem *alwasyLeaveItem = [[RESideMenuItem alloc] initWithTitle:@"always leave" prefix:icon ofSize:25.0f ofColour:[UIColor app_offWhite] action:^(RESideMenu *menu, RESideMenuItem *item) {
+        BOOL value = ![[NSUserDefaults standardUserDefaults] boolForKey:@"shouldDisconnectOnBackground"];
+		//TODO Add toggling of icon live here
+		[[NSUserDefaults standardUserDefaults] setObject:@(value) forKey:@"shouldDisconnectOnBackground"];
+		
+    }];
 	/*
 	RESideMenuItem *musicItem = [[RESideMenuItem alloc] initWithTitle:@"music library" prefix:[JHFontAwesome standardIcon:FontAwesome_HDD] ofSize:28.0f ofColour:[UIColor app_offWhite] action:^(RESideMenu *menu, RESideMenuItem *item) {
         //[menu hide];
@@ -269,7 +278,7 @@
 		[self.navigationController pushViewController:[GeneralUI loadController:[JHAboutViewController class]] animated:YES];
     }];
 	
-    _sideMenu = [[RESideMenu alloc] initWithJHItems:@[@[ nameItem], @[aboutItem]]];
+    _sideMenu = [[RESideMenu alloc] initWithJHItems:@[@[nameItem, alwasyLeaveItem], @[aboutItem]]];
 	UIImage *img = [UIImage imageNamed:@"menu-bg"];
 	_sideMenu.backgroundImage = img;
     _sideMenu.verticalOffset = IS_WIDESCREEN ? 160 : 126;
