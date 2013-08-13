@@ -32,6 +32,14 @@
 	return view;
 }
 
++ (id)loadViewFromNib:(NSString*)name classType:(Class)classType
+{
+	UIView *view = [[classType alloc] init];
+	view = [[[NSBundle mainBundle] loadNibNamed:name owner:view options:nil] objectAtIndex:0];
+	
+	return view;
+}
+
 + (id)loadController:(Class)classType
 {
     NSString *className = NSStringFromClass(classType);

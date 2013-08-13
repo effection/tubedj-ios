@@ -17,6 +17,7 @@
 
 //Loading
 + (id)loadViewFromNib:(Class)classType;
++ (id)loadViewFromNib:(NSString*)name classType:(Class)classType;
 + (id)loadController:(Class)classType;
 
 //Backgrounds

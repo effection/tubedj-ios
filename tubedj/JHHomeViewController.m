@@ -239,6 +239,70 @@
 	[self.view endEditing:YES];
 	NSString *currentName = [NSString stringWithString:[JHTubeDjManager sharedManager].myName];
 	
+	JHSideMenuEditCell *nameItem = [GeneralUI loadViewFromNib:[JHSideMenuEditCell class]];
+	nameItem.prefixLabel.font = [UIFont fontAwesomeWithSize:28.0f];
+	nameItem.prefixLabel.text = [JHFontAwesome standardIcon:FontAwesome_Pencil];
+	nameItem.editField.text = [JHTubeDjManager sharedManager].myName;
+	nameItem.action = ^(JHSideMenu *menu, JHSideMenuCell* item) {
+		
+		JHSideMenuEditCell *editCell = (JHSideMenuEditCell *)item;
+		NSString *newName = editCell.editField.text;
+		if(newName.length < USERNAME_MIN_LENGTH || newName.length > USERNAME_MAX_LENGTH) return;
+		
+		[[JHTubeDjManager sharedManager] changeUserName:newName success:^(NSString *userId, NSString *name) {
+			//[menu hide];
+		} error:^(NSError *error) {
+			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Ooops" message:@"Sorry, something happened while trying to change your name" cancelButtonItem:[UIAlertButtonItem itemWithLabel:@"OK" action:^{
+				//Do nothing
+				editCell.editField.text = currentName;
+			}] otherButtonItems: nil];
+			
+			[alert show];
+		}];
+		
+	};
+	
+	
+	JHSideMenuToggleCell *alwaysLeaveItem = [GeneralUI loadViewFromNib:[JHSideMenuToggleCell class]];
+	alwaysLeaveItem.prefixLabel.font = [UIFont fontAwesomeWithSize:25.0f];
+	alwaysLeaveItem.offColour = [UIColor app_offWhite];
+	alwaysLeaveItem.onColour = [UIColor app_green];
+	alwaysLeaveItem.offIcon = [JHFontAwesome standardIcon:FontAwesome_CheckEmpty];
+	alwaysLeaveItem.onIcon = [JHFontAwesome standardIcon:FontAwesome_Check];
+	alwaysLeaveItem.titleLabel.text = @"always leave";
+	alwaysLeaveItem.action = ^(JHSideMenu *menu, JHSideMenuCell *cell) {
+		JHSideMenuToggleCell *toggleCell = (JHSideMenuToggleCell *)cell;
+		[[NSUserDefaults standardUserDefaults] setBool:toggleCell.on forKey:@"shouldDisconnectOnBackground"];
+	};
+	
+	JHSideMenuButtonCell *aboutItem = [GeneralUI loadViewFromNib:[JHSideMenuButtonCell class]];
+	aboutItem.titleLabel.text = @"about";
+	aboutItem.prefixLabel.font = [UIFont fontAwesomeWithSize:28.0f];
+	aboutItem.prefixLabel.text = [JHFontAwesome standardIcon:FontAwesome_Info];
+	aboutItem.action = ^(JHSideMenu *menu, JHSideMenuCell *cell) {
+		[menu hide];
+		[self.navigationController pushViewController:[GeneralUI loadController:[JHAboutViewController class]] animated:YES];
+	};
+
+	
+	_jhSideMenu = [[JHSideMenu alloc] initWithItems:@[@[nameItem, alwaysLeaveItem], @[aboutItem]]];
+	UIImage *img = [UIImage imageNamed:@"menu-bg"];
+	_jhSideMenu.backgroundImage = img;
+    _jhSideMenu.verticalOffset = IS_WIDESCREEN ? 160 : 126;
+	_jhSideMenu.itemHeight = 40.0;
+	_jhSideMenu.font = [UIFont helveticaNeueRegularWithSize:22.0];
+	_jhSideMenu.textColor = [UIColor app_offWhite];
+	_jhSideMenu.hideStatusBarArea = NO;
+    //_sideMenu.hideStatusBarArea = [[[UIApplication sharedApplication] delegate] OSVersion] < 7;
+    [_jhSideMenu show];
+}
+
+
+- (void)showMenu1
+{
+	[self.view endEditing:YES];
+	NSString *currentName = [NSString stringWithString:[JHTubeDjManager sharedManager].myName];
+	
 	RESideMenuItem *nameItem = [[RESideMenuItem alloc] initWithTitle:[JHTubeDjManager sharedManager].myName isEditable:YES prefix:[JHFontAwesome standardIcon:FontAwesome_Pencil] ofSize:28.0f ofColour:[UIColor app_offWhite] action:nil editAction:^(RESideMenu *menu, RESideMenuItem *item, UITextField *textField) {
 		
 		NSString *newName = textField.text;

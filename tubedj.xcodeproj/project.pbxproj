@@ -126,6 +126,14 @@
 		7CBE540917AAECF100647D68 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CBE540817AAECF100647D68 /* QuartzCore.framework */; };
 		7CBE540E17AAEF6300647D68 /* JHQRCodeViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7CBE540C17AAEF6300647D68 /* JHQRCodeViewController.mm */; };
 		7CBE540F17AAEF6300647D68 /* JHQRCodeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CBE540D17AAEF6300647D68 /* JHQRCodeViewController.xib */; };
+		7CF4B98517BAA9F800638DEB /* JHSideMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CF4B98417BAA9F800638DEB /* JHSideMenu.m */; };
+		7CF4B98817BAAB2400638DEB /* JHSideMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CF4B98717BAAB2400638DEB /* JHSideMenuCell.m */; };
+		7CF4B98B17BAAE4D00638DEB /* JHSideMenuButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CF4B98A17BAAE4D00638DEB /* JHSideMenuButtonCell.m */; };
+		7CF4B98E17BAAE5E00638DEB /* JHSideMenuToggleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CF4B98D17BAAE5E00638DEB /* JHSideMenuToggleCell.m */; };
+		7CF4B99117BAAE7D00638DEB /* JHSideMenuEditCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CF4B99017BAAE7D00638DEB /* JHSideMenuEditCell.m */; };
+		7CF4B99317BAAE8900638DEB /* JHSideMenuButtonCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CF4B99217BAAE8900638DEB /* JHSideMenuButtonCell.xib */; };
+		7CF4B99717BAAEA400638DEB /* JHSideMenuEditCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CF4B99617BAAEA300638DEB /* JHSideMenuEditCell.xib */; };
+		7CF4B99917BAB6D600638DEB /* JHSideMenuToggleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7CF4B99817BAB6D500638DEB /* JHSideMenuToggleCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -303,6 +311,19 @@
 		7CBE540B17AAEF6300647D68 /* JHQRCodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHQRCodeViewController.h; sourceTree = "<group>"; };
 		7CBE540C17AAEF6300647D68 /* JHQRCodeViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = JHQRCodeViewController.mm; sourceTree = "<group>"; };
 		7CBE540D17AAEF6300647D68 /* JHQRCodeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JHQRCodeViewController.xib; sourceTree = "<group>"; };
+		7CF4B98317BAA9F800638DEB /* JHSideMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHSideMenu.h; sourceTree = "<group>"; };
+		7CF4B98417BAA9F800638DEB /* JHSideMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JHSideMenu.m; sourceTree = "<group>"; };
+		7CF4B98617BAAB2400638DEB /* JHSideMenuCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHSideMenuCell.h; sourceTree = "<group>"; };
+		7CF4B98717BAAB2400638DEB /* JHSideMenuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JHSideMenuCell.m; sourceTree = "<group>"; };
+		7CF4B98917BAAE4D00638DEB /* JHSideMenuButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHSideMenuButtonCell.h; sourceTree = "<group>"; };
+		7CF4B98A17BAAE4D00638DEB /* JHSideMenuButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JHSideMenuButtonCell.m; sourceTree = "<group>"; };
+		7CF4B98C17BAAE5E00638DEB /* JHSideMenuToggleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHSideMenuToggleCell.h; sourceTree = "<group>"; };
+		7CF4B98D17BAAE5E00638DEB /* JHSideMenuToggleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JHSideMenuToggleCell.m; sourceTree = "<group>"; };
+		7CF4B98F17BAAE7D00638DEB /* JHSideMenuEditCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHSideMenuEditCell.h; sourceTree = "<group>"; };
+		7CF4B99017BAAE7D00638DEB /* JHSideMenuEditCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JHSideMenuEditCell.m; sourceTree = "<group>"; };
+		7CF4B99217BAAE8900638DEB /* JHSideMenuButtonCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JHSideMenuButtonCell.xib; sourceTree = "<group>"; };
+		7CF4B99617BAAEA300638DEB /* JHSideMenuEditCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JHSideMenuEditCell.xib; sourceTree = "<group>"; };
+		7CF4B99817BAB6D500638DEB /* JHSideMenuToggleCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JHSideMenuToggleCell.xib; sourceTree = "<group>"; };
 		CBFB221824DF4DA888384C44 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -603,6 +624,19 @@
 				7C8918F917B4572400FCF104 /* RESideMenuEditCell.h */,
 				7C8918FA17B4572400FCF104 /* RESideMenuEditCell.m */,
 				7C8918FC17B4572E00FCF104 /* RESideMenuEditCell.xib */,
+				7CF4B98317BAA9F800638DEB /* JHSideMenu.h */,
+				7CF4B98417BAA9F800638DEB /* JHSideMenu.m */,
+				7CF4B98617BAAB2400638DEB /* JHSideMenuCell.h */,
+				7CF4B98717BAAB2400638DEB /* JHSideMenuCell.m */,
+				7CF4B98917BAAE4D00638DEB /* JHSideMenuButtonCell.h */,
+				7CF4B98A17BAAE4D00638DEB /* JHSideMenuButtonCell.m */,
+				7CF4B99217BAAE8900638DEB /* JHSideMenuButtonCell.xib */,
+				7CF4B98C17BAAE5E00638DEB /* JHSideMenuToggleCell.h */,
+				7CF4B98D17BAAE5E00638DEB /* JHSideMenuToggleCell.m */,
+				7CF4B99817BAB6D500638DEB /* JHSideMenuToggleCell.xib */,
+				7CF4B98F17BAAE7D00638DEB /* JHSideMenuEditCell.h */,
+				7CF4B99017BAAE7D00638DEB /* JHSideMenuEditCell.m */,
+				7CF4B99617BAAEA300638DEB /* JHSideMenuEditCell.xib */,
 			);
 			name = RESideMenu;
 			sourceTree = "<group>";
@@ -739,6 +773,9 @@
 				7C89197217B6923B00FCF104 /* reset-icon-pressed.png in Resources */,
 				7C89197317B6923B00FCF104 /* reset-icon-pressed@2x.png in Resources */,
 				7C9E7F4617B91E76006B964C /* whatsapp@2x.png in Resources */,
+				7CF4B99317BAAE8900638DEB /* JHSideMenuButtonCell.xib in Resources */,
+				7CF4B99717BAAEA400638DEB /* JHSideMenuEditCell.xib in Resources */,
+				7CF4B99917BAB6D600638DEB /* JHSideMenuToggleCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -832,6 +869,11 @@
 				7C89196A17B67FD700FCF104 /* JHAboutViewController.m in Sources */,
 				7C89197617B6D05000FCF104 /* NSData+Base64.m in Sources */,
 				7C9E7F4417B91CDD006B964C /* JBWhatsAppActivity.m in Sources */,
+				7CF4B98517BAA9F800638DEB /* JHSideMenu.m in Sources */,
+				7CF4B98817BAAB2400638DEB /* JHSideMenuCell.m in Sources */,
+				7CF4B98B17BAAE4D00638DEB /* JHSideMenuButtonCell.m in Sources */,
+				7CF4B98E17BAAE5E00638DEB /* JHSideMenuToggleCell.m in Sources */,
+				7CF4B99117BAAE7D00638DEB /* JHSideMenuEditCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
