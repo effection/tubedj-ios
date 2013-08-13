@@ -16,6 +16,8 @@
 	self.prefixLabel.textColor = [UIColor app_offWhite];
 	self.titleLabel.textColor = [UIColor app_offWhite];
 	self.titleLabel.font = [UIFont helveticaNeueRegularWithSize:22.0];
+	self.prefixLabel.highlightedTextColor = [UIColor app_lightGrey];
+	self.titleLabel.highlightedTextColor = [UIColor app_lightGrey];
 }
 
 @end

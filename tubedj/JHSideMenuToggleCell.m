@@ -15,11 +15,22 @@
 	[super commonInit];
 	_on = NO;
 	self.titleLabel.font = [UIFont helveticaNeueRegularWithSize:22.0];
+	self.titleLabel.highlightedTextColor = [UIColor app_lightGrey];
+	
+	UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
+	tapGesture.numberOfTapsRequired = 1;
+	tapGesture.cancelsTouchesInView = NO;
+	[self addGestureRecognizer:tapGesture];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
-	_on = !_on;
+	
+}
+
+- (void)handleTap:(UIGestureRecognizer *)sender {
+	
+    _on = !_on;
 	[UIView animateWithDuration:0.2 animations:^{
 		self.prefixLabel.transform = CGAffineTransformMakeScale(0.8, 0.8);
 	} completion:^(BOOL finished) {
