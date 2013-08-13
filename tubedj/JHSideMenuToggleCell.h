@@ -11,7 +11,7 @@
 
 @interface JHSideMenuToggleCell : JHSideMenuButtonCell
 
-@property (nonatomic, readonly) BOOL on;
+@property (nonatomic, readwrite) BOOL on;
 
 @property (weak, nonatomic) IBOutlet UILabel *prefixLabel;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;

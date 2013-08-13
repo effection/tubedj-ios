@@ -262,6 +262,7 @@
 		
 	};
 	
+	__block BOOL alwaysLeaveOn =  [[NSUserDefaults standardUserDefaults] boolForKey:@"shouldDisconnectOnBackground"];
 	
 	JHSideMenuToggleCell *alwaysLeaveItem = [GeneralUI loadViewFromNib:[JHSideMenuToggleCell class]];
 	alwaysLeaveItem.prefixLabel.font = [UIFont fontAwesomeWithSize:25.0f];
@@ -271,9 +272,12 @@
 	alwaysLeaveItem.onIcon = [JHFontAwesome standardIcon:FontAwesome_Check];
 	alwaysLeaveItem.prefixLabel.text = alwaysLeaveItem.offIcon;
 	alwaysLeaveItem.titleLabel.text = @"always leave";
+	alwaysLeaveItem.on =alwaysLeaveOn;
+	
 	alwaysLeaveItem.action = ^(JHSideMenu *menu, JHSideMenuCell *cell) {
 		JHSideMenuToggleCell *toggleCell = (JHSideMenuToggleCell *)cell;
 		[[NSUserDefaults standardUserDefaults] setBool:toggleCell.on forKey:@"shouldDisconnectOnBackground"];
+		[[NSUserDefaults standardUserDefaults] synchronize];
 	};
 	
 	JHSideMenuButtonCell *aboutItem = [GeneralUI loadViewFromNib:[JHSideMenuButtonCell class]];
@@ -298,62 +302,6 @@
     [_jhSideMenu show];
 }
 
-
-- (void)showMenu1
-{
-	[self.view endEditing:YES];
-	NSString *currentName = [NSString stringWithString:[JHTubeDjManager sharedManager].myName];
-	
-	RESideMenuItem *nameItem = [[RESideMenuItem alloc] initWithTitle:[JHTubeDjManager sharedManager].myName isEditable:YES prefix:[JHFontAwesome standardIcon:FontAwesome_Pencil] ofSize:28.0f ofColour:[UIColor app_offWhite] action:nil editAction:^(RESideMenu *menu, RESideMenuItem *item, UITextField *textField) {
-		
-		NSString *newName = textField.text;
-		if(newName.length < USERNAME_MIN_LENGTH || newName.length > USERNAME_MAX_LENGTH) return;
-		
-		[[JHTubeDjManager sharedManager] changeUserName:newName success:^(NSString *userId, NSString *name) {
-			//[menu hide];
-		} error:^(NSError *error) {
-			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Ooops" message:@"Sorry, something happened while trying to change your name" cancelButtonItem:[UIAlertButtonItem itemWithLabel:@"OK" action:^{
-				//Do nothing
-				textField.text = currentName;
-			}] otherButtonItems: nil];
-			
-			[alert show];
-		}];
-		
-	}];
-	
-	NSString *icon = [[NSUserDefaults standardUserDefaults] boolForKey:@"shouldDisconnectOnBackground"] ? [JHFontAwesome standardIcon:FontAwesome_Check] : [JHFontAwesome standardIcon:FontAwesome_CheckEmpty];
-	
-	RESideMenuItem *alwasyLeaveItem = [[RESideMenuItem alloc] initWithTitle:@"always leave" prefix:icon ofSize:25.0f ofColour:[UIColor app_offWhite] action:^(RESideMenu *menu, RESideMenuItem *item) {
-        BOOL value = ![[NSUserDefaults standardUserDefaults] boolForKey:@"shouldDisconnectOnBackground"];
-		//TODO Add toggling of icon live here
-		[[NSUserDefaults standardUserDefaults] setObject:@(value) forKey:@"shouldDisconnectOnBackground"];
-		
-    }];
-	/*
-	RESideMenuItem *musicItem = [[RESideMenuItem alloc] initWithTitle:@"music library" prefix:[JHFontAwesome standardIcon:FontAwesome_HDD] ofSize:28.0f ofColour:[UIColor app_offWhite] action:^(RESideMenu *menu, RESideMenuItem *item) {
-        //[menu hide];
-    }];
-	RESideMenuItem *youtubeItem = [[RESideMenuItem alloc] initWithTitle:@"youtube" prefix:[JHFontAwesome standardIcon:FontAwesome_FacetimeVideo] ofSize:23.0f ofColour:[UIColor app_green] action:^(RESideMenu *menu, RESideMenuItem *item) {
-        //[menu hide];
-    }];*/
-	
-	RESideMenuItem *aboutItem = [[RESideMenuItem alloc] initWithTitle:@"about" prefix:[JHFontAwesome standardIcon:FontAwesome_Info] ofSize:28.0f ofColour:[UIColor app_offWhite] action:^(RESideMenu *menu, RESideMenuItem *item) {
-        [menu hide];
-		[self.navigationController pushViewController:[GeneralUI loadController:[JHAboutViewController class]] animated:YES];
-    }];
-	
-    _sideMenu = [[RESideMenu alloc] initWithJHItems:@[@[nameItem, alwasyLeaveItem], @[aboutItem]]];
-	UIImage *img = [UIImage imageNamed:@"menu-bg"];
-	_sideMenu.backgroundImage = img;
-    _sideMenu.verticalOffset = IS_WIDESCREEN ? 160 : 126;
-	_sideMenu.itemHeight = 40.0;
-	_sideMenu.font = [UIFont helveticaNeueRegularWithSize:22.0];
-	_sideMenu.textColor = [UIColor app_offWhite];
-	_sideMenu.hideStatusBarArea = NO;
-    //_sideMenu.hideStatusBarArea = [[[UIApplication sharedApplication] delegate] OSVersion] < 7;
-    [_sideMenu show];
-}
 
 - (void)showQRCodeReader
 {

@@ -8,12 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "ZBarSDK.h"
-#import "RESideMenu.h"
 #import "JHSideMenu.h"
 
 @interface JHHomeViewController : UIViewController <ZBarReaderDelegate>
 
-@property (strong, readonly, nonatomic) RESideMenu *sideMenu;
 @property (strong, readonly, nonatomic) JHSideMenu *jhSideMenu;
 
 - (void)queueJoinRoom:(NSString *)roomId;

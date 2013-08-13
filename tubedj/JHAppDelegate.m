@@ -130,8 +130,10 @@
 		if([JHTubeDjManager sharedManager].roomId.length > 0) {
 			//Save room id to defaults
 			
-			if(![[JHTubeDjManager sharedManager] isRoomOwner])
+			if(![[JHTubeDjManager sharedManager] isRoomOwner]) {
 				[[NSUserDefaults standardUserDefaults] setValue:[JHTubeDjManager sharedManager].roomId forKey:@"restoreRoomId"];
+				[[NSUserDefaults standardUserDefaults] synchronize];
+			}
 			
 			//Leave room
 			[[JHTubeDjManager sharedManager] socketIODisconnect];
@@ -155,6 +157,7 @@
 		{
 			//Try to join room again and set stored roomId to nil
 			[[NSUserDefaults standardUserDefaults] removeObjectForKey:@"restoreRoomId"];
+			[[NSUserDefaults standardUserDefaults] synchronize];
 			JHHomeViewController *viewController = [GeneralUI loadController:[JHHomeViewController class]];
 			navController.viewControllers = @[viewController];
 			[viewController queueJoinRoom:restoreRoomId];

@@ -92,6 +92,7 @@
 	if(self.nameTextField.text.length >= USERNAME_MIN_LENGTH && self.nameTextField.text.length <= USERNAME_MAX_LENGTH)
 	{
 		[[NSUserDefaults standardUserDefaults] setObject:self.nameTextField.text forKey:@"username"];
+		[[NSUserDefaults standardUserDefaults] synchronize];
 		//JHDiscalimerViewController *nextPage = [GeneralUI loadController:[JHDiscalimerViewController class]];
 		JHIntroGraphicViewController *nextPage = [GeneralUI loadController:[JHIntroGraphicViewController class]];
 		[self.navigationController pushViewController:nextPage animated:YES];

@@ -101,7 +101,6 @@ static NSString * const kAFAPIBaseURLString = @"http://ihateyouloveme.no-ip.org:
 
 - (void)setCookies:(NSArray *)cookies
 {
-    //NSArray *cookies = [NSKeyedUnarchiver unarchiveObjectWithData: [[NSUserDefaults standardUserDefaults] objectForKey: @"sessionCookies"]];
     NSHTTPCookieStorage *cookieStorage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
 	
     for (NSHTTPCookie *cookie in cookies){

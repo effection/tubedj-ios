@@ -28,6 +28,14 @@
 	
 }
 
+- (void)setOn:(BOOL)on
+{
+	_on = on;
+	self.prefixLabel.transform = CGAffineTransformIdentity;
+	self.prefixLabel.textColor = _on ? self.onColour : self.offColour;
+	self.prefixLabel.text = _on ? self.onIcon : self.offIcon;
+}
+
 - (void)handleTap:(UIGestureRecognizer *)sender {
 	
     _on = !_on;
