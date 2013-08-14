@@ -49,7 +49,11 @@
 	[self.shareButton addTarget:self action:@selector(shareButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
 	self.showsShareButton = NO;
 	
-	UIBarButtonItem *shareBarButton = [[UIBarButtonItem alloc] initWithCustomView:self.shareButton];
+	UIView *buttonView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 60, 44)];
+    buttonView.bounds = CGRectOffset(buttonView.bounds, 0, -3);
+    [buttonView addSubview:self.shareButton];
+	
+	UIBarButtonItem *shareBarButton = [[UIBarButtonItem alloc] initWithCustomView:buttonView];
 	self.navigationController.visibleViewController.navigationItem.leftBarButtonItem = shareBarButton;
 
 	
