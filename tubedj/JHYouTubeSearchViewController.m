@@ -50,6 +50,17 @@ NSString * const CellIdentifier = @"JHYoutubeSongCell";
 	[searchBar setSearchFieldBackgroundImage:[UIImage imageNamed:@"search-background"] forState:UIControlStateNormal];
 	[searchBar setImage:[UIImage imageNamed:@"search-icon"] forSearchBarIcon:UISearchBarIconSearch state:UIControlStateNormal];
 	
+	for(int i = 0; i < searchBar.subviews.count; i++) {
+        if([[searchBar.subviews objectAtIndex:i] isKindOfClass:[UITextField class]])
+		{
+            [(UITextField*)[searchBar.subviews objectAtIndex:i] setFont:[UIFont fontWithName:@"Helvetica Neue" size:18]];
+			[(UITextField*)[searchBar.subviews objectAtIndex:i] setTextColor:[UIColor app_offWhite]];
+			//[((UITextField*)[searchBar.subviews objectAtIndex:i]).attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"search youtube" attributes:@{NSForegroundColorAttributeName: [UIColor app_lightGrey]}];];
+			break;
+		}
+    }
+	
+	
 	self.tableView.tableHeaderView = searchBar;
 	self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 80, 0);
 	

@@ -37,8 +37,7 @@
 	[[UINavigationBar appearance] setShadowImage:shadow];
 	
 	
-	[[UITextField appearanceWhenContainedIn:[UISearchBar class], nil] setFont:[UIFont systemFontOfSize:18]];
-	[[UITextField appearanceWhenContainedIn:[UISearchBar class], nil] setTextColor:[UIColor app_offWhite]];
+	//[[UITextField appearanceWhenContainedIn:[UISearchBar class], nil] setTextColor:[UIColor app_green]];
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions

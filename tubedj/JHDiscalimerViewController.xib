@@ -335,7 +335,6 @@ dXNlIG1vcmUgZGF0YSE</string>
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{122, 446}, {77, 38}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
-						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -1461,8 +1460,8 @@ dXNlIG1vcmUgZGF0YSE</string>
 				<string key="114.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="116.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<array key="116.IBViewMetadataConstraints">
-					<reference ref="718906773"/>
 					<reference ref="1033540478"/>
+					<reference ref="718906773"/>
 				</array>
 				<boolean value="NO" key="116.IBViewMetadataTranslatesAutoresizingMaskIntoConstraints"/>
 				<string key="117.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
