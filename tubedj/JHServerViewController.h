@@ -7,15 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "RESideMenu.h"
 #import "JHYouTubeSearchViewController.h"
 #import "JHPlaylistViewController.h"
 #import "JHYoutubePlayer.h"
 #import "WSCoachMarksView.h"
+#import "JHSideMenu.h"
 
 #define IS_WIDESCREEN ( fabs( ( double )[ [ UIScreen mainScreen ] bounds ].size.height - ( double )568 ) < DBL_EPSILON )
 @interface JHServerViewController : UIViewController <JHYoutubeSearchViewControllerDelegate, JHPlaylistViewControllerDelegate, JHYoutubePlayerDelegate, WSCoachMarksViewDelegate>
-@property (strong, readonly, nonatomic) RESideMenu *sideMenu;
+
+@property (strong, readonly, nonatomic) JHSideMenu *sideMenu;
 
 @property (nonatomic, readwrite) BOOL isPlaying;
 @property (nonatomic, strong) NSString *currentSongId;

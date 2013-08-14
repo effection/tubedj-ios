@@ -355,34 +355,48 @@
 {
 	[self.view endEditing:YES];
 	
-    RESideMenuItem *homeItem = [[RESideMenuItem alloc] initWithTitle:@"disconnect" prefix:[JHFontAwesome standardIcon:FontAwesome_Off] ofSize:28.0f ofColour:[UIColor app_red] action:^(RESideMenu *menu, RESideMenuItem *item) {
-        [menu hide];
+	JHSideMenuButtonCell *stopitem = [GeneralUI loadViewFromNib:[JHSideMenuButtonCell class]];
+	stopitem.textLabel.text = @"disconnect";
+	stopitem.prefixLabel.font = [UIFont fontAwesomeWithSize:28.0f];
+	stopitem.prefixLabel.textColor = [UIColor app_red];
+	stopitem.prefixLabel.text = [JHFontAwesome standardIcon:FontAwesome_Off];
+	stopitem.action = ^(JHSideMenu *menu, JHSideMenuCell *cell) {
+		[menu hide];
 		[[JHTubeDjManager sharedManager] leaveRoomWithSuccess:^(NSString *roomId) {
 			[self.navigationController popToRootViewControllerAnimated:YES];
 		} error:^(NSError *error) {
 			//Let user stay in until they close app
 		}];
-    }];
-
+	};
+	
+	
 	NSMutableArray *userItems = [[NSMutableArray alloc] initWithCapacity:[JHTubeDjManager sharedManager].users.count];
 	
 	for (NSString* key in [JHTubeDjManager sharedManager].users) {
 		JHUserItem *user = [[JHTubeDjManager sharedManager].users objectForKey:key];
-		RESideMenuItem *userMenuItem = [[RESideMenuItem alloc] initWithTitle:user.name prefix:[JHFontAwesome standardIcon:FontAwesome_EllipsisVertical] ofSize:23.0f ofColour:[UIColor app_offWhite] action:^(RESideMenu *menu, RESideMenuItem *item) {
+		
+		JHSideMenuButtonCell *useritem = [GeneralUI loadViewFromNib:[JHSideMenuButtonCell class]];
+		useritem.titleLabel.text = user.name;
+		useritem.prefixLabel.font = [UIFont fontAwesomeWithSize:23.0f];
+		useritem.prefixLabel.text = [JHFontAwesome standardIcon:FontAwesome_EllipsisVertical];
+		useritem.action = ^(JHSideMenu *menu, JHSideMenuCell *cell) {
 			[menu hide];
-		}];
-		[userItems addObject:userMenuItem];
+		};
+		
+		[userItems addObject:useritem];
 	}
 	
-    _sideMenu = [[RESideMenu alloc] initWithJHItems:@[@[homeItem], userItems]];
+	_jhSideMenu = [[JHSideMenu alloc] initWithItems:@[@[stopitem], userItems]];
 	UIImage *img = [UIImage imageNamed:@"menu-bg"];
-	_sideMenu.backgroundImage = img;
-    _sideMenu.verticalOffset = IS_WIDESCREEN ? 160 : 126;
-	_sideMenu.itemHeight = 40.0;
-	_sideMenu.font = [UIFont helveticaNeueRegularWithSize:22.0];
-	_sideMenu.textColor = [UIColor app_offWhite];
-    _sideMenu.hideStatusBarArea = NO;//[[[UIApplication sharedApplication] delegate] OSVersion] < 7;
-    [_sideMenu show];
+	_jhSideMenu.backgroundImage = img;
+    _jhSideMenu.verticalOffset = IS_WIDESCREEN ? 160 : 126;
+	_jhSideMenu.itemHeight = 40.0;
+	_jhSideMenu.font = [UIFont helveticaNeueRegularWithSize:22.0];
+	_jhSideMenu.textColor = [UIColor app_offWhite];
+	_jhSideMenu.hideStatusBarArea = NO;
+    //_sideMenu.hideStatusBarArea = [[[UIApplication sharedApplication] delegate] OSVersion] < 7;
+    [_jhSideMenu show];
+	
 }
 
 @end

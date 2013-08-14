@@ -272,7 +272,7 @@
 	alwaysLeaveItem.onIcon = [JHFontAwesome standardIcon:FontAwesome_Check];
 	alwaysLeaveItem.prefixLabel.text = alwaysLeaveItem.offIcon;
 	alwaysLeaveItem.titleLabel.text = @"always leave";
-	alwaysLeaveItem.on =alwaysLeaveOn;
+	alwaysLeaveItem.on = alwaysLeaveOn;
 	
 	alwaysLeaveItem.action = ^(JHSideMenu *menu, JHSideMenuCell *cell) {
 		JHSideMenuToggleCell *toggleCell = (JHSideMenuToggleCell *)cell;
