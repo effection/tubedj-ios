@@ -34,20 +34,17 @@
     [super viewDidLoad];
 	self.view.backgroundColor = [UIColor app_darkGrey];
 	
-	UIButton *doneButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 60, 44)];
-	[doneButton setTitle:@"done" forState:UIControlStateNormal];
-	[doneButton setTitleColor:[UIColor app_blue] forState:UIControlStateNormal];
-	[doneButton addTarget:self action:@selector(doneButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-	
-	UIBarButtonItem *doneBarButton = [[UIBarButtonItem alloc] initWithCustomView:doneButton];
-	self.navigationController.visibleViewController.navigationItem.rightBarButtonItem = doneBarButton;
-	
+	if(self.roomId)
+	{
+		[self setRoomId:self.roomId];
+	}
+
 	self.shareButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 60, 44)];
 	self.shareButton.titleLabel.font = [UIFont fontAwesomeWithSize:24.0];
 	[self.shareButton setTitle:[JHFontAwesome standardIcon:FontAwesome_Share] forState:UIControlStateNormal];
 	[self.shareButton setTitleColor:[UIColor app_blue] forState:UIControlStateNormal];
 	[self.shareButton addTarget:self action:@selector(shareButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-	self.showsShareButton = NO;
+	self.shareButton.hidden = !self.showsShareButton;
 	
 	UIView *buttonView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 60, 44)];
     buttonView.bounds = CGRectOffset(buttonView.bounds, 0, -3);
@@ -55,9 +52,15 @@
 	
 	UIBarButtonItem *shareBarButton = [[UIBarButtonItem alloc] initWithCustomView:buttonView];
 	self.navigationController.visibleViewController.navigationItem.leftBarButtonItem = shareBarButton;
-
 	
-    
+	UIButton *doneButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 60, 44)];
+	[doneButton setTitle:@"done" forState:UIControlStateNormal];
+	[doneButton setTitleColor:[UIColor app_blue] forState:UIControlStateNormal];
+	[doneButton addTarget:self action:@selector(doneButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+	
+	UIBarButtonItem *doneBarButton = [[UIBarButtonItem alloc] initWithCustomView:doneButton];
+	self.navigationController.visibleViewController.navigationItem.rightBarButtonItem = doneBarButton;
+
 }
 
 - (void)didReceiveMemoryWarning
