@@ -10,7 +10,6 @@
 #import "JHAppDelegate.h"
 #import "JHYoutubeSongCell.h"
 #import "JHPlaylistViewController.h"
-#import "RESideMenu.h"
 #import "JHQRCodeViewController.h"
 #import "JHStandardYoutubeViewController.h"
 #import "JHTubeDjManager.h"
@@ -623,16 +622,16 @@
 		[userItems addObject:useritem];
 	}
 	
-	_jhSideMenu = [[JHSideMenu alloc] initWithItems:@[@[stopitem], userItems]];
+	_sideMenu = [[JHSideMenu alloc] initWithItems:@[@[stopitem], userItems]];
 	UIImage *img = [UIImage imageNamed:@"menu-bg"];
-	_jhSideMenu.backgroundImage = img;
-    _jhSideMenu.verticalOffset = IS_WIDESCREEN ? 160 : 126;
-	_jhSideMenu.itemHeight = 40.0;
-	_jhSideMenu.font = [UIFont helveticaNeueRegularWithSize:22.0];
-	_jhSideMenu.textColor = [UIColor app_offWhite];
-	_jhSideMenu.hideStatusBarArea = NO;
+	_sideMenu.backgroundImage = img;
+    _sideMenu.verticalOffset = IS_WIDESCREEN ? 160 : 126;
+	_sideMenu.itemHeight = 40.0;
+	_sideMenu.font = [UIFont helveticaNeueRegularWithSize:22.0];
+	_sideMenu.textColor = [UIColor app_offWhite];
+	_sideMenu.hideStatusBarArea = NO;
     //_sideMenu.hideStatusBarArea = [[[UIApplication sharedApplication] delegate] OSVersion] < 7;
-    [_jhSideMenu show];
+    [_sideMenu show];
 
 }
 
