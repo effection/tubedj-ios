@@ -162,7 +162,7 @@
 - (void)openJoinScreenOverrideCoachMarks:(BOOL)overrideShowingCoachMarks showQRCodeReader:(BOOL)showQRCodeReader
 {
 #ifdef YES
-	[[JHTubeDjManager sharedManager] joinRoom:@"8TXEdskT" success:^(NSString *roomId, NSString *ownerId, NSDictionary *users, NSArray *playlist) {
+	[[JHTubeDjManager sharedManager] joinRoom:@"ToKxubxc" success:^(NSString *roomId, NSString *ownerId, NSDictionary *users, NSArray *playlist) {
 	 JHClientViewController *clientViewController = [GeneralUI loadController:[JHClientViewController class]];
 	 [self.navigationController pushViewController:clientViewController animated:YES];
 	 } error:^(NSError *error) {

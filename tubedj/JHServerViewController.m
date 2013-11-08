@@ -148,6 +148,10 @@
 		isCoaching = YES;
 		[[JHTubeDjManager sharedManager] fakeRoomSetup];
 	}
+	else
+	{
+		[self.scrollView setContentOffset:CGPointMake(320, 0) animated:YES];
+	}
 }
 
 - (void)viewWillAppear:(BOOL)animated

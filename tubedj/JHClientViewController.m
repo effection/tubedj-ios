@@ -144,6 +144,8 @@
 		[[JHTubeDjManager sharedManager] fakeRoomSetup];
 	} else {
 		//Room joined before entering
+		
+		[self.scrollView setContentOffset:CGPointMake(320, 0) animated:YES];
 	}
 	[self addNotificationObservers];
 }

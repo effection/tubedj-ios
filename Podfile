@@ -1,0 +1,6 @@
+platform :ios, '6.0'
+pod 'RMSwipeTableViewCell'
+pod 'AFNetworking', '~> 1.3'
+pod 'ZBarSDK', '~> 1.3'
+pod 'SocketRocket', '~>0.3'
+pod 'WSCoachMarksView', '~> 0.2'

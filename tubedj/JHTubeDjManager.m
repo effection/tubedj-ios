@@ -10,7 +10,7 @@
 #import "SocketIOPacket.h"
 
 #if TARGET_IPHONE_SIMULATOR
-static NSString * const kSocketIoHost = @"192.168.0.6";
+static NSString * const kSocketIoHost = @"127.0.0.1";
 #else
 static NSString * const kSocketIoHost = @"ihateyouloveme.no-ip.org";
 #endif

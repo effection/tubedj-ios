@@ -213,7 +213,8 @@ NSString * const PlaylistCellIdentifier = @"JHYoutubeSongCell";
 		}];
 	}
     return cell;
-}
+}//TODO Fix cell reuse on Playlist having left-right pullable instead of right-left and also cache youtube searches so scrolling doesnt flicker.
+ //Fix crash at coaching screen too
 
 #pragma mark - Table view delegate
 
